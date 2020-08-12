@@ -9,7 +9,7 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 ## Setup and installation
 
 - [ ] Clone the repository on your system by running the command <br/>
-  `git clone <repository link or SSH key>`
+  `git clone https://github.com/SamarthAroraa/Sensus.git`
 
 - [ ] `cd sensus`
 
