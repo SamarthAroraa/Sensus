@@ -4,3 +4,17 @@ Depression is a leading cause of disability worldwide and is a major contributor
 Our policy is to keep Sensus as unopinionated as possible. We provide the user with analytics and and statistics on their happiness quotient. 
 
 **We at Sensus aim to build a better, happier, more introspective future!**
+
+
+## Setup and installation
+
+- [ ] Clone the repository on your system by running the command <br/>
+  `git clone <repository link or SSH key>`
+
+- [ ] `cd sensus`
+
+- [ ] Install dependencies <br/>
+      `npm install`
+      
+ - [ ] Run the server <br/>
+ `npm start`
