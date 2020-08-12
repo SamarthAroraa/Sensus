@@ -11,7 +11,7 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 - [ ] Clone the repository on your system by running the command <br/>
   `git clone https://github.com/SamarthAroraa/Sensus.git`
 
-- [ ] `cd sensus`
+- [ ] `cd Sensus`
 
 - [ ] Install dependencies <br/>
       `npm install`
