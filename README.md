@@ -16,5 +16,9 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 - [ ] Install dependencies <br/>
       `npm install`
       
- - [ ] Run the server <br/>
+- [ ] Run the server <br/>
  `npm start`
+
+- [ ] Add the following at the end of your ~/.bash_profile<br/>
+`export GOOGLE_APPLICATION_CREDENTIALS="<path-to-the-project-directory>ç/Sensus/config/Sensus-0f50e66c71ef.json"`
+

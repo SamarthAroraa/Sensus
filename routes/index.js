@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const analzeController = require("../controllers/sentimentAPI");
 
-router.get("/", (req, res) => {
-  return res.send("<h1>Hello</h1>");
+router.get("/", function (req, res) {
+  return res.render("./pages/test_home", {
+    layout: "_layout.ejs",
+    title: "Test Home",
+    sentiment: null,
+    final_score: null,
+    text: null,
+  });
 });
-// router.use("/users", require("./users"));
-
-// router.use("/api", require("./api"));
-
+router.post("/analyze", analzeController.analyze);
 module.exports = router;
