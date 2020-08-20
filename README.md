@@ -25,7 +25,7 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
         - [ ] Advanced System Settings
         - [ ] Environment Variables...
         - [ ] Add a new variable, with name GOOGLE_APPLICATION_CREDENTIALS
-        - [ ] Set file path to <path-to-the-project-directory>/Sensus/config/Sensus-0f50e66c71ef.json
+        - [ ] Set file path to \<path-to-the-project-directory\>/Sensus/config/Sensus-0f50e66c71ef.json
         - [ ] Restart your PC
 
     - [ ] For MAC:
