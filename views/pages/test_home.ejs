@@ -1,0 +1,21 @@
+<form action="/analyze" method="POST">
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      name="text"
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<% if(final_score) {%>
+<div id="results">
+    <h1>Final score: <%=final_score%> </h1></br>
+    <p><%=text%></p>
+    <p>Score: <%=sentiment.score%></p>
+    <p>Magnitude: <%=sentiment.magnitude%></p>
+</div>
+<% } %>
