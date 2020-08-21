@@ -1,5 +1,5 @@
 <div class="container mt-4">
-<form action="/analyze" method="POST">
+<form action="/testing/analyze" method="POST">
   <div class="form-group">
     <textarea
       class="form-control"
@@ -17,6 +17,7 @@
     <p><%=text%></p>
     <p>Score: <%=sentiment.score%></p>
     <p>Magnitude: <%=sentiment.magnitude%></p>
+    <div class="color" style="height: 100px; width: 100px; border-radius: 50px; background-color: <%= color %>;"></div>
 </div>
 <% } %>
 </div>
