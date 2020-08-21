@@ -2,9 +2,13 @@ const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const expressLayouts = require("express-ejs-layouts");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
 const db = require("./config/mongoose");
+
+const session = require("express-session");
+const passport= require('passport');
+const passportLocal= require('./config/passport-local-strategy');
+const MongoStore = require("connect-mongo")(session);
+
 const env = require("./config/environment");
 const partials = require("express-partials");
 const sassMiddleware = require("node-sass-middleware");
@@ -57,6 +61,11 @@ app.use(
 );
 app.use(flash());
 app.use(flashMiddleware.setFlash);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 app.use("/", require("./routes"));
 
 app.listen(port, () => {
