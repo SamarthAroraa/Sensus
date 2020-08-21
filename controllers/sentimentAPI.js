@@ -33,7 +33,7 @@ module.exports.analyze = async function (req, res) {
       console.log(`  Magnitude: ${sentence.sentiment.magnitude}`);
     });
     return res.render("./pages/test_home", {
-      layout: "_layout.ejs",
+      layout: "layout.ejs",
       title: "Test Home",
       sentiment: sentiment,
       final_score: sentiment.score,
