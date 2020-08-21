@@ -1,25 +1,34 @@
-const mongoose = require("mongoose");
-const multer = require("multer");
-const path = require("path");
+
+const mongoose= require('mongoose');
+
 
 //////////////////////////////////////
 //          User Schema             //
 //////////////////////////////////////
+
+
+
+
+
 const userSchema = new mongoose.Schema(
   {
+
     email: {
-      type: String,
-      required: true,
-      unique: true,
+        type: String,
+        required: true,
+        unique: true
     },
+
     password: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
+
     name: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
+
     //array of the entries made by the user
     entries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Entry" }],
   },
@@ -30,3 +39,4 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
+
