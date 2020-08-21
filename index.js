@@ -26,17 +26,26 @@ app.use(
         prefix: "/css",
     })
 );
+
 app.use(express.urlencoded({
     extended: true
 }));
+
 app.use(cookieParser());
 
+
+app.use(expressLayouts);
+
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 app.use(express.static(path.join(__dirname, env.asset_path)));
-app.set("layout extractStyles", true);
-app.set("layout extractScripts", true);
+
+// app.use(partials());
+
 app.set("view engine", "ejs");
-app.use(partials());
 app.set("views", "./views");
+
 app.use(
     session({
         name: "sensus",
