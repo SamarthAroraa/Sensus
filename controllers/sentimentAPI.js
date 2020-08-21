@@ -14,9 +14,14 @@ module.exports.analyze = async function (req, res) {
     const document = {
       content: text,
       type: "PLAIN_TEXT",
+      language: "EN",
     };
-    const [result] = await client.analyzeSentiment({ document });
+    const [result] = await client.analyzeSentiment({
+      document,
+      encodingType: "UTF8",
+    });
     const sentiment = result.documentSentiment;
+    console.log(result);
     console.log("Document sentiment:");
     console.log(`  Score: ${sentiment.score}`);
     console.log(`  Magnitude: ${sentiment.magnitude}`);

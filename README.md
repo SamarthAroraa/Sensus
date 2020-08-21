@@ -42,3 +42,5 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 
 - [ ] Run the server <br/>
  `npm start`
+
+ ## Navigate to the

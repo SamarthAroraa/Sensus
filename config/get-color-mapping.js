@@ -25,7 +25,7 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
   const happy_colors = spring_colors.slice(18);
   //sad color list
   const sad_colors = velocity_blue_colors.slice(0, 10).reverse();
-
+  console.log(sad_colors);
   //initialized the color group to be used
   let color_group = null;
 
@@ -35,13 +35,13 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
     score_color_index = Math.floor(score * 10);
     color_group = happy_colors;
   } else {
-    score_color_index = Math.floor(Math.abs(score) * 10);
+    score_color_index = Math.floor(Math.abs(score) * 10.1);
     color_group = sad_colors;
   }
 
   //opacity for the color, mapped to the confidence value. Tanh is used to clamp the [0,inf) range
   // for confidence to a [0,1) range for the opacity
-  const alpha_val = Math.tanh(Math.abs(magnitude)).toFixed(2);
+  const alpha_val = Math.tanh(Math.abs(1.5 * magnitude)).toFixed(2);
 
   const color_group_array = color_group[score_color_index];
   const rgba = `rgba(${color_group_array[0]},${color_group_array[1]},${color_group_array[2]},${alpha_val})`;
