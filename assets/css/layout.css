@@ -1,21 +1,17 @@
-body {
-    margin: 0Px; }
-  
-  #layout-main {
-    height: 80%; }
-  
-  header li {
-    display: inline-block;
-    margin: 0Px 10Px;
-    font-size: 1.6rem; }
+header li {
+  display: inline-block;
+  margin: 0Px 10Px;
+  font-size: 1.6rem;
+  color: white; }
 
+#contro {
+  background-color: white; }
 
-    .basic-hf-layout {
-        height: 10%;
-        width: 100%;
-        background-color: #e9116b;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: baseline;
-        font-family: Arial, Helvetica, sans-serif; }
+.basic-hf-layout {
+  height: 10%;
+  width: 100%;
+  background-color: #e9116b;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline; }

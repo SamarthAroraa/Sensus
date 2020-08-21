@@ -14,7 +14,7 @@ module.exports.signUp= function(req, res){
     }
 
     return res.render('user_sign_up',{
-        title: "Social | Sign Up"
+        title: "Sensus | Sign Up"
     });
 }
 
@@ -25,7 +25,7 @@ module.exports.signIn= function(req, res){
     }
 
     return res.render('user_sign_in', {
-        title: "Social | Sign In"
+        title: "Sensus | Sign In"
     });
 }
 
