@@ -1,29 +1,40 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 //////////////////////////////////////
 //          Entry Schema            //
 //////////////////////////////////////
 
-const entrySchema = new mongoose.Schema({
-
+const entrySchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     text: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     mood: {
-        type: String,
-        required: true,
-        default: '00000000',
+      type: String,
+      required: true,
+      default: "#fff",
     },
     createDate: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
+      default: Date.now(),
     },
     updateDate: {
-        type: Date,
-    }
-})
+      type: Date,
+      default: Date.now(),
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Entry = mongoose.model('Entry', entrySchema);
+const Entry = mongoose.model("Entry", entrySchema);
 
 module.exports = Entry;
