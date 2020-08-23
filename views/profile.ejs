@@ -3,7 +3,7 @@
 </h3>
 
 <div class="container mt-4">
-    <form action="/profile/analyze" method="POST">
+    <form action="/users/profile/analyze" method="POST">
       <div class="form-group">
         <textarea
           class="form-control"
@@ -14,7 +14,7 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    
+
     <% if(final_score) {%>
     <div id="results">
         <h1>Final score: <%=final_score%> </h1></br>
