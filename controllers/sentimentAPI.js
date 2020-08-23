@@ -32,9 +32,11 @@ module.exports.analyze = async function (req, res) {
       console.log(`  Score: ${sentence.sentiment.score}`);
       console.log(`  Magnitude: ${sentence.sentiment.magnitude}`);
     });
-    return res.render("./pages/test_home", {
+
+    return res.render("profile", {
       
-      title: "Test Home",
+      title: "Profile",
+
       sentiment: sentiment,
       final_score: sentiment.score,
       text: text,
@@ -43,4 +45,6 @@ module.exports.analyze = async function (req, res) {
   } catch (err) {
     console.log(err);
   }
+
 };
+

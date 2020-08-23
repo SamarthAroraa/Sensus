@@ -1,13 +1,13 @@
 const express= require('express');
 const router= express.Router();
-const passport= require('passport');
-
-
+const passport= require('passport')
 const usersController= require('../controllers/users_controller');
+const testingController = require("../controllers/testing-controller");
+const sentimentAnalyisApi = require("../controllers/sentimentAPI");
 
 
-router.get('/profile', passport.checkAuthentication, usersController.profile);
-
+router.get('/profile', passport.checkAuthentication, testingController.home );
+router.post("/profile/analyze", sentimentAnalyisApi.analyze);
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
 
@@ -24,7 +24,9 @@ router.get('/sign-out', usersController.destroySession);
 
 
 // const analzeController = require("../controllers/sentimentAPI");
-// router.get("/", function (req, res) {
+
+
+// router.get("/testing", function (req, res) {
 
 // const analzeController = require("../controllers/sentimentAPI");
 
@@ -38,5 +40,6 @@ router.get('/sign-out', usersController.destroySession);
 //   });
 // });
 // router.post("/analyze", analzeController.analyze);
+// });
 
 module.exports= router;
