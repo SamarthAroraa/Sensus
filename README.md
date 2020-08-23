@@ -44,9 +44,16 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 
 - [ ] Run the server <br/>
       `npm start`
+## To run the frontend React app:-
+ - [ ] From the root of the project directory go into the client directory
+       `cd client`
+  - [ ] Install client packages 
+      `npm install`
+   - [ ] `npm start`
 
 ## Navigate to the testing route
 
 Navigate to
 `<domain-name>/testing` <br/>
 (For development, `<domain-name>` is localhost:5000)
+
