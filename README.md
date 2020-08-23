@@ -14,6 +14,8 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 - [ ] `cd Sensus`
 
 - [ ] Install dependencies <br/>
+      `npm install` <br/>
+      `cd client` <br/>
       `npm install`
 
 - [ ] Modify your environment variables

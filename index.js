@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors= require('cors')
 const cookieParser = require("cookie-parser");
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/mongoose");
@@ -46,6 +47,7 @@ app.use(express.static(path.join(__dirname, env.asset_path)));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
+app.use(cors())
 app.use(
     session({
         name: "sensus",
