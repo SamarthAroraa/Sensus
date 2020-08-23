@@ -1,5 +1,6 @@
 header a:hover {
-  color: blue; }
+  color: blue;
+  text-decoration: none; }
 
 header a {
   color: white; }

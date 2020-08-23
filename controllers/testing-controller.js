@@ -7,3 +7,4 @@ module.exports.home = function (req, res) {
       color: null,
     });
   };
+
