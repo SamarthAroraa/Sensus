@@ -1,3 +1,27 @@
 <h3>
     <%= user.name %>
 </h3>
+
+<div class="container mt-4">
+    <form action="/profile/analyze" method="POST">
+      <div class="form-group">
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+          name="text"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+    <% if(final_score) {%>
+    <div id="results">
+        <h1>Final score: <%=final_score%> </h1></br>
+        <p><%=text%></p>
+        <p>Score: <%=sentiment.score%></p>
+        <p>Magnitude: <%=sentiment.magnitude%></p>
+        <div class="color" style="height: 100px; width: 100px; border-radius: 50px; background-color: <%= color %>;"></div>
+    </div>
+    <% } %>
+    </div>
