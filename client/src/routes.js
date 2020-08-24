@@ -42,6 +42,27 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/new-entry",
+    name: "New Entry",
+    icon: "tim-icons icon-book-bookmark",
+    component: UserProfile,
+    layout: "/admin",
+  },
+  {
+    path: "/entry-list",
+    name: "Entry List",
+    icon: "tim-icons icon-bullet-list-67",
+    component: Icons,
+    layout: "/admin",
+  },
+  {
+    path: "/entry-calender",
+    name: "Timeline",
+    icon: "tim-icons icon-calendar-60",
+    component: Icons,
+    layout: "/admin",
+  },
+  {
     path: "/icons",
     name: "Icons",
     rtlName: "الرموز",
@@ -65,7 +86,7 @@ var routes = [
     component: Notifications,
     layout: "/admin",
   },
-  
+
   {
     path: "/tables",
     name: "Table List",
