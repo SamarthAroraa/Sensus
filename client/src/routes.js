@@ -23,6 +23,7 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
+import NewEntry from "views/NewEntry"
 
 var routes = [
   {
@@ -45,8 +46,9 @@ var routes = [
     path: "/new-entry",
     name: "New Entry",
     icon: "tim-icons icon-book-bookmark",
-    component: UserProfile,
+    component: NewEntry,
     layout: "/admin",
+    // promptApiRoute: ""
   },
   {
     path: "/entry-list",
