@@ -48,8 +48,7 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 
 ## To run only the server
 
-- [ ] Run the server <br/>
-      `npm run server`
+- [ ] `npm run server`
 
 ## To run only the frontend React app:-
 
