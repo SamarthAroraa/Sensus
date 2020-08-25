@@ -1,21 +1,4 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
+import React, { useState } from "react";
 
 // reactstrap components
 import {
@@ -28,185 +11,278 @@ import {
   FormGroup,
   Form,
   Input,
+  Label,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
-class UserProfile extends React.Component {
-  render() {
-    return (
-      <>
-        <div className="content">
+const UserProfile = () => {
+  const username = "@mike_andrew123"; //This will be taken from props.
+
+  let fname = "Mike";
+  let lname = "Andrew";
+  let pname = "";
+  let pnamedef = false;
+  let co = "";
+  let abt =
+    "Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...";
+  let fburl = "";
+  let turl = "";
+  let iurl = "";
+  let liurl = "";
+
+  const [firstName, setFirstName] = useState("Mike");
+  const [lastName, setLastName] = useState("Andrew");
+  const [penName, setPenName] = useState("");
+  const [penNameDefault, setPenNameDefault] = useState(false);
+  const [country, setCountry] = useState("");
+  const [about, setAbout] = useState(
+    "Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is..."
+  );
+  const [facebookURL, setFacebookURL] = useState("");
+  const [twitterURL, setTwitterURL] = useState("");
+  const [instagramURL, setInstagramURL] = useState("");
+  const [linkedinURL, setLinkedinURL] = useState("");
+
+  const handleSave = () => {
+    setFirstName(fname);
+    setLastName(lname);
+    setPenName(pname);
+    setPenNameDefault(pnamedef);
+    setCountry(co);
+    setAbout(abt);
+    setFacebookURL(fburl);
+    setTwitterURL(turl);
+    setInstagramURL(iurl);
+    setLinkedinURL(liurl);
+  };
+
+  return (
+    <div className="content">
+      <Card className="card-user">
+        <CardBody>
+          <CardText />
+          <div className="author">
+            <div className="block block-one" />
+            <div className="block block-two" />
+            <div className="block block-three" />
+            <div className="block block-four" />
+            <a href="#pablo" onClick={(e) => e.preventDefault()}>
+              <img
+                alt="..."
+                className="avatar"
+                src={require("assets/img/emilyz.jpg")}
+              />{" "}
+              <h3 className="title">
+                {firstName} {lastName} {penName == "" ? "" : `(${penName})`}
+              </h3>{" "}
+            </a>{" "}
+            <p className="description"> {username} </p>{" "}
+          </div>{" "}
+          <div className="card-description">{about}</div>{" "}
+        </CardBody>{" "}
+        <CardFooter>
+          <div className="button-container">
+            {facebookURL == "" ? null : (
+              <Button className="btn-icon btn-round" color="facebook">
+                <a href={facebookURL}>
+                  <i className="fab fa-facebook" />
+                </a>
+              </Button>
+            )}
+            {twitterURL == "" ? null : (
+              <Button className="btn-icon btn-round" color="twitter">
+                <a href={twitterURL}>
+                  <i className="fab fa-twitter" />
+                </a>
+              </Button>
+            )}
+            {instagramURL == "" ? null : (
+              <Button className="btn-icon btn-round" color="instagram">
+                <a href={instagramURL}>
+                  <i className="fab fa-instagram" />
+                </a>
+              </Button>
+            )}
+            {linkedinURL == "" ? null : (
+              <Button className="btn-icon btn-round" color="linkedin">
+                <a href={linkedinURL}>
+                  <i className="fab fa-linkedin" />
+                </a>
+              </Button>
+            )}
+          </div>{" "}
+        </CardFooter>{" "}
+      </Card>{" "}
+      <Card>
+        <CardHeader>
+          <h5 className="title"> Edit Profile </h5>{" "}
+        </CardHeader>{" "}
+        <CardBody>
+          <Form>
+            <Row>
+              <Col className="pr-md-1" md="6">
+                <FormGroup>
+                  <label> First Name </label>{" "}
+                  <Input
+                    placeholder="First Name"
+                    type="text"
+                    onChange={(event) => {
+                      fname = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+              <Col className="pl-md-1" md="6">
+                <FormGroup>
+                  <label> Last Name </label>{" "}
+                  <Input
+                    placeholder="Last Name"
+                    type="text"
+                    onChange={(event) => {
+                      lname = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+            <Row>
+              <Col className="pr-md-1" md="6">
+                <FormGroup>
+                  <label> Pen Name </label>{" "}
+                  <Input
+                    placeholder="Pen Name"
+                    type="text"
+                    onChange={(event) => {
+                      pname = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+              <Col className="pl-md-1" md="6">
+                <label> </label>
+                <FormGroup check>
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      onClick={(event) => {
+                        pnamedef = !pnamedef;
+                      }}
+                    />{" "}
+                    Use pen name as default
+                    <span className="form-check-sign">
+                      <span className="check"></span>
+                    </span>
+                  </Label>
+                </FormGroup>
+              </Col>{" "}
+            </Row>
+            <Row>
+              <Col className="pr-md-1" md="4">
+                <FormGroup>
+                  <label> Country </label>{" "}
+                  <Input
+                    placeholder="Country"
+                    type="text"
+                    onChange={(event) => {
+                      co = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+            <Row>
+              <Col md="8">
+                <FormGroup>
+                  <label> About Me </label>{" "}
+                  <Input
+                    cols="80"
+                    placeholder="Here can be your description"
+                    rows="4"
+                    type="textarea"
+                    onChange={(event) => {
+                      abt = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+          </Form>{" "}
+        </CardBody>{" "}
+        <CardHeader>
+          <h5 className="title"> Social Media Links </h5>
+        </CardHeader>
+        <CardBody>
           <Row>
-            <Col md="8">
-              <Card>
-                <CardHeader>
-                  <h5 className="title">Edit Profile</h5>
-                </CardHeader>
-                <CardBody>
-                  <Form>
-                    <Row>
-                      <Col className="pr-md-1" md="5">
-                        <FormGroup>
-                          <label>Company (disabled)</label>
-                          <Input
-                            defaultValue="Creative Code Inc."
-                            disabled
-                            placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="px-md-1" md="3">
-                        <FormGroup>
-                          <label>Username</label>
-                          <Input
-                            defaultValue="michael23"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-md-1" md="4">
-                        <FormGroup>
-                          <label htmlFor="exampleInputEmail1">
-                            Email address
-                          </label>
-                          <Input placeholder="mike@email.com" type="email" />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="pr-md-1" md="6">
-                        <FormGroup>
-                          <label>First Name</label>
-                          <Input
-                            defaultValue="Mike"
-                            placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-md-1" md="6">
-                        <FormGroup>
-                          <label>Last Name</label>
-                          <Input
-                            defaultValue="Andrew"
-                            placeholder="Last Name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Address</label>
-                          <Input
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="pr-md-1" md="4">
-                        <FormGroup>
-                          <label>City</label>
-                          <Input
-                            defaultValue="Mike"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="px-md-1" md="4">
-                        <FormGroup>
-                          <label>Country</label>
-                          <Input
-                            defaultValue="Andrew"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-md-1" md="4">
-                        <FormGroup>
-                          <label>Postal Code</label>
-                          <Input placeholder="ZIP Code" type="number" />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="8">
-                        <FormGroup>
-                          <label>About Me</label>
-                          <Input
-                            cols="80"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
-                            placeholder="Here can be your description"
-                            rows="4"
-                            type="textarea"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                  </Form>
-                </CardBody>
-                <CardFooter>
-                  <Button className="btn-fill" color="primary" type="submit">
-                    Save
-                  </Button>
-                </CardFooter>
-              </Card>
-            </Col>
-            <Col md="4">
-              <Card className="card-user">
-                <CardBody>
-                  <CardText />
-                  <div className="author">
-                    <div className="block block-one" />
-                    <div className="block block-two" />
-                    <div className="block block-three" />
-                    <div className="block block-four" />
-                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="avatar"
-                        src={require("assets/img/emilyz.jpg")}
-                      />
-                      <h5 className="title">Mike Andrew</h5>
-                    </a>
-                    <p className="description">Ceo/Co-Founder</p>
-                  </div>
-                  <div className="card-description">
-                    Do not be scared of the truth because we need to restart the
-                    human foundation in truth And I love you like Kanye loves
-                    Kanye I love Rick Owens’ bed design but the back is...
-                  </div>
-                </CardBody>
-                <CardFooter>
-                  <div className="button-container">
-                    <Button className="btn-icon btn-round" color="facebook">
-                      <i className="fab fa-facebook" />
-                    </Button>
-                    <Button className="btn-icon btn-round" color="twitter">
-                      <i className="fab fa-twitter" />
-                    </Button>
-                    <Button className="btn-icon btn-round" color="google">
-                      <i className="fab fa-google-plus" />
-                    </Button>
-                  </div>
-                </CardFooter>
-              </Card>
-            </Col>
-          </Row>
-        </div>
-      </>
-    );
-  }
-}
+            <Col className="pr-md-1" md="4">
+              <FormGroup>
+                <label> Facebook </label>{" "}
+                <Input
+                  placeholder="FB ID URL"
+                  type="text"
+                  onChange={(event) => {
+                    fburl = event.target.value;
+                  }}
+                />
+              </FormGroup>{" "}
+            </Col>{" "}
+          </Row>{" "}
+          <Row>
+            <Col className="pr-md-1" md="4">
+              <FormGroup>
+                <label> Twitter </label>{" "}
+                <Input
+                  placeholder="Twitter URL"
+                  type="text"
+                  onChange={(event) => {
+                    turl = event.target.value;
+                  }}
+                />
+              </FormGroup>{" "}
+            </Col>{" "}
+          </Row>{" "}
+          <Row>
+            <Col className="pr-md-1" md="4">
+              <FormGroup>
+                <label> Instagram </label>{" "}
+                <Input
+                  placeholder="Instagram URL"
+                  type="text"
+                  onChange={(event) => {
+                    iurl = event.target.value;
+                  }}
+                />
+              </FormGroup>{" "}
+            </Col>{" "}
+          </Row>{" "}
+          <Row>
+            <Col className="pr-md-1" md="4">
+              <FormGroup>
+                <label> LinkedIn </label>{" "}
+                <Input
+                  placeholder="LinkedIn URL"
+                  type="text"
+                  onChange={(event) => {
+                    liurl = event.target.value;
+                  }}
+                />
+              </FormGroup>{" "}
+            </Col>{" "}
+          </Row>{" "}
+        </CardBody>
+        <CardFooter>
+          <Button
+            className="btn-fill"
+            color="primary"
+            type="submit"
+            onClick={handleSave}
+          >
+            Save{" "}
+          </Button>{" "}
+        </CardFooter>{" "}
+      </Card>{" "}
+    </div>
+  );
+};
 
 export default UserProfile;
