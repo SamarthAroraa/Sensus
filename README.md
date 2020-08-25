@@ -57,5 +57,5 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
 ## Navigate to the testing route
 
 Navigate to
-`<domain-name>/testing` <br/>
-(For development, `<domain-name>` is localhost:5000)
+`<backend-domain-name>/testing` <br/>
+(For development, `<backend-domain-name>` is localhost:5000)
