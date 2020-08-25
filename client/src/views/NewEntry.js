@@ -18,7 +18,6 @@ import {
 
 class NewEntry extends React.Component {
   constructor(props) {
-
     //conversion of date in the required format
     var today = new Date();
     var dd = today.getDate();
@@ -61,6 +60,7 @@ class NewEntry extends React.Component {
     const title_styles = {
       border: "none",
       fontSize: 32 + "px",
+      overflow: "hidden",
     };
 
     return (
@@ -77,7 +77,7 @@ class NewEntry extends React.Component {
                       cols="80"
                       defaultValue="Entry Title"
                       placeholder="Give your entry a title"
-                      rows="4"
+                      rows="1"
                       type="textarea"
                     />
                   </FormGroup>
@@ -95,6 +95,7 @@ class NewEntry extends React.Component {
                             style={textarea_styles}
                             cols="80"
                             defaultValue=""
+                            className="ps-child"
                             placeholder={this.state.prompt}
                             rows="4"
                             type="textarea"
