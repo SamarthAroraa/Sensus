@@ -23,23 +23,4 @@ router.post('/create-session', passport.authenticate(
 router.get('/sign-out', usersController.destroySession);
 
 
-// const analzeController = require("../controllers/sentimentAPI");
-
-
-// router.get("/testing", function (req, res) {
-
-// const analzeController = require("../controllers/sentimentAPI");
-
-// router.get("/profile", function (req, res) {
-//   return res.render("./pages/test_home", {
-//     layout: "_layout.ejs",
-//     title: "Test Home",
-//     sentiment: null,
-//     final_score: null,
-//     text: null,
-//   });
-// });
-// router.post("/analyze", analzeController.analyze);
-// });
-
 module.exports= router;
