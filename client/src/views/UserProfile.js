@@ -219,7 +219,7 @@ const UserProfile = () => {
                 <label> Facebook </label>{" "}
                 <Input
                   placeholder="FB ID URL"
-                  type="text"
+                  type="url"
                   onChange={(event) => {
                     fburl = event.target.value;
                   }}
@@ -233,7 +233,7 @@ const UserProfile = () => {
                 <label> Twitter </label>{" "}
                 <Input
                   placeholder="Twitter URL"
-                  type="text"
+                  type="url"
                   onChange={(event) => {
                     turl = event.target.value;
                   }}
@@ -247,7 +247,7 @@ const UserProfile = () => {
                 <label> Instagram </label>{" "}
                 <Input
                   placeholder="Instagram URL"
-                  type="text"
+                  type="url"
                   onChange={(event) => {
                     iurl = event.target.value;
                   }}
@@ -261,7 +261,7 @@ const UserProfile = () => {
                 <label> LinkedIn </label>{" "}
                 <Input
                   placeholder="LinkedIn URL"
-                  type="text"
+                  type="url"
                   onChange={(event) => {
                     liurl = event.target.value;
                   }}
