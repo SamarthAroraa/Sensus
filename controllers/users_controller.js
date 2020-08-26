@@ -1,11 +1,8 @@
 const User = require("../models/user");
 
 const addUser = (req, res) => {
-
-    const user = new User({
-        
-    })
-}
+  const user = new User({});
+};
 
 module.exports.profile = function (req, res) {
   return res.render("profile", {
@@ -79,3 +76,20 @@ module.exports.destroySession = function (req, res) {
 };
 
 //Profile Page Modifications.
+
+module.exports.updateProfile = (req, res) => {
+  User.updateOne(
+    { username: req.body.username },
+    {
+      firstName: req.body.fname,
+      lastName: req.body.lname,
+      penName: req.body.pname,
+      usePenNameDefault: req.body.pnamedef,
+      about: req.body.abt,
+      facebookURL: req.body.fburl,
+      twitterURL: req.body.turl,
+      instgramURL: req.body.iurl,
+      linkedinURL: req.body.liurl,
+    }
+  );
+};

@@ -118,8 +118,8 @@ const UserProfile = () => {
         <CardHeader>
           <h5 className="title"> Edit Profile </h5>{" "}
         </CardHeader>{" "}
-        <CardBody>
-          <Form>
+        <Form>
+          <CardBody>
             <Row>
               <Col className="pr-md-1" md="6">
                 <FormGroup>
@@ -127,7 +127,10 @@ const UserProfile = () => {
                   <Input
                     placeholder="First Name"
                     type="text"
+                    name="fname"
+                    // value={fname}
                     onChange={(event) => {
+                      console.log(event.target.value);
                       fname = event.target.value;
                     }}
                   />
@@ -139,6 +142,8 @@ const UserProfile = () => {
                   <Input
                     placeholder="Last Name"
                     type="text"
+                    name="lname"
+                    // value={lname}
                     onChange={(event) => {
                       lname = event.target.value;
                     }}
@@ -153,6 +158,8 @@ const UserProfile = () => {
                   <Input
                     placeholder="Pen Name"
                     type="text"
+                    name="pname"
+                    // value={pname}
                     onChange={(event) => {
                       pname = event.target.value;
                     }}
@@ -165,6 +172,8 @@ const UserProfile = () => {
                   <Label check>
                     <Input
                       type="checkbox"
+                      name="pnamedef"
+                      // value={pnamedef}
                       onClick={(event) => {
                         pnamedef = !pnamedef;
                       }}
@@ -184,6 +193,8 @@ const UserProfile = () => {
                   <Input
                     placeholder="Country"
                     type="text"
+                    name="country"
+                    // value={co}
                     onChange={(event) => {
                       co = event.target.value;
                     }}
@@ -200,6 +211,8 @@ const UserProfile = () => {
                     placeholder="Here can be your description"
                     rows="4"
                     type="textarea"
+                    name="about"
+                    // value={abt}
                     onChange={(event) => {
                       abt = event.target.value;
                     }}
@@ -207,79 +220,87 @@ const UserProfile = () => {
                 </FormGroup>{" "}
               </Col>{" "}
             </Row>{" "}
-          </Form>{" "}
-        </CardBody>{" "}
-        <CardHeader>
-          <h5 className="title"> Social Media Links </h5>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col className="pr-md-1" md="4">
-              <FormGroup>
-                <label> Facebook </label>{" "}
-                <Input
-                  placeholder="FB ID URL"
-                  type="url"
-                  onChange={(event) => {
-                    fburl = event.target.value;
-                  }}
-                />
-              </FormGroup>{" "}
-            </Col>{" "}
-          </Row>{" "}
-          <Row>
-            <Col className="pr-md-1" md="4">
-              <FormGroup>
-                <label> Twitter </label>{" "}
-                <Input
-                  placeholder="Twitter URL"
-                  type="url"
-                  onChange={(event) => {
-                    turl = event.target.value;
-                  }}
-                />
-              </FormGroup>{" "}
-            </Col>{" "}
-          </Row>{" "}
-          <Row>
-            <Col className="pr-md-1" md="4">
-              <FormGroup>
-                <label> Instagram </label>{" "}
-                <Input
-                  placeholder="Instagram URL"
-                  type="url"
-                  onChange={(event) => {
-                    iurl = event.target.value;
-                  }}
-                />
-              </FormGroup>{" "}
-            </Col>{" "}
-          </Row>{" "}
-          <Row>
-            <Col className="pr-md-1" md="4">
-              <FormGroup>
-                <label> LinkedIn </label>{" "}
-                <Input
-                  placeholder="LinkedIn URL"
-                  type="url"
-                  onChange={(event) => {
-                    liurl = event.target.value;
-                  }}
-                />
-              </FormGroup>{" "}
-            </Col>{" "}
-          </Row>{" "}
-        </CardBody>
-        <CardFooter>
-          <Button
-            className="btn-fill"
-            color="primary"
-            type="submit"
-            onClick={handleSave}
-          >
-            Save{" "}
-          </Button>{" "}
-        </CardFooter>{" "}
+          </CardBody>{" "}
+          <CardHeader>
+            <h5 className="title"> Social Media Links </h5>
+          </CardHeader>
+          <CardBody>
+            <Row>
+              <Col className="pr-md-1" md="4">
+                <FormGroup>
+                  <label> Facebook </label>{" "}
+                  <Input
+                    placeholder="FB ID URL"
+                    type="url"
+                    name="fburl"
+                    // value={fburl}
+                    onChange={(event) => {
+                      fburl = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+            <Row>
+              <Col className="pr-md-1" md="4">
+                <FormGroup>
+                  <label> Twitter </label>{" "}
+                  <Input
+                    placeholder="Twitter URL"
+                    type="url"
+                    name="turl"
+                    // value={turl}
+                    onChange={(event) => {
+                      turl = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+            <Row>
+              <Col className="pr-md-1" md="4">
+                <FormGroup>
+                  <label> Instagram </label>{" "}
+                  <Input
+                    placeholder="Instagram URL"
+                    type="url"
+                    name="iurl"
+                    // value={iurl}
+                    onChange={(event) => {
+                      iurl = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+            <Row>
+              <Col className="pr-md-1" md="4">
+                <FormGroup>
+                  <label> LinkedIn </label>{" "}
+                  <Input
+                    placeholder="LinkedIn URL"
+                    type="url"
+                    name="liurl"
+                    // value={liurl}
+                    onChange={(event) => {
+                      liurl = event.target.value;
+                    }}
+                  />
+                </FormGroup>{" "}
+              </Col>{" "}
+            </Row>{" "}
+          </CardBody>
+          <CardFooter>
+            <Button
+              className="btn-fill"
+              color="primary"
+              type="submit"
+              onClick={handleSave}
+            >
+              Save{" "}
+            </Button>{" "}
+          </CardFooter>{" "}
+        </Form>{" "}
       </Card>{" "}
     </div>
   );
