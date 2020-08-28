@@ -27,12 +27,14 @@ module.exports.signUp = function (req, res) {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
-      const defaultName = req.body.
+      const defaultName = req.body.defaulPname ? req.body.firstName : req.body.penName;
+
       const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
+        defaultName:defaultName
       });
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {

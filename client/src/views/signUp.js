@@ -77,9 +77,8 @@ const SignUp = () => {
               <Col>
                 <Label for="pen-name">Pen Name</Label>
                 <Input
-                
                   type="text"
-                  name="pen-name"
+                  name="penName"
                   id="pen-name"
                   placeholder="You can use a Pen name too!"
                 />
@@ -92,7 +91,7 @@ const SignUp = () => {
 
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" name="default-p-name" />
+              <Input type="checkbox" name="defaultPname" />
               Use Pen name as the default
               <span className="form-check-sign">
                 <span className="check"></span>

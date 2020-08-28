@@ -19,9 +19,6 @@ router.post('/sign-up', usersController.signUp);
 // @access Public
 router.post("/login" , usersController.login)
 
-
-
-
 // router.get('/profile', passport.checkAuthentication, testingController.home );
 // router.post("/profile/analyze", sentimentAnalyisApi.analyze);
 // router.post('/create', usersController.create);
