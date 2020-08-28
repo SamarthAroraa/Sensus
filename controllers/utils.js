@@ -27,11 +27,11 @@ module.exports.dailyPrompts = (req, res) => {
       "The words I’d like to live by are…",
       "I couldn’t imagine living without…",
     ];
-    return res.json(200, {
+    return res.status(200).json({
       prompt: prompts[Math.floor(Math.random() * prompts.length)],
     });
   } catch (err) {
-    return res.json(500, {
+    return res.status(500).json({
       message: `${err}`,
     });
   }
