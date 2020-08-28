@@ -3,15 +3,20 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "sensusmail@gmail.com",
+        user: "sensus.service@gmail.com",
         pass: "pack6:ICU"
     }
 });
 
+const generateWelcomeEmail = (messageOptions) => {
+
+    //TODO: Create a email template
+}
+
 module.exports.sendMail = async (messageOptions) => {
 
-    await transporter.sendMail(messageOptions, (err, info) => {
-        if(err) {
+    transporter.sendMail(messageOptions, (err, info) => {
+        if (err) {
             console.log(err);
         }
         else {
