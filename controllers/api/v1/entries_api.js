@@ -10,7 +10,7 @@ module.exports.index= async function(req,res){
 
 
 
-    return res.json(200, {
+    return res.send(200).json({
         message: "List of entries",
         entries: entries
     })
