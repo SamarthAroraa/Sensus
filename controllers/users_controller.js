@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const mailer = require('../config/nodemailer');
 
 const addUser = (req, res) => {
   const user = new User({});
@@ -50,9 +51,16 @@ module.exports.create = function (req, res) {
       if (!user) {
         User.create(req.body, function (err, user) {
           if (err) {
-            console.log("Error in creating user while signing up!");
+            console.log("Error in creating user while signing up!" + err);
             return;
           }
+
+          mailer.sendMail({
+            from: "Team Sensus",
+            to: req.body.email,
+            subject: "Test Email",
+            text: "If you are receiving this email, you have successfully signed up for Sensus!"
+          });
 
           return res.redirect("/users/sign-in");
         });
