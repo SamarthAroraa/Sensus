@@ -4,7 +4,7 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
 const User = require("../models/user");
-const mailer = require('../config/nodemailer');
+const mailer = require("../config/nodemailer");
 
 const addUser = (req, res) => {
   const user = new User({});
@@ -27,14 +27,20 @@ module.exports.signUp = function (req, res) {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
-      const defaultName = req.body.defaulPname ? req.body.firstName : req.body.penName;
+      const defaultName =
+        req.body.defaultPname && req.body.penName != ""
+          ? req.body.penName
+          : req.body.firstName;
+      const penName = req.body.penName ? req.body.penName : "";
 
       const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        defaultName:defaultName
+        defaultName: defaultName,
+        penName: penName,
+        usePenNameDefault: req.body.defaultPname,
       });
       // Hash password before saving in database
       bcrypt.genSalt(10, (err, salt) => {
@@ -125,7 +131,8 @@ module.exports.create = function (req, res) {
             from: "Team Sensus",
             to: req.body.email,
             subject: "Test Email",
-            text: "If you are receiving this email, you have successfully signed up for Sensus!"
+            text:
+              "If you are receiving this email, you have successfully signed up for Sensus!",
           });
 
           return res.redirect("/users/sign-in");

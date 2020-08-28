@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    defaultName: {
+      type: String,
+      required: true,
+    },
 
     about: {
       type: String,
