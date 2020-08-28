@@ -27,8 +27,8 @@ const SignUp = () => {
   };
   return (
     <form className="login-form">
-      <Card className="form-component">
-        <CardBody className="p-4">
+      <Card className="form-component mt-4">
+        <CardBody className="p-4 ">
           <CardTitle>
             <h1>Sign Up</h1>
           </CardTitle>
@@ -39,21 +39,32 @@ const SignUp = () => {
             </Label>
             <Row>
               <Col>
-                <Input type="text" placeholder="First name" />
+                <Input
+                  type="text"
+                  placeholder="First name"
+                  name="firstName"
+                  required
+                />
               </Col>
               <Col>
-                <Input type="text" placeholder="Last name" />
+                <Input
+                  type="text"
+                  placeholder="Last name"
+                  name="lastName"
+                  required
+                />
               </Col>
             </Row>
           </FormGroup>
           <FormGroup>
-            <Label for="exampleEmail">
+            <Label for="email">
               Email address <span style={danger}>*</span>
             </Label>
             <Input
               type="email"
               name="email"
-              id="exampleEmail"
+              id="email"
+              required
               placeholder="Enter email"
             />
             <FormText color="muted">
@@ -88,17 +99,32 @@ const SignUp = () => {
             </Label>
           </FormGroup>
           <FormGroup></FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="Password"
-              autoComplete="off"
-            />
-          </FormGroup>
-          <FormGroup check></FormGroup>
+          <Label for="password">
+            Password <span style={danger}>*</span>
+          </Label>
+          <Row className="">
+            <Col>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                required
+                placeholder="Password"
+                autoComplete="off"
+              />
+            </Col>
+            <Col>
+              <Input
+                type="password"
+                name="password2"
+                required
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                autoComplete="off"
+              />
+            </Col>
+          </Row>
+          <FormGroup></FormGroup>
           <Button color="primary" className="animation-on-hover" type="submit">
             Sign up
           </Button>
@@ -115,7 +141,7 @@ const SignUp = () => {
             </Button>
           </FormGroup>
           <div className="text-center pt-1 ">
-            <a href="/login">Already a member? Login.</a>
+            <a href="/login">Already a member? Login</a>
           </div>
         </CardBody>
       </Card>

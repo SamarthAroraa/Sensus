@@ -6,19 +6,27 @@ const testingController = require("../controllers/testing-controller");
 const sentimentAnalyisApi = require("../controllers/sentimentAPI");
 
 
-router.get('/profile', passport.checkAuthentication, testingController.home );
-router.post("/profile/analyze", sentimentAnalyisApi.analyze);
-router.get('/sign-up', usersController.signUp);
-router.get('/sign-in', usersController.signIn);
 
-router.post('/create', usersController.create);
 
+
+// @route POST api/users/register
+// @desc Register user
+// @access Public
+router.post('/sign-up', usersController.signUp);
+
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/login" , usersController.login)
+
+
+
+
+// router.get('/profile', passport.checkAuthentication, testingController.home );
+// router.post("/profile/analyze", sentimentAnalyisApi.analyze);
+// router.post('/create', usersController.create);
 //use passport as a middleware to authenticate
 
-router.post('/create-session', passport.authenticate(
-  'local',
-  {failureRedirect: '/users/sign-in'},
-), usersController.createSession);
 
 router.get('/sign-out', usersController.destroySession);
 
