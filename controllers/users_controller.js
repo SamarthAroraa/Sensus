@@ -26,6 +26,7 @@ module.exports.signUp = function (req, res) {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
+      const defaultName = req.body.
       const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
