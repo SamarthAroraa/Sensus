@@ -9,6 +9,7 @@ router.use('/app-utils', require('./utils'))
 
 router.get('/', homeController.home);
 
+router.use('/api', require('./api'));
 
 
 module.exports = router;
