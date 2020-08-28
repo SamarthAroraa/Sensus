@@ -1,140 +1,126 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import "../assets/scss/login-form.scss";
+import Switch from "react-bootstrap-switch";
 
-function Copyright() {
+import {
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Button,
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Row,
+  Col,
+  Form,
+} from "reactstrap";
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+} from "react-social-login-buttons";
+const SignUp = () => {
+  const danger = {
+    color: "#ff0000",
+  };
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+    <form className="login-form">
+      <Card className="form-component">
+        <CardBody className="p-4">
+          <CardTitle>
+            <h1>Sign Up</h1>
+          </CardTitle>
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+          <FormGroup>
+            <Label>
+              Your name <span style={danger}>*</span>
+            </Label>
+            <Row>
+              <Col>
+                <Input type="text" placeholder="First name" />
+              </Col>
+              <Col>
+                <Input type="text" placeholder="Last name" />
+              </Col>
+            </Row>
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleEmail">
+              Email address <span style={danger}>*</span>
+            </Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="Enter email"
+            />
+            <FormText color="muted">
+              We'll never share your email with anyone else.
+            </FormText>
+          </FormGroup>
 
-export default function SignUp() {
-  const classes = useStyles();
+          <FormGroup>
+            <Row>
+              <Col>
+                <Label for="pen-name">Pen Name</Label>
+                <Input
+                  type="text"
+                  name="pen-name"
+                  id="pen-name"
+                  placeholder="You can use a Pen name too!"
+                />
+              </Col>
+            </Row>
+            <FormText color="muted">
+              This is an optional field. You can change it later.
+            </FormText>
+          </FormGroup>
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
+          <FormGroup check>
+            <Label check>
+              <Input type="checkbox" />
+              Use Pen name as the default
+              <span className="form-check-sign">
+                <span className="check"></span>
+              </span>
+            </Label>
+          </FormGroup>
+          <FormGroup></FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              placeholder="Password"
+              autoComplete="off"
+            />
+          </FormGroup>
+          <FormGroup check></FormGroup>
+          <Button color="primary" className="animation-on-hover" type="submit">
+            Sign up
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+
+          <div className="text-center pt-3">
+            Or sign up with your social accounts
+          </div>
+          <FormGroup className="justify-content-center d-flex pt-2">
+            <Button className="btn-icon btn-round mr-3" color="danger">
+              <i className="fab fa-google" />
+            </Button>
+            <Button className="btn-icon btn-round ml-3" color="info">
+              <i className="fab fa-facebook-f" />
+            </Button>
+          </FormGroup>
+          <div className="text-center pt-1 ">
+            <a href="/login">Already a member? Login.</a>
+          </div>
+        </CardBody>
+      </Card>
+    </form>
   );
-}
+};
+
+export default SignUp;
