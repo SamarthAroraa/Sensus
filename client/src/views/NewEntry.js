@@ -51,8 +51,8 @@ class NewEntry extends React.Component {
   render() {
     //styles for the main textarea
     const textarea_styles = {
-      maxHeight: 70 + "vh",
-      height: 70 + "vh",
+      maxHeight: 73 + "vh",
+      height: 73 + "vh",
       border: "none",
       fontSize: 17 + "px",
     };
@@ -69,7 +69,7 @@ class NewEntry extends React.Component {
           <Row>
             <Col md="1"></Col>
             <Col md="10">
-              <Card style={{ height: 90 + "vh" }}>
+              <Card style={{ height: 100 + "vh" }}>
                 <CardHeader>
                   <FormGroup>
                     <Input
@@ -81,6 +81,8 @@ class NewEntry extends React.Component {
                       type="textarea"
                     />
                   </FormGroup>
+                  {/* <hr /> */}
+
                   <h5 className="text-muted ml-4">
                     <i className="tim-icons icon-calendar-60"></i> &nbsp;
                     {this.state.currentDate}
