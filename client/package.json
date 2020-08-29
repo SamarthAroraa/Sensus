@@ -6,9 +6,11 @@
   "proxy": "http://localhost:5000/",
   "dependencies": {
     "@types/react": "16.9.23",
+    "axios": "^0.20.0",
     "chart.js": "2.9.3",
-    "classnames": "2.2.6",
+    "classnames": "^2.2.6",
     "history": "4.10.1",
+    "jwt-decode": "^2.2.0",
     "node-sass": "4.13.1",
     "perfect-scrollbar": "1.5.0",
     "prop-types": "15.7.2",
@@ -17,11 +19,15 @@
     "react-dom": "16.13.0",
     "react-google-maps": "9.4.5",
     "react-notification-alert": "0.0.12",
-    "react-router-dom": "5.1.2",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.3",
-    "reactstrap": "8.4.1"
+    "reactstrap": "8.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "proxy": "http://localhost:5000",
     "start": "react-scripts start",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test --env=jsdom",

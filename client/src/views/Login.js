@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import { Link } from "react-router-dom";
 import "../assets/scss/login-form.scss";
 
@@ -18,9 +19,27 @@ import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
-const Login = () => {
+const Login = (props) => {
+  const [errors, setErrors] = useState({});
+  const [userCredentials, setUserCredentials] = useState({
+    password: "",
+    email: "",
+  });
+  const { password, email } = userCredentials;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserCredentials({ ...userCredentials, [name]: value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: email,
+      password: password,
+    };
+    console.log(newUser);
+  };
   return (
-    <form className="login-form">
+    <form className="login-form" noValidate onSubmit={onSubmit}>
       <Card className="form-component">
         <CardBody className="p-4">
           <CardTitle>
@@ -30,6 +49,9 @@ const Login = () => {
           <FormGroup>
             <Label for="exampleEmail">Email address</Label>
             <Input
+              onChange={handleChange}
+              value={email}
+              error={errors.email}
               type="email"
               name="email"
               id="exampleEmail"
@@ -46,6 +68,9 @@ const Login = () => {
               name="password"
               id="examplePassword"
               placeholder="Password"
+              value={password}
+              onChange={handleChange}
+              error={errors.password}
               autoComplete="off"
             />
           </FormGroup>

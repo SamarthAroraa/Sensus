@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState ,useEffect, useRef} from "react";
 import "../assets/scss/login-form.scss";
 import Switch from "react-bootstrap-switch";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
+import classnames from "classnames";
 
 import {
   FormGroup,
@@ -21,12 +26,70 @@ import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
-const SignUp = () => {
+const SignUp = (props) => {
   const danger = {
     color: "#ff0000",
   };
+
+  const [errors, setErrors] = useState({});
+  const [defaultPname, setDefaultPname] = useState(false);
+  const [userCredentials, setUserCredentials] = useState({
+    firstName: "",
+    password: "",
+    password2: "",
+    email: "",
+    lastName: "",
+    penName: "",
+    // defaultPname: false,
+  });
+  const {
+    firstName,
+    password,
+    password2,
+    email,
+    lastName,
+    penName,
+    // defaultPname,
+  } = userCredentials;
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserCredentials({ ...userCredentials, [name]: value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      password2: password2,
+      penName: penName,
+      defaultPname: defaultPname,
+    };
+    console.log(newUser);
+  };
+
+  useEffect(() => {
+    console.log("errors changed", props.errors);
+  }, [props.errors]);
+
+  //Skipping first iteration (exactly like componentWillReceiveProps):
+  const isFirstRun = useRef(true);
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if(props.errors){
+      setErrors(props.errors);
+    }
+    console.log("errors changed", props.errors);
+  }, [props.errors]);
+
   return (
-    <form className="login-form">
+    <form className="login-form" noValidate onSubmit={onSubmit}>
       <Card className="form-component mt-4">
         <CardBody className="p-4 ">
           <CardTitle>
@@ -40,6 +103,9 @@ const SignUp = () => {
             <Row>
               <Col>
                 <Input
+                  onChange={handleChange}
+                  error={errors.firstName}
+                  value={firstName}
                   type="text"
                   placeholder="First name"
                   name="firstName"
@@ -48,6 +114,9 @@ const SignUp = () => {
               </Col>
               <Col>
                 <Input
+                  onChange={handleChange}
+                  error={errors.lastName}
+                  value={lastName}
                   type="text"
                   placeholder="Last name"
                   name="lastName"
@@ -61,6 +130,9 @@ const SignUp = () => {
               Email address <span style={danger}>*</span>
             </Label>
             <Input
+              onChange={handleChange}
+              value={email}
+              error={errors.email}
               type="email"
               name="email"
               id="email"
@@ -77,8 +149,10 @@ const SignUp = () => {
               <Col>
                 <Label for="pen-name">Pen Name</Label>
                 <Input
+                  onChange={handleChange}
                   type="text"
                   name="penName"
+                  value={penName}
                   id="pen-name"
                   placeholder="You can use a Pen name too!"
                 />
@@ -91,7 +165,12 @@ const SignUp = () => {
 
           <FormGroup check>
             <Label check>
-              <Input type="checkbox" name="defaultPname" />
+              <Input
+                type="checkbox"
+                defaultChecked={defaultPname}
+                onChange={() => setDefaultPname(!defaultPname)}
+                name="defaultPname"
+              />
               Use Pen name as the default
               <span className="form-check-sign">
                 <span className="check"></span>
@@ -107,6 +186,9 @@ const SignUp = () => {
               <Input
                 type="password"
                 name="password"
+                value={password}
+                onChange={handleChange}
+                error={errors.password}
                 id="password"
                 required
                 placeholder="Password"
@@ -115,8 +197,11 @@ const SignUp = () => {
             </Col>
             <Col>
               <Input
+                onChange={handleChange}
                 type="password"
+                value={password2}
                 name="password2"
+                error={errors.password2}
                 required
                 id="confirmPassword"
                 placeholder="Confirm Password"
@@ -141,7 +226,7 @@ const SignUp = () => {
             </Button>
           </FormGroup>
           <div className="text-center pt-1 ">
-            <a href="/login">Already a member? Login</a>
+            <Link to="/login">Already a member? Login</Link>
           </div>
         </CardBody>
       </Card>
@@ -149,4 +234,14 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+SignUp.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps, { registerUser })(SignUp);
