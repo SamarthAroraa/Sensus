@@ -41,6 +41,11 @@ Our policy is to keep Sensus as unopinionated as possible. We provide the user w
     - [ ] Add the following at the end of your ~/.bashrc<br/> `export GOOGLE_APPLICATION_CREDENTIALS="<path-to-the-project-directory>/Sensus/config/Sensus-0f50e66c71ef.json"`
 
     - [ ] Run `source ~/.bashrc` in the terminal.
+    
+    
+## Install the following browser extensions:-
+- [ ] Redux DevTools
+- [ ] React Developer Tools
 
 ## To run the frontend and backend together :-
 
