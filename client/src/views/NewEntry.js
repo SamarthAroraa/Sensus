@@ -45,7 +45,6 @@ class NewEntry extends React.Component {
       .then((response) => response.json())
       .then((response) => {
         this.setState({ prompt: response.prompt });
-        console.log(response);
       });
   }
   render() {

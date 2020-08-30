@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
+const env = require('../config/environment')
 
 const User = require("../models/user");
 const mailer = require("../config/nodemailer");
@@ -58,6 +59,7 @@ module.exports.signUp = function (req, res) {
 };
 
 module.exports.login = function (req, res) {
+  const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
   if (!isValid) {
     return res.status(400).json(errors);
@@ -83,7 +85,7 @@ module.exports.login = function (req, res) {
         // Sign token
         jwt.sign(
           payload,
-          keys.secretOrKey,
+          env.secretOrKey,
           {
             expiresIn: 31556926, // 1 year in seconds
           },

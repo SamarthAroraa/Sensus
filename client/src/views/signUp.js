@@ -1,4 +1,4 @@
-import React, { useState ,useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../assets/scss/login-form.scss";
 import Switch from "react-bootstrap-switch";
 import { Link, withRouter } from "react-router-dom";
@@ -26,6 +26,7 @@ import {
   FacebookLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
+
 const SignUp = (props) => {
   const danger = {
     color: "#ff0000",
@@ -68,25 +69,20 @@ const SignUp = (props) => {
       penName: penName,
       defaultPname: defaultPname,
     };
-    console.log(newUser);
+    props.registerUser(newUser, props.history);
   };
 
   useEffect(() => {
-    console.log("errors changed", props.errors);
-  }, [props.errors]);
-
-  //Skipping first iteration (exactly like componentWillReceiveProps):
-  const isFirstRun = useRef(true);
-  useEffect(() => {
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
-      return;
+    // If logged in and user navigates to Register page, should redirect them to dashboard
+    if (props.auth.isAuthenticated) {
+      this.props.history.push("/admin/new-entry");
     }
-    if(props.errors){
+  });
+  useEffect(() => {
+    if (props.errors) {
       setErrors(props.errors);
     }
-    console.log("errors changed", props.errors);
-  }, [props.errors]);
+  }, [props]);
 
   return (
     <form className="login-form" noValidate onSubmit={onSubmit}>
@@ -107,21 +103,29 @@ const SignUp = (props) => {
                   error={errors.firstName}
                   value={firstName}
                   type="text"
+                  className={classnames("", {
+                    invalid: errors.firstName,
+                  })}
                   placeholder="First name"
                   name="firstName"
                   required
                 />
+                <FormText color="danger">{errors.firstName}</FormText>
               </Col>
               <Col>
                 <Input
                   onChange={handleChange}
                   error={errors.lastName}
                   value={lastName}
+                  className={classnames("", {
+                    invalid: errors.lastName,
+                  })}
                   type="text"
                   placeholder="Last name"
                   name="lastName"
                   required
                 />
+                <FormText color="danger">{errors.lastName}</FormText>
               </Col>
             </Row>
           </FormGroup>
@@ -129,16 +133,22 @@ const SignUp = (props) => {
             <Label for="email">
               Email address <span style={danger}>*</span>
             </Label>
+
             <Input
               onChange={handleChange}
               value={email}
               error={errors.email}
               type="email"
               name="email"
+              className={classnames("", {
+                invalid: errors.email,
+              })}
               id="email"
               required
               placeholder="Enter email"
             />
+            <FormText color="danger">{errors.email}</FormText>
+
             <FormText color="muted">
               We'll never share your email with anyone else.
             </FormText>
@@ -187,6 +197,9 @@ const SignUp = (props) => {
                 type="password"
                 name="password"
                 value={password}
+                className={classnames("", {
+                  invalid: errors.password,
+                })}
                 onChange={handleChange}
                 error={errors.password}
                 id="password"
@@ -194,6 +207,7 @@ const SignUp = (props) => {
                 placeholder="Password"
                 autoComplete="off"
               />
+              <FormText color="danger">{errors.password}</FormText>
             </Col>
             <Col>
               <Input
@@ -202,11 +216,15 @@ const SignUp = (props) => {
                 value={password2}
                 name="password2"
                 error={errors.password2}
+                className={classnames("", {
+                  invalid: errors.password2,
+                })}
                 required
                 id="confirmPassword"
                 placeholder="Confirm Password"
                 autoComplete="off"
               />
+             <FormText color="danger">{errors.password2}</FormText>
             </Col>
           </Row>
           <FormGroup></FormGroup>
@@ -244,4 +262,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { registerUser })(SignUp);
+export default connect(mapStateToProps, { registerUser })(withRouter(SignUp));
