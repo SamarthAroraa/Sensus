@@ -27,11 +27,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    username: {
-      type: String,
-      required: true,
-    },
-
+    
     penName: {
       type: String,
     },
@@ -39,6 +35,10 @@ const userSchema = new mongoose.Schema(
     usePenNameDefault: {
       type: Boolean,
       default: false,
+    },
+    defaultName: {
+      type: String,
+      required: true,
     },
 
     about: {

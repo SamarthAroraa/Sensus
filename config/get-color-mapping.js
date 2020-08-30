@@ -25,7 +25,6 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
   const happy_colors = spring_colors.slice(18);
   //sad color list
   const sad_colors = velocity_blue_colors.slice(0, 10).reverse();
-  console.log(sad_colors);
   //initialized the color group to be used
   let color_group = null;
 

@@ -1,5 +1,11 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
+const env = require('../config/environment')
+
 const User = require("../models/user");
-const mailer = require('../config/nodemailer');
+const mailer = require("../config/nodemailer");
 
 const addUser = (req, res) => {
   const user = new User({});
@@ -12,22 +18,90 @@ module.exports.profile = function (req, res) {
 };
 
 module.exports.signUp = function (req, res) {
-  if (req.isAuthenticated()) {
-    res.redirect("/users/profile");
+  // Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
+  User.findOne({ email: req.body.email }).then((user) => {
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    } else {
+      const defaultName =
+        req.body.defaultPname && req.body.penName != ""
+          ? req.body.penName
+          : req.body.firstName;
+      const penName = req.body.penName ? req.body.penName : "";
 
-  return res.render("user_sign_up", {
-    title: "Sensus | Sign Up",
+      const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        defaultName: defaultName,
+        penName: penName,
+        usePenNameDefault: req.body.defaultPname,
+      });
+      // Hash password before saving in database
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then((user) => res.json(user))
+            .catch((err) => console.log(err));
+        });
+      });
+    }
   });
 };
 
-module.exports.signIn = function (req, res) {
-  if (req.isAuthenticated()) {
-    res.redirect("/users/profile");
+module.exports.login = function (req, res) {
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
-
-  return res.render("user_sign_in", {
-    title: "Sensus | Sign In",
+  const email = req.body.email;
+  const password = req.body.password;
+  // Find user by email
+  User.findOne({ email }).then((user) => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+    // Check password
+    bcrypt.compare(password, user.password).then((isMatch) => {
+      if (isMatch) {
+        // User matched
+        // Create JWT Payload
+        const payload = {
+          id: user._id,
+          fname: user.firstName,
+          lname: user.lastName,
+        };
+        // Sign token
+        jwt.sign(
+          payload,
+          env.secretOrKey,
+          {
+            expiresIn: 31556926, // 1 year in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token,
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ passwordincorrect: "Password incorrect" });
+      }
+    });
   });
 };
 
@@ -59,7 +133,8 @@ module.exports.create = function (req, res) {
             from: "Team Sensus",
             to: req.body.email,
             subject: "Test Email",
-            text: "If you are receiving this email, you have successfully signed up for Sensus!"
+            text:
+              "If you are receiving this email, you have successfully signed up for Sensus!",
           });
 
           return res.redirect("/users/sign-in");

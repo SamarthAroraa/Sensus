@@ -130,7 +130,6 @@ const UserProfile = () => {
                     name="fname"
                     // value={fname}
                     onChange={(event) => {
-                      console.log(event.target.value);
                       fname = event.target.value;
                     }}
                   />

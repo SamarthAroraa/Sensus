@@ -1,13 +1,12 @@
 const express = require("express");
 const app = express();
-const cors= require('cors')
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const expressLayouts = require("express-ejs-layouts");
 const db = require("./config/mongoose");
 
 const session = require("express-session");
-const passport= require('passport');
-const passportLocal= require('./config/passport-local-strategy');
+const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 
 const env = require("./config/environment");
@@ -19,26 +18,27 @@ const port = 5000;
 const path = require("path");
 
 app.use(
-    sassMiddleware({
-        src: path.join(__dirname, env.asset_path, "scss"),
-        dest: path.join(__dirname, env.asset_path, "css"),
-        debug: true,
-        outputStyle: "extended",
-        prefix: "/css",
-    })
+  sassMiddleware({
+    src: path.join(__dirname, env.asset_path, "scss"),
+    dest: path.join(__dirname, env.asset_path, "css"),
+    debug: true,
+    outputStyle: "extended",
+    prefix: "/css",
+  })
 );
 
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 app.use(cookieParser());
 
-
 app.use(expressLayouts);
 
-app.set('layout extractStyles', true);
-app.set('layout extractScripts', true);
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
 
 app.use(express.static(path.join(__dirname, env.asset_path)));
 
@@ -47,38 +47,40 @@ app.use(express.static(path.join(__dirname, env.asset_path)));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.use(cors())
+app.use(cors());
 app.use(
-    session({
-        name: "sensus",
-        //TO DO change secret before deployment
-        secret: env.session_cookie_key,
-        saveUninitialized: false,
-        resave: true,
-        require: false,
-        cookie: {
-            maxAge: null,
-        },
+  session({
+    name: "sensus",
+    //TO DO change secret before deployment
+    secret: env.session_cookie_key,
+    saveUninitialized: false,
+    resave: true,
+    require: false,
+    cookie: {
+      maxAge: null,
+    },
 
-        store: new MongoStore({
-                mongooseConnection: db,
-                autoRemove: "disabled",
-            },
-            function(err) {
-                console.log(err || "connect-mogodb ok");
-            }
-        ),
-    })
+    store: new MongoStore(
+      {
+        mongooseConnection: db,
+        autoRemove: "disabled",
+      },
+      function (err) {
+        console.log(err || "connect-mogodb ok");
+      }
+    ),
+  })
 );
 app.use(flash());
 app.use(flashMiddleware.setFlash);
 
+// Passport middleware
 app.use(passport.initialize());
-app.use(passport.session());
+// Passport config
+require("./config/passport-jwt")(passport);
 
-app.use(passport.setAuthenticatedUser);
 app.use("/", require("./routes"));
 
 app.listen(port, () => {
-    console.log(`Server is active on port:${port}`);
+  console.log(`Server is active on port:${port}`);
 });
