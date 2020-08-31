@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    
     penName: {
       type: String,
     },
@@ -58,6 +57,9 @@ const userSchema = new mongoose.Schema(
     },
 
     linkedinURL: {
+      type: String,
+    },
+    country: {
       type: String,
     },
 
