@@ -20,7 +20,7 @@
 // #############################
 
 // chartExample1 and chartExample2 options
-let chart1_2_options = {
+let chart_1_options = {
   maintainAspectRatio: false,
   legend: {
     display: false,
@@ -68,6 +68,26 @@ let chart1_2_options = {
       },
     ],
   },
+};
+
+let chart_2_options = {
+  maintainAspectRatio: false,
+  legend: {
+    display: true,
+    position: "left",
+  },
+  tooltips: {
+    backgroundColor: "#f5f5f5",
+    titleFontColor: "#333",
+    bodyFontColor: "#666",
+    bodySpacing: 4,
+    xPadding: 12,
+    mode: "nearest",
+    intersect: 0,
+    position: "nearest",
+  },
+  responsive: true,
+  
 };
 
 // #########################################
@@ -234,7 +254,7 @@ let chartExample1 = {
       ],
     };
   },
-  options: chart1_2_options,
+  options: chart_1_options,
 };
 
 // #########################################
@@ -244,19 +264,13 @@ let chartExample2 = {
   data: (canvas) => {
     let ctx = canvas.getContext("2d");
 
-    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
-    gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
-    gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
-
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+      labels: ["Neutral", "Sad", "Happy"],
       datasets: [
         {
-          label: "Data",
+          label: "Entry Count",
           fill: true,
-          backgroundColor: gradientStroke,
+          backgroundColor: ["#f5f5f5", "#1f8ef1", "#00d6b4"],
           borderColor: "#1f8ef1",
           borderWidth: 2,
           borderDash: [],
@@ -268,12 +282,13 @@ let chartExample2 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 100, 70, 80, 120, 80],
+          data: [10, 30, 60],
+          type: "pie"
         },
       ],
     };
   },
-  options: chart1_2_options,
+  options: chart_2_options,
 };
 
 // #########################################
