@@ -81,6 +81,16 @@ module.exports.login = function (req, res) {
           id: user._id,
           fname: user.firstName,
           lname: user.lastName,
+          defaultName : user.defaultName,
+          usePenNameDefault: user.usePenNameDefault,
+          about:user.about,
+          penName: user.penName,
+          country: user.country,
+          instagramURL: user.instagramURL,
+          linkedinURL:user.linkedinURL,
+          twitterURL: user.twitterURL,
+          facebookURL: user.facebookURL,
+          entries: user.entries
         };
         // Sign token
         jwt.sign(

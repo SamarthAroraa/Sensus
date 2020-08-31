@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -15,8 +15,12 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../actions/authActions";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const username = "@mike_andrew123"; //This will be taken from props.
 
   let fname = "Mike";
@@ -31,14 +35,25 @@ const UserProfile = () => {
   let iurl = "";
   let liurl = "";
 
-  const [firstName, setFirstName] = useState("Mike");
-  const [lastName, setLastName] = useState("Andrew");
+  useEffect(() => {
+    if (props.auth.user) {
+      setFirstName(props.auth.user.fname);
+      setLastName(props.auth.user.lname);
+      setPenName(props.auth.user.penName);
+      setPenNameDefault(props.auth.user.penNameDefault);
+      setCountry(props.auth.user.country);
+      setAbout(props.auth.user.about);
+      setFacebookURL(props.auth.user.facebookURL);
+      setInstagramURL(props.auth.user.instagramURL);
+    }
+  });
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [penName, setPenName] = useState("");
   const [penNameDefault, setPenNameDefault] = useState(false);
   const [country, setCountry] = useState("");
-  const [about, setAbout] = useState(
-    "Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is..."
-  );
+  const [about, setAbout] = useState("Hi! I'm using Sensus");
   const [facebookURL, setFacebookURL] = useState("");
   const [twitterURL, setTwitterURL] = useState("");
   const [instagramURL, setInstagramURL] = useState("");
@@ -74,10 +89,11 @@ const UserProfile = () => {
                 src={require("assets/img/emilyz.jpg")}
               />{" "}
               <h3 className="title">
-                {firstName} {lastName} {penName == "" ? "" : `(${penName})`}
+                {firstName} {lastName}{" "}
+                {penName == "" ? "" : `(${penName})`}
               </h3>{" "}
             </a>{" "}
-            <p className="description"> {username} </p>{" "}
+            
           </div>{" "}
           <div className="card-description">{about}</div>{" "}
         </CardBody>{" "}
@@ -128,9 +144,9 @@ const UserProfile = () => {
                     placeholder="First Name"
                     type="text"
                     name="fname"
-                    // value={fname}
-                    onChange={(event) => {
-                      fname = event.target.value;
+                    value={firstName}
+                    onChange={(e) => {
+                        setFirstName(e.target.value)
                     }}
                   />
                 </FormGroup>{" "}
@@ -142,9 +158,9 @@ const UserProfile = () => {
                     placeholder="Last Name"
                     type="text"
                     name="lname"
-                    // value={lname}
+                    value={lastName}
                     onChange={(event) => {
-                      lname = event.target.value;
+                      setLastName (event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -158,7 +174,7 @@ const UserProfile = () => {
                     placeholder="Pen Name"
                     type="text"
                     name="pname"
-                    // value={pname}
+                    value={penName}
                     onChange={(event) => {
                       pname = event.target.value;
                     }}
@@ -172,6 +188,7 @@ const UserProfile = () => {
                     <Input
                       type="checkbox"
                       name="pnamedef"
+                      defaultChecked={penNameDefault}
                       // value={pnamedef}
                       onClick={(event) => {
                         pnamedef = !pnamedef;
@@ -305,4 +322,15 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+UserProfile.propTypes = {
+  auth: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { registerUser })(
+  withRouter(UserProfile)
+);
