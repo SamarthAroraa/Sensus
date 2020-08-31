@@ -24,7 +24,9 @@ module.exports.createUpdate = async function (req, res) {
         message: "User not found",
       });
     }
+    //to be returned in response
     let new_entry;
+    let mode; //Update or create (U or C respectively)
     const color = await SentimentApi.analyze(text);
     if (!entry_for_date) {
       new_entry = await Entry.create({
@@ -33,18 +35,20 @@ module.exports.createUpdate = async function (req, res) {
         mood: color,
         createDate: date,
       });
+      mode = "C";
+    } else {
+      entry_for_date.text = text;
+      entry_for_date.title = title;
+      entry_for_date.updateDate = Date.now();
+      entry_for_date.save();
+      mode = "U";
+      new_entry = entry_for_date;
     }
-    else{
-        entry_for_date.text=text;
-        entry_for_date.title= title;
-        entry_for_date.updateDate = Date.now();
-        entry_for_date.save();
-    }
-  
+
     return res.status(200).json({
-      message: "Here is the user making the entry",
-      user: user,
-      color: color,
+      message: "Here is the saved entry",
+      entry: new_entry,
+      mode: mode,
     });
   } catch (err) {
     console.log(err);

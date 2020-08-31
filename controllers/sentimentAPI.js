@@ -10,8 +10,10 @@ const client = new language.LanguageServiceClient();
 // Detects the sentiment of the document
 module.exports.analyze = async function (text) {
   try {
+    text=String(text)
+    text=text.toLowerCase() 
     const document = {
-      content: String(text),
+      content: text,
       type: "PLAIN_TEXT",
       language: "EN",
     };
