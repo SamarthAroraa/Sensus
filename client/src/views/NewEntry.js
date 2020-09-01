@@ -42,7 +42,7 @@ const NewEntry = (props) => {
   const [entryText, setEntryText] = useState("");
   const [borderColor, setBorderColor] = useState("transparent");
   const [entryTitle, setEntryTitle] = useState(
-    "Hi, " + props.auth.user.fname + ". Give your entry a title!"
+    "Hi, " + props.auth.user.defaultName + ". Give your entry a title!"
   );
   const [prompt, setPrompt] = useState("");
 

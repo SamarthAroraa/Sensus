@@ -21,7 +21,7 @@ module.exports.createUpdate = async function (req, res) {
     let uid = req.body.user_id;
     console.log(req.body);
     let user = await User.findById(uid);
-    let entry_for_date = await Entry.findOne({ createDate: date });
+    let entry_for_date = await Entry.findOne({ createDate: date, user: user });
 
     // console.log(user, "userr");
     if (!user) {
@@ -34,6 +34,7 @@ module.exports.createUpdate = async function (req, res) {
     let new_entry;
     let mode; //Update or create (U or C respectively)
     if (text.length > 10) {
+        console.log('analyzing');
       color = await SentimentApi.analyze(text);
     } else {
       color = "transparent";
@@ -70,7 +71,7 @@ module.exports.createUpdate = async function (req, res) {
     });
   }
 };
-
+// 5f4ba5769fdc69d27fd2725b
 module.exports.findByDate = async function (req, res) {
   try {
     //function to get the previous entry for the date if it exits
@@ -79,8 +80,9 @@ module.exports.findByDate = async function (req, res) {
     let user = await User.findById(uid);
     let entry_for_date = await Entry.findOne({
       createDate: date,
-      user: uid,
+      user: user,
     });
+    // console.log(user, uid);
     if (!entry_for_date) {
       return res.status(200).json({
         exists: 0,
