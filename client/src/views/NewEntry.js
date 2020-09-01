@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 // reactstrap components
 import {
   Button,
@@ -17,6 +18,8 @@ import {
   Row,
   Col,
 } from "reactstrap";
+
+const qs = require("querystring");
 
 const NewEntry = (props) => {
   // constructor(props) {
@@ -42,6 +45,24 @@ const NewEntry = (props) => {
   );
   const [prompt, setPrompt] = useState("");
 
+  const save = () => {
+    let newEntry = {
+      user_id: props.auth.user.id,
+      title: entryTitle,
+      text: entryText,
+      date: today,
+    };
+    console.log(JSON.stringify(newEntry));
+    axios
+      .post(
+        "http://localhost:5000/api/v1/entries/create-update",
+        qs.stringify(newEntry)
+      )
+      // .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  };
   //
 
   useEffect(() => {
@@ -50,20 +71,26 @@ const NewEntry = (props) => {
       .then((response) => {
         setPrompt(response.prompt);
       });
+
+    let url =
+      "http://localhost:5000/api/v1/entries/find?" +
+      "user_id=" +
+      props.auth.user.id +
+      "&date=" +
+      today;
+    axios.get(url).then((res) => {
+      setEntryText(res.data.entry.text);
+      setEntryTitle(res.data.entry.title);
+    });
   }, []);
-  useEffect(() => {
-    let newEntry = {
-      user_id: props.auth.user.id,
-      title: entryTitle,
-      text: entryText,
-      date: today,
-    };
-  }, [entryText, entryTitle]);
+  // useEffect(() => {
+
+  // }, [entryText, entryTitle]);
 
   //styles for the main textarea
   const textarea_styles = {
-    maxHeight: 73 + "vh",
-    height: 73 + "vh",
+    maxHeight: 69 + "vh",
+    height: 69 + "vh",
     border: "none",
     fontSize: 17 + "px",
   };
@@ -88,7 +115,7 @@ const NewEntry = (props) => {
                     cols="80"
                     value={entryTitle}
                     onChange={(e) => {
-                      setEntryTitle(e.value);
+                      setEntryTitle(e.target.value);
                     }}
                     placeholder="Give your entry a title"
                     rows="1"
@@ -112,7 +139,7 @@ const NewEntry = (props) => {
                           cols="80"
                           value={entryText}
                           onChange={(e) => {
-                            setEntryText(e.value);
+                            setEntryText(e.target.value);
                           }}
                           className="ps-child"
                           placeholder={prompt}
@@ -122,6 +149,20 @@ const NewEntry = (props) => {
                       </FormGroup>
                     </Col>
                   </Row>
+                  {/* <Row> */}
+                  {/* <Col sm="12"> */}
+                  <div className="text-right">
+                    <Button
+                      onClick={() => save()}
+                      size="md"
+                      color="primary"
+                      className="pl-4 pr-4"
+                    >
+                      <i className="tim-icons icon-cloud-upload-94"></i> Save
+                    </Button>
+                  </div>
+                  {/* </Col> */}
+                  {/* </Row> */}
                 </Form>
               </CardBody>
             </Card>

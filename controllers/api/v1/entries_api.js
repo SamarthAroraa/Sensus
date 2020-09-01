@@ -11,10 +11,13 @@ module.exports.index = async function (req, res) {
 
 module.exports.createUpdate = async function (req, res) {
   try {
+    //   req=await req.json();
+    // var body_parsed = JSON.parse(req.body.)
     let text = req.body.text;
     let title = req.body.title;
     let date = req.body.date;
     let uid = req.body.user_id;
+    console.log(req.body);
     let user = await User.findById(uid);
     let entry_for_date = await Entry.findOne({ createDate: date });
 
@@ -30,6 +33,7 @@ module.exports.createUpdate = async function (req, res) {
     const color = await SentimentApi.analyze(text);
     if (!entry_for_date) {
       new_entry = await Entry.create({
+        title: title,
         user: user,
         text: text,
         mood: color,
@@ -54,6 +58,25 @@ module.exports.createUpdate = async function (req, res) {
     console.log(err);
     return res.status(500).json({
       message: err,
+    });
+  }
+};
+
+module.exports.findByDate = async function (req, res) {
+  //function to get the previous entry for the date if it exits
+  let date = req.query.date;
+  let uid = req.query.user_id;
+  console.log(req.query);
+  let user = await User.findById(uid);
+  let entry_for_date = await Entry.findOne({ createDate: date });
+  if (!entry_for_date) {
+    return res.status(200).json({
+      exists: 0,
+    });
+  } else {
+    return res.status(200).json({
+      exists: 1,
+      entry: entry_for_date,
     });
   }
 };
