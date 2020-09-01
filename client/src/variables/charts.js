@@ -283,7 +283,7 @@ let chartExample2 = {
           pointHoverBorderWidth: 15,
           pointRadius: 4,
           data: [10, 30, 60],
-          type: "pie"
+          type: "doughnut"
         },
       ],
     };

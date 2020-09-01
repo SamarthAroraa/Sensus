@@ -180,7 +180,7 @@ class Dashboard extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Pie
+                    <Doughnut
                       data={chartExample2.data}
                       options={chartExample2.options}
                     />
