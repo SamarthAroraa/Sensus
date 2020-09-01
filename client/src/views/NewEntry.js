@@ -84,9 +84,11 @@ const NewEntry = (props) => {
       "&date=" +
       today;
     axios.get(url).then((res) => {
-      setEntryText(res.data.entry.text);
-      setEntryTitle(res.data.entry.title);
-      setBorderColor(res.data.entry.mood);
+      if (res.data.exists) {
+        setEntryText(res.data.entry.text);
+        setEntryTitle(res.data.entry.title);
+        setBorderColor(res.data.entry.mood);
+      }
     });
     console.log("mounting");
 
@@ -121,7 +123,9 @@ const NewEntry = (props) => {
         <Row>
           <Col md="1"></Col>
           <Col md="10">
-            <Card style={{ height: 100 + "vh" ,border: '4px solid '+borderColor }}>
+            <Card
+              style={{ height: 100 + "vh", border: "4px solid " + borderColor }}
+            >
               <CardHeader>
                 <FormGroup>
                   <Input

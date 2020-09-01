@@ -1,6 +1,8 @@
 const Entry = require("../../../models/entry");
 const User = require("../../../models/user");
 const SentimentApi = require("../../sentimentAPI");
+const ObjectId = require("mongodb").ObjectID;
+
 module.exports.index = async function (req, res) {
   let entries = await Entry.find({}).sort("-createdAt").populate("user");
   return res.status(200).json({
@@ -27,10 +29,15 @@ module.exports.createUpdate = async function (req, res) {
         message: "User not found",
       });
     }
+    let color;
     //to be returned in response
     let new_entry;
     let mode; //Update or create (U or C respectively)
-    const color = await SentimentApi.analyze(text);
+    if (text.length > 10) {
+      color = await SentimentApi.analyze(text);
+    } else {
+      color = "transparent";
+    }
     if (!entry_for_date) {
       new_entry = await Entry.create({
         title: title,
@@ -40,6 +47,7 @@ module.exports.createUpdate = async function (req, res) {
         createDate: date,
       });
       mode = "C";
+      user.entries.push(new_entry);
     } else {
       entry_for_date.text = text;
       entry_for_date.title = title;
@@ -64,20 +72,26 @@ module.exports.createUpdate = async function (req, res) {
 };
 
 module.exports.findByDate = async function (req, res) {
-  //function to get the previous entry for the date if it exits
-  let date = req.query.date;
-  let uid = req.query.user_id;
-  console.log(req.query);
-  let user = await User.findById(uid);
-  let entry_for_date = await Entry.findOne({ createDate: date });
-  if (!entry_for_date) {
-    return res.status(200).json({
-      exists: 0,
+  try {
+    //function to get the previous entry for the date if it exits
+    let date = req.query.date;
+    let uid = ObjectId(req.query.user_id);
+    let user = await User.findById(uid);
+    let entry_for_date = await Entry.findOne({
+      createDate: date,
+      user: uid,
     });
-  } else {
-    return res.status(200).json({
-      exists: 1,
-      entry: entry_for_date,
-    });
+    if (!entry_for_date) {
+      return res.status(200).json({
+        exists: 0,
+      });
+    } else {
+      return res.status(200).json({
+        exists: 1,
+        entry: entry_for_date,
+      });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err });
   }
 };

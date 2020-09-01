@@ -28,7 +28,7 @@ const entrySchema = new mongoose.Schema(
     mood: {
       type: String,
       required: true,
-      default: "rgba(255,255,255,1)",
+      default: "transparent",
     },
     createDate: {
       type: String,
