@@ -43,6 +43,7 @@ module.exports.createUpdate = async function (req, res) {
     } else {
       entry_for_date.text = text;
       entry_for_date.title = title;
+      entry_for_date.mood = color;
       entry_for_date.updateDate = Date.now();
       entry_for_date.save();
       mode = "U";

@@ -40,19 +40,23 @@ const NewEntry = (props) => {
 
   const [currentDate, setCurrentDate] = useState(today);
   const [entryText, setEntryText] = useState("");
+  const [borderColor, setBorderColor] = useState("transparent");
   const [entryTitle, setEntryTitle] = useState(
     "Hi, " + props.auth.user.fname + ". Give your entry a title!"
   );
   const [prompt, setPrompt] = useState("");
 
+  var newEntry = {};
+
+  //function that saves/updates the entry
   const save = () => {
-    let newEntry = {
+    newEntry = {
       user_id: props.auth.user.id,
       title: entryTitle,
       text: entryText,
       date: today,
     };
-    console.log(JSON.stringify(newEntry));
+    console.log(newEntry);
     axios
       .post(
         "http://localhost:5000/api/v1/entries/create-update",
@@ -63,6 +67,7 @@ const NewEntry = (props) => {
         console.log(res);
       });
   };
+
   //
 
   useEffect(() => {
@@ -81,11 +86,20 @@ const NewEntry = (props) => {
     axios.get(url).then((res) => {
       setEntryText(res.data.entry.text);
       setEntryTitle(res.data.entry.title);
+      setBorderColor(res.data.entry.mood);
     });
-  }, []);
-  // useEffect(() => {
+    console.log("mounting");
 
-  // }, [entryText, entryTitle]);
+    return () => {
+      newEntry = {
+        user_id: props.auth.user.id,
+        title: entryTitle,
+        text: entryText,
+        date: today,
+      };
+      save();
+    };
+  }, []);
 
   //styles for the main textarea
   const textarea_styles = {
@@ -107,7 +121,7 @@ const NewEntry = (props) => {
         <Row>
           <Col md="1"></Col>
           <Col md="10">
-            <Card style={{ height: 100 + "vh" }}>
+            <Card style={{ height: 100 + "vh" ,border: '4px solid '+borderColor }}>
               <CardHeader>
                 <FormGroup>
                   <Input
