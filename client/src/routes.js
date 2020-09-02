@@ -43,7 +43,7 @@ var routes = [
   // },
   {
     path: "/entry-calender",
-    name: "Timeline",
+    name: "Entries list",
     icon: "tim-icons icon-calendar-60",
     component: EntryCalendar,
     layout: "/admin",
