@@ -46,7 +46,7 @@ const UserProfile = (props) => {
       setFacebookURL(props.auth.user.facebookURL);
       setInstagramURL(props.auth.user.instagramURL);
     }
-  });
+  }, []);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

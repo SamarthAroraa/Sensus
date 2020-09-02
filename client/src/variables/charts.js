@@ -23,7 +23,8 @@
 let chart_1_options = {
   maintainAspectRatio: false,
   legend: {
-    display: false,
+    display: true,
+    position: "left",
   },
   tooltips: {
     backgroundColor: "#f5f5f5",
@@ -87,7 +88,6 @@ let chart_2_options = {
     position: "nearest",
   },
   responsive: true,
-  
 };
 
 // #########################################
@@ -120,26 +120,6 @@ let chartExample1 = {
       ],
       datasets: [
         {
-          //Average Data
-
-          label: "Average Data",
-          fill: true,
-
-          borderColor: "#00d6b4",
-          borderWidth: 2,
-          borderDash: [],
-          borderDashOffset: 0.0,
-          pointBackgroundColor: "#00d6b4",
-          pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#00d6b4",
-          pointBorderWidth: 20,
-          pointHoverRadius: 4,
-          pointHoverBorderWidth: 15,
-          pointRadius: 4,
-          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
-          type: "line",
-        },
-        {
           //User's Data
 
           label: "My Data",
@@ -157,6 +137,26 @@ let chartExample1 = {
           pointHoverBorderWidth: 15,
           pointRadius: 4,
           data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
+          type: "line",
+        },
+        {
+          //Average Data
+
+          label: "Average Data",
+          fill: true,
+
+          borderColor: "#00d6b4",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#00d6b4",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#00d6b4",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
           type: "line",
         },
       ],
@@ -188,9 +188,9 @@ let chartExample1 = {
       ],
       datasets: [
         {
-          label: "My First dataset",
+          label: "My Data",
           fill: true,
-          backgroundColor: gradientStroke,
+          // backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
           borderWidth: 2,
           borderDash: [],
@@ -203,7 +203,25 @@ let chartExample1 = {
           pointHoverBorderWidth: 15,
           pointRadius: 4,
           type: "line",
-          data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
+          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
+        },
+        {
+          label: "Average Data",
+          fill: true,
+          // backgroundColor: gradientStroke,
+          borderColor: "#00d6b4",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#00d6b4",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#00d6b4",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],
+          type: "line",
         },
       ],
     };
@@ -283,7 +301,7 @@ let chartExample2 = {
           pointHoverBorderWidth: 15,
           pointRadius: 4,
           data: [10, 30, 60],
-          type: "doughnut"
+          type: "doughnut",
         },
       ],
     };

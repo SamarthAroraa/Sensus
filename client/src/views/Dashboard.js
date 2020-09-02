@@ -72,8 +72,7 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">Total Shipments</h5>
-                      <CardTitle tag="h2">Performance</CardTitle>
+                      <CardTitle tag="h2">Annual Mood Chart</CardTitle>
                     </Col>
                     <Col sm="6">
                       <ButtonGroup
@@ -155,14 +154,7 @@ class Dashboard extends React.Component {
                   <div className="chart-area">
                     <Line
                       data={chartExample1[this.state.bigChartData]}
-                      options={
-                        this.state.bigChartData == "data1"
-                          ? {
-                              ...chartExample1.options,
-                              legend: { display: true },
-                            }
-                          : chartExample1.options
-                      }
+                      options={chartExample1.options}
                     />
                   </div>
                 </CardBody>
@@ -173,10 +165,7 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Total Shipments</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-bell-55 text-info" /> 763,215
-                  </CardTitle>
+                  <CardTitle tag="h3">Overall Mood Stats</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
@@ -191,11 +180,7 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Daily Sales</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                    3,500€
-                  </CardTitle>
+                  <CardTitle tag="h3">Your Mood This Month</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
@@ -210,10 +195,7 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <h5 className="card-category">Completed Tasks</h5>
-                  <CardTitle tag="h3">
-                    <i className="tim-icons icon-send text-success" /> 12,100K
-                  </CardTitle>
+                  <CardTitle tag="h3">Weekly Mood Chart</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
