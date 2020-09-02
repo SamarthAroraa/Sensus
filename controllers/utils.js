@@ -3,7 +3,6 @@ module.exports.dailyPrompts = (req, res) => {
   try {
     const prompts = [
       "Who is someone you’ve always admired?",
-      "What do you think of Daylight Savings Time?",
       "What was your favorite movie as a kid?",
       "When did you first fall in love?",
       "How would you describe yourself to a stranger in one paragraph?",
@@ -11,12 +10,10 @@ module.exports.dailyPrompts = (req, res) => {
       "What brings you joy?",
       "Describe a place where you felt happiest.",
       "What was your greatest fear, and how did you conquer it?",
-      "Write a letter to someone that you always want to thank but have never had the chance to do so.",
       "What is something that you would like to change about yourself? How can you change it?",
       "Where’s one place that you’d like to visit, and how do you imagine your time there?",
       "If you are granted a wish, what would you wish for and why?",
       "If you are a superhero, what superpower would you like to have and how would you use it?",
-      "Write a letter to someone that you care about to tell them how you feel.",
       "List down a bucket list with the things that you have always wanted to do.",
       "Where do you see yourself in the next 1, 3, 5, 10 years from now?",
       "If I could talk to my teenage self, the one thing I would say is…",
