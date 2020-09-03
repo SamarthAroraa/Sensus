@@ -29,15 +29,34 @@ module.exports.createUpdate = async function (req, res) {
         message: "User not found",
       });
     }
-    let color;
+    // let color;
     //to be returned in response
     let new_entry;
+    let color = "#fff",
+      score = 0,
+      magnitude = 0;
     let mode; //Update or create (U or C respectively)
-    if (text.length > 10) {
-        console.log('analyzing');
-      color = await SentimentApi.analyze(text);
+    if (text.length >= 2) {
+      console.log("analyzing");
+
+      let get_sentiment = await SentimentApi.analyze(text);
+
+      color = get_sentiment.color;
+      score = get_sentiment.score;
+      magnitude = get_sentiment.magnitude;
     } else {
       color = "transparent";
+      score = 0;
+      magnitude = 0;
+    }
+    console.log(score, magnitude, color);
+
+    let category = "S";
+    if ( score <= 0.25 && score >= -0.25) {
+      category = "N";
+    } else if (category > 0.25) {
+      console.log()
+      category = "H";
     }
     if (!entry_for_date) {
       new_entry = await Entry.create({
@@ -45,14 +64,17 @@ module.exports.createUpdate = async function (req, res) {
         user: user,
         text: text,
         mood: color,
+        category: category,
         createDate: date,
       });
       mode = "C";
       user.entries.push(new_entry);
+      user.save();
     } else {
       entry_for_date.text = text;
       entry_for_date.title = title;
       entry_for_date.mood = color;
+      entry_for_date.category = category;
       entry_for_date.updateDate = Date.now();
       entry_for_date.save();
       mode = "U";

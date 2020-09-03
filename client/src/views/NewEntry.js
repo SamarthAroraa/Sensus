@@ -26,8 +26,9 @@ const NewEntry = (props) => {
   //conversion of date in the required format
   var today = new Date();
   var dd = today.getDate();
-
-  var mm = today.getMonth();
+  // 0 indexed months so added 1
+  
+  var mm = today.getMonth() + 1;
   var yyyy = today.getFullYear();
   if (dd < 10) {
     dd = "0" + dd;
@@ -105,8 +106,8 @@ const NewEntry = (props) => {
 
   //styles for the main textarea
   const textarea_styles = {
-    maxHeight: 69 + "vh",
-    height: 69 + "vh",
+    maxHeight: 59 + "vh",
+    height: 59 + "vh",
     border: "none",
     fontSize: 17 + "px",
   };
@@ -124,7 +125,7 @@ const NewEntry = (props) => {
           <Col md="1"></Col>
           <Col md="10">
             <Card
-              style={{ height: 100 + "vh", border: "4px solid " + borderColor }}
+              style={{ height: 91 + "vh", border: "4px solid " + borderColor }}
             >
               <CardHeader>
                 <FormGroup>

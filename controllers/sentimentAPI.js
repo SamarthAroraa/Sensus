@@ -10,8 +10,8 @@ const client = new language.LanguageServiceClient();
 // Detects the sentiment of the document
 module.exports.analyze = async function (text) {
   try {
-    text=String(text)
-    text=text.toLowerCase() 
+    text = String(text);
+    text = text.toLowerCase();
     const document = {
       content: text,
       type: "PLAIN_TEXT",
@@ -22,7 +22,6 @@ module.exports.analyze = async function (text) {
       encodingType: "UTF8",
     });
     const sentiment = result.documentSentiment;
-    console.log(result);
     console.log("Document sentiment:");
     console.log(`  Score: ${sentiment.score}`);
     console.log(`  Magnitude: ${sentiment.magnitude}`);
@@ -33,10 +32,18 @@ module.exports.analyze = async function (text) {
       console.log(`  Score: ${sentence.sentiment.score}`);
       console.log(`  Magnitude: ${sentence.sentiment.magnitude}`);
     });
-
-    return color;
+    let brief = {
+      color: color,
+      score: sentiment.score,
+      magnitude: sentiment.magnitude,
+    };
+    return brief;
   } catch (err) {
     console.log(err);
-    return "#fff";
+    return {
+      color: "#fff",
+      score: 0,
+      magnitude: 0,
+    };
   }
 };
