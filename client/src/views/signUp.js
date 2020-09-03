@@ -224,7 +224,7 @@ const SignUp = (props) => {
                 placeholder="Confirm Password"
                 autoComplete="off"
               />
-             <FormText color="danger">{errors.password2}</FormText>
+              <FormText color="danger">{errors.password2}</FormText>
             </Col>
           </Row>
           <FormGroup></FormGroup>
@@ -232,7 +232,7 @@ const SignUp = (props) => {
             Sign up
           </Button>
 
-          <div className="text-center pt-3">
+          {/* <div className="text-center pt-3">
             Or sign up with your social accounts
           </div>
           <FormGroup className="justify-content-center d-flex pt-2">
@@ -242,7 +242,7 @@ const SignUp = (props) => {
             <Button className="btn-icon btn-round ml-3" color="info">
               <i className="fab fa-facebook-f" />
             </Button>
-          </FormGroup>
+          </FormGroup> */}
           <div className="text-center pt-1 ">
             <Link to="/login">Already a member? Login</Link>
           </div>

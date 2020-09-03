@@ -1,11 +1,10 @@
-
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -34,7 +33,7 @@ class AdminNavbar extends React.Component {
       color: "navbar-transparent",
     };
   }
-  onLogoutClick = e => {
+  onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
@@ -124,7 +123,7 @@ class AdminNavbar extends React.Component {
             </button>
             <Collapse navbar isOpen={this.state.collapseOpen}>
               <Nav className="ml-auto" navbar>
-                <InputGroup className="search-bar">
+                {/* <InputGroup className="search-bar">
                   <Button
                     color="link"
                     data-target="#searchModal"
@@ -135,8 +134,8 @@ class AdminNavbar extends React.Component {
                     <i className="tim-icons icon-zoom-split" />
                     <span className="d-lg-none d-md-block">Search</span>
                   </Button>
-                </InputGroup>
-                <UncontrolledDropdown nav>
+                </InputGroup> */}
+                {/* <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
                     color="default"
@@ -174,7 +173,7 @@ class AdminNavbar extends React.Component {
                       </DropdownItem>
                     </NavLink>
                   </DropdownMenu>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
@@ -197,9 +196,9 @@ class AdminNavbar extends React.Component {
                         </DropdownItem>
                       </Link>
                     </NavLink>
-                    <NavLink tag="li">
+                    {/* <NavLink tag="li">
                       <DropdownItem className="nav-item">Settings</DropdownItem>
-                    </NavLink>
+                    </NavLink> */}
                     <DropdownItem divider tag="li" />
                     <NavLink tag="li" onClick={this.onLogoutClick}>
                       <DropdownItem className="nav-item">Log out</DropdownItem>
@@ -216,7 +215,7 @@ class AdminNavbar extends React.Component {
           isOpen={this.state.modalSearch}
           toggle={this.toggleModalSearch}
         >
-          <div className="modal-header">
+          {/* <div className="modal-header">
             <Input id="inlineFormInputGroup" placeholder="SEARCH" type="text" />
             <button
               aria-label="Close"
@@ -227,7 +226,7 @@ class AdminNavbar extends React.Component {
             >
               <i className="tim-icons icon-simple-remove" />
             </button>
-          </div>
+          </div> */}
         </Modal>
       </>
     );
@@ -236,15 +235,11 @@ class AdminNavbar extends React.Component {
 
 AdminNavbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(AdminNavbar);
-
+export default connect(mapStateToProps, { logoutUser })(AdminNavbar);

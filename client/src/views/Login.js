@@ -118,7 +118,7 @@ const Login = (props) => {
           <Button color="primary" className="animation-on-hover" type="submit">
             Login
           </Button>
-          <div className="text-center pt-3">
+          {/* <div className="text-center pt-3">
             Or log in with your social accounts
           </div>
           <FormGroup className="justify-content-center d-flex pt-2">
@@ -128,7 +128,7 @@ const Login = (props) => {
             <Button className="btn-icon btn-round ml-3" color="info">
               <i className="fab fa-facebook-f" />
             </Button>
-          </FormGroup>
+          </FormGroup> */}
           <div className="text-center">
             <Link to="/sign-up">New to Sensus? Sign Up</Link>
           </div>

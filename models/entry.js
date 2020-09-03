@@ -39,6 +39,9 @@ const entrySchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    // score: {
+    //   type: mongoose
+    // }
   },
   {
     timestamps: true,

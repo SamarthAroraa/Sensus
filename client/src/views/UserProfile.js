@@ -86,18 +86,16 @@ const UserProfile = (props) => {
               <img
                 alt="..."
                 className="avatar"
-                src={require("assets/img/emilyz.jpg")}
+                src={require("assets/img/anime3.png")}
               />{" "}
               <h3 className="title">
-                {firstName} {lastName}{" "}
-                {penName == "" ? "" : `(${penName})`}
+                {firstName} {lastName} {penName == "" ? "" : `(${penName})`}
               </h3>{" "}
             </a>{" "}
-            
           </div>{" "}
           <div className="card-description">{about}</div>{" "}
         </CardBody>{" "}
-        <CardFooter>
+        {/* <CardFooter>
           <div className="button-container">
             {facebookURL == "" ? null : (
               <Button className="btn-icon btn-round" color="facebook">
@@ -128,7 +126,7 @@ const UserProfile = (props) => {
               </Button>
             )}
           </div>{" "}
-        </CardFooter>{" "}
+        </CardFooter>{" "} */}
       </Card>{" "}
       <Card>
         <CardHeader>
@@ -146,7 +144,7 @@ const UserProfile = (props) => {
                     name="fname"
                     value={firstName}
                     onChange={(e) => {
-                        setFirstName(e.target.value)
+                      setFirstName(e.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -160,7 +158,7 @@ const UserProfile = (props) => {
                     name="lname"
                     value={lastName}
                     onChange={(event) => {
-                      setLastName (event.target.value);
+                      setLastName(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -240,7 +238,7 @@ const UserProfile = (props) => {
           <CardHeader>
             <h5 className="title"> Social Media Links </h5>
           </CardHeader>
-          <CardBody>
+          {/* <CardBody>
             <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
@@ -305,7 +303,7 @@ const UserProfile = (props) => {
                 </FormGroup>{" "}
               </Col>{" "}
             </Row>{" "}
-          </CardBody>
+          </CardBody> */}
           <CardFooter>
             <Button
               className="btn-fill"
