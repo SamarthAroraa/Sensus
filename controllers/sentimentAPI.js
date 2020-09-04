@@ -8,10 +8,9 @@ const getColorMapping = require("../config/get-color-mapping").getColorMapping;
 const client = new language.LanguageServiceClient();
 
 // Detects the sentiment of the document
-module.exports.analyze = async function (text) {
+module.exports.analyze = async function (req, res) {
   try {
-    text=String(text)
-    text=text.toLowerCase() 
+    const text = req.body.text;
     const document = {
       content: text,
       type: "PLAIN_TEXT",
@@ -34,9 +33,18 @@ module.exports.analyze = async function (text) {
       console.log(`  Magnitude: ${sentence.sentiment.magnitude}`);
     });
 
-    return color;
+    return res.render("profile", {
+      
+      title: "Profile",
+
+      sentiment: sentiment,
+      final_score: sentiment.score,
+      text: text,
+      color: color,
+    });
   } catch (err) {
     console.log(err);
-    return "#fff";
   }
+
 };
+

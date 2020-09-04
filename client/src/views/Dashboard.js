@@ -19,7 +19,7 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 
 // reactstrap components
 import {
@@ -39,7 +39,7 @@ import {
   Table,
   Row,
   Col,
-  UncontrolledTooltip,
+  UncontrolledTooltip
 } from "reactstrap";
 
 // core components
@@ -47,19 +47,19 @@ import {
   chartExample1,
   chartExample2,
   chartExample3,
-  chartExample4,
+  chartExample4
 } from "variables/charts.js";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1",
+      bigChartData: "data1"
     };
   }
-  setBgChartData = (name) => {
+  setBgChartData = name => {
     this.setState({
-      bigChartData: name,
+      bigChartData: name
     });
   };
   render() {
@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <Row>
                     <Col className="text-left" sm="6">
-                      <h5 className="card-category">MOOD CHART</h5>
+                      <h5 className="card-category">Total Shipments</h5>
                       <CardTitle tag="h2">Performance</CardTitle>
                     </Col>
                     <Col sm="6">
@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
                         <Button
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data1",
+                            active: this.state.bigChartData === "data1"
                           })}
                           color="info"
                           id="0"
@@ -109,7 +109,7 @@ class Dashboard extends React.Component {
                           size="sm"
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data2",
+                            active: this.state.bigChartData === "data2"
                           })}
                           onClick={() => this.setBgChartData("data2")}
                         >
@@ -131,7 +131,7 @@ class Dashboard extends React.Component {
                           size="sm"
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data3",
+                            active: this.state.bigChartData === "data3"
                           })}
                           onClick={() => this.setBgChartData("data3")}
                         >
@@ -155,14 +155,7 @@ class Dashboard extends React.Component {
                   <div className="chart-area">
                     <Line
                       data={chartExample1[this.state.bigChartData]}
-                      options={
-                        this.state.bigChartData == "data1"
-                          ? {
-                              ...chartExample1.options,
-                              legend: { display: true },
-                            }
-                          : chartExample1.options
-                      }
+                      options={chartExample1.options}
                     />
                   </div>
                 </CardBody>
@@ -175,12 +168,13 @@ class Dashboard extends React.Component {
                 <CardHeader>
                   <h5 className="card-category">Total Shipments</h5>
                   <CardTitle tag="h3">
-                    <i className="tim-icons icon-bell-55 text-info" /> 763,215
+                    <i className="tim-icons icon-bell-55 text-info" />{" "}
+                    763,215
                   </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div className="chart-area">
-                    <Doughnut
+                    <Line
                       data={chartExample2.data}
                       options={chartExample2.options}
                     />
@@ -245,19 +239,19 @@ class Dashboard extends React.Component {
                     <DropdownMenu aria-labelledby="dropdownMenuLink" right>
                       <DropdownItem
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         Action
                       </DropdownItem>
                       <DropdownItem
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         Another action
                       </DropdownItem>
                       <DropdownItem
                         href="#pablo"
-                        onClick={(e) => e.preventDefault()}
+                        onClick={e => e.preventDefault()}
                       >
                         Something else
                       </DropdownItem>
