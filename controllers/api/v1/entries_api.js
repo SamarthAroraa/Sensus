@@ -21,7 +21,7 @@ module.exports.createUpdate = async function (req, res) {
     let uid = req.body.user_id;
     console.log(req.body);
     let user = await User.findById(uid);
-    let entry_for_date = await Entry.findOne({ createDate: date, user: user });
+    let entry_for_date = await Entry.findOne({ createDate: date, user: user._id });
 
     // console.log(user, "userr");
     if (!user) {
@@ -49,16 +49,15 @@ module.exports.createUpdate = async function (req, res) {
       score = 0;
       magnitude = 0;
     }
-    console.log(score, magnitude, color);
+    console.log(typeof score,typeof 0.25, magnitude, color);
 
     let category = "S";
     if ( score <= 0.25 && score >= -0.25) {
       category = "N";
-    } else if (category > 0.25) {
-      console.log()
+    } else if (score > 0.25) {
       category = "H";
     }
-    if (!entry_for_date ) {
+    if (!entry_for_date   ) {
       new_entry = await Entry.create({
         title: title,
         user: user,
