@@ -20,6 +20,10 @@ import React from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
+// For emojis:
+import positiveEmoji from "../assets/emojis/positive1.gif";
+import neutralEmoji from "../assets/emojis/neutral1.gif";
+import negativeEmoji from "../assets/emojis/negative1.gif";
 
 // reactstrap components
 import {
@@ -51,17 +55,27 @@ import {
 } from "variables/charts.js";
 
 class Dashboard extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      bigChartData: "data1",
+      annualChartData: "data1",
     };
+    this.emojis = [positiveEmoji, neutralEmoji, negativeEmoji];
+    this.captions = ["You're Doing Great", "Hustling Hard", "But We Know That You'll Be Doing Better Soon"];
   }
+
   setBgChartData = (name) => {
     this.setState({
-      bigChartData: name,
+      annualChartData: name,
     });
   };
+
+  componentWillMount() {
+
+    fetch("http://localhost:5000/api/v1/annual")
+  }
+
   render() {
     return (
       <>
@@ -82,7 +96,7 @@ class Dashboard extends React.Component {
                         <Button
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data1",
+                            active: this.state.annualChartData === "data1",
                           })}
                           color="info"
                           id="0"
@@ -108,7 +122,7 @@ class Dashboard extends React.Component {
                           size="sm"
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data2",
+                            active: this.state.annualChartData === "data2",
                           })}
                           onClick={() => this.setBgChartData("data2")}
                         >
@@ -130,7 +144,7 @@ class Dashboard extends React.Component {
                           size="sm"
                           tag="label"
                           className={classNames("btn-simple", {
-                            active: this.state.bigChartData === "data3",
+                            active: this.state.annualChartData === "data3",
                           })}
                           onClick={() => this.setBgChartData("data3")}
                         >
@@ -153,7 +167,7 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={annualChart[this.state.bigChartData]}
+                      data={annualChart[this.state.annualChartData]}
                       options={annualChart.options}
                     />
                   </div>
@@ -183,11 +197,23 @@ class Dashboard extends React.Component {
                   <CardTitle tag="h3">Your Mood This Month</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <div className="chart-area">
-                    <Bar
-                      data={chartExample3.data}
-                      options={chartExample3.options}
-                    />
+                  <div
+                    className="chart-area"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignContent: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      alt="your-mood"
+                      src={this.emojis[0]}
+                      style={{ margin: "auto", "align-self": "center" }}
+                    ></img>
+                    <h4 style={{ margin: "auto" }}>
+                      {this.captions[0]}
+                    </h4>
                   </div>
                 </CardBody>
               </Card>
