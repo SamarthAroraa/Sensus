@@ -41,7 +41,7 @@ module.exports.analyze = async function (text) {
   } catch (err) {
     console.log(err);
     return {
-      color: "#fff",
+      color: "transparent",
       score: 0,
       magnitude: 0,
     };
