@@ -32,11 +32,11 @@ module.exports.createUpdate = async function (req, res) {
     // let color;
     //to be returned in response
     let new_entry;
-    let color = "#fff",
+    let color = "transparent",
       score = 0,
       magnitude = 0;
     let mode; //Update or create (U or C respectively)
-    if (text.length >= 2) {
+    if (text.length >= 8) {
       console.log("analyzing");
 
       let get_sentiment = await SentimentApi.analyze(text);

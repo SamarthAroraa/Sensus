@@ -28,22 +28,23 @@ module.exports.getAnnualData =async  function (req, res) {
           dailyentries: { $push: { day: "$_id.day", count: "$count" } },
         },
       },
+      // {
+      //   $group: {
+      //   average: { "$avg": "$count" },
 
-      {
-        $group: {
-          _id: { year: "$_id.year" },
-          monthlyentries: {
-            $push: { month: "$_id.month", dailyentries: "$dailyentries" },
-          },
-        },
-      },
+      //     _id: { year: "$_id.year" },
+      //     monthlyentries: {
+      //       $push: { month: "$_id.month", average: "$first" },
+      //     },
+      //   },
+      // },
     ],
 
     (err, result) => {
       if (err) {
         console.log(err);
       } // TODO handle error
-      // console.log(result);
+      console.log(result);
       return result;
     }
   );
@@ -177,6 +178,8 @@ module.exports.getAnnualData =async  function (req, res) {
       return result;
     }
   );
-  return res.status(200).json(data);
+  complete.user=data;
+  complete.global=global;
+  return res.status(200).json(complete);
 };
 module.exports.getTotalData = function (req, res) {};
