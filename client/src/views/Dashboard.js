@@ -24,6 +24,8 @@ import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
 import positiveEmoji from "../assets/emojis/positive1.gif";
 import neutralEmoji from "../assets/emojis/neutral1.gif";
 import negativeEmoji from "../assets/emojis/negative1.gif";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -55,14 +57,19 @@ import {
 } from "variables/charts.js";
 
 class Dashboard extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       annualChartData: "data1",
+      overallMoodData: [33, 33, 33],
+      weeklyData: [0, 0, 0, 0, 0, 0, 0],
     };
     this.emojis = [positiveEmoji, neutralEmoji, negativeEmoji];
-    this.captions = ["You're Doing Great", "Hustling Hard", "But We Know That You'll Be Doing Better Soon"];
+    this.captions = [
+      "You're Doing Great",
+      "Hustling Hard",
+      "But We Know That You'll Be Doing Better Soon",
+    ];
   }
 
   setBgChartData = (name) => {
@@ -71,9 +78,66 @@ class Dashboard extends React.Component {
     });
   };
 
-  componentWillMount() {
+  componentDidMount() {
+    //Fetch total data
+    fetch("http://localhost:5000/api/v1/data/total", {
+      method: "post",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+      body: `user=${this.props.auth.user.id}`,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({
+          overallMoodData: [
+            response.N[0].entries.length,
+            response.S[0].entries.length,
+            response.H[0].entries.length,
+          ],
+        });
+      });
 
-    fetch("http://localhost:5000/api/v1/annual")
+    //Fetch Weekly data
+    fetch("http://localhost:5000/api/v1/data/weekly", {
+      method: "post",
+
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+      body: `user=${this.props.auth.user.id}`,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        let date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        const dates = {};
+
+        for (let i = 0; i < 7; i++) {
+          dates[`${date.getDate()}/${date.getMonth() + 1}`] = i;
+          date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+        }
+
+        //Created an enum type dates to get index
+
+        let data = [0, 0, 0, 0, 0, 0, 0];
+
+        //Populating data
+        response.forEach((element, index) => {
+          data[dates[`${element._id.day}/${element._id.month}`]] = element.val
+            ? element.val == "H"
+              ? 1
+              : element.val == "N"
+                ? 0
+                : -1
+            : 0;
+        });
+
+        this.setState({
+          weeklyData: data,
+        });
+      });
   }
 
   render() {
@@ -184,7 +248,18 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Doughnut
-                      data={entriesDoughnut.data}
+                      data={(canvas) => {
+                        let data = entriesDoughnut.data(canvas);
+
+                        data = {
+                          ...data,
+                          datasets: data.datasets.map((a) => {
+                            return { ...a, data: this.state.overallMoodData };
+                          }),
+                        };
+
+                        return data;
+                      }}
                       options={entriesDoughnut.options}
                     />
                   </div>
@@ -209,11 +284,9 @@ class Dashboard extends React.Component {
                     <img
                       alt="your-mood"
                       src={this.emojis[0]}
-                      style={{ margin: "auto", "align-self": "center" }}
+                      style={{ margin: "auto", alignSelf: "center" }}
                     ></img>
-                    <h4 style={{ margin: "auto" }}>
-                      {this.captions[0]}
-                    </h4>
+                    <h4 style={{ margin: "auto" }}>{this.captions[0]}</h4>
                   </div>
                 </CardBody>
               </Card>
@@ -226,7 +299,18 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={weeklyChart.data}
+                      data={(canvas) => {
+                        let data = weeklyChart.data(canvas);
+
+                        data = {
+                          ...data,
+                          datasets: data.datasets.map((a) => {
+                            return { ...a, data: this.state.weeklyData };
+                          }),
+                        };
+
+                        return data;
+                      }}
                       options={weeklyChart.options}
                     />
                   </div>
@@ -240,4 +324,9 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  errors: state.errors,
+});
+
+export default connect(mapStateToProps)(withRouter(Dashboard));
