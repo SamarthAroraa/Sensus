@@ -3,10 +3,10 @@ const User = require("../../../models/user");
 const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
-module.exports.getAnnualData =async  function (req, res) {
-  var complete={}
-  var global = {}
-  global.S= await Entry.aggregate(
+module.exports.getAnnualData = async function (req, res) {
+  var complete = {};
+  var global = {};
+  global.S = await Entry.aggregate(
     [
       // { $match: { user: ObjectId(req.body.user) } },
       { $match: { category: "S" } },
@@ -47,9 +47,9 @@ module.exports.getAnnualData =async  function (req, res) {
       return result;
     }
   );
-  var data = { };
+  var data = {};
   //Pipline to accumulate all Sad classified entries
- data.S= await Entry.aggregate(
+  data.S = await Entry.aggregate(
     [
       { $match: { user: ObjectId(req.body.user) } },
       { $match: { category: "S" } },
@@ -92,7 +92,7 @@ module.exports.getAnnualData =async  function (req, res) {
   );
   //Pipline to accumulate all Neutral [N] classified entries
 
-  data.N= await Entry.aggregate(
+  data.N = await Entry.aggregate(
     [
       { $match: { user: ObjectId(req.body.user) } },
       { $match: { category: "N" } },
@@ -136,7 +136,7 @@ module.exports.getAnnualData =async  function (req, res) {
 
   //Pipline to accumulate all Happy [H] classified entries
 
-  data.H= await Entry.aggregate(
+  data.H = await Entry.aggregate(
     [
       { $match: { user: ObjectId(req.body.user) } },
       { $match: { category: "H" } },
@@ -177,6 +177,48 @@ module.exports.getAnnualData =async  function (req, res) {
       return result;
     }
   );
+
+  //Pipeline to accumulate entries from user and not entries.
+
+  data.Test = await User.aggregate(
+    [
+      { $match: { _id: ObjectId(req.body.user) } },
+      {
+        $lookup: {
+          from: "entries",
+          localField: "entries",
+          foreignField: "_id",
+          as: "entries",
+        },
+      },
+      {
+        $project: {
+          _id: false,
+          entries: {
+            $filter: {
+              input: "$entries",
+              as: "entry",
+              cond: {
+                $eq: ["$$entry.category", "H"],
+              },
+            },
+          },
+        },
+      },
+    ],
+    (err, user) => {
+      if (err) {
+        console.log(err);
+      }
+
+      console.log(user);
+
+      return user;
+
+      
+    }
+  );
+
   return res.status(200).json(data);
 };
 module.exports.getTotalData = function (req, res) {};
