@@ -19,8 +19,8 @@
 // // // Chart variables
 // #############################
 
-// chartExample1 and chartExample2 options
-let chart_1_options = {
+// annualChart and entriesDoughnut options
+let annualChartOptions = {
   maintainAspectRatio: false,
   legend: {
     display: true,
@@ -71,7 +71,7 @@ let chart_1_options = {
   },
 };
 
-let chart_2_options = {
+let doughnutOptions = {
   maintainAspectRatio: false,
   legend: {
     display: true,
@@ -93,7 +93,7 @@ let chart_2_options = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-let chartExample1 = {
+let annualChart = {
   data1: (canvas) => {
     let ctx = canvas.getContext("2d");
 
@@ -252,9 +252,9 @@ let chartExample1 = {
       ],
       datasets: [
         {
-          label: "My First dataset",
+          label: "My Data",
           fill: true,
-          backgroundColor: gradientStroke,
+          // backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
           borderWidth: 2,
           borderDash: [],
@@ -269,16 +269,35 @@ let chartExample1 = {
           data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130],
           type: "line",
         },
+        {
+
+          label: "Average Data",
+          fill: true,
+
+          borderColor: "#00d6b4",
+          borderWidth: 2,
+          borderDash: [],
+          borderDashOffset: 0.0,
+          pointBackgroundColor: "#00d6b4",
+          pointBorderColor: "rgba(255,255,255,0)",
+          pointHoverBackgroundColor: "#00d6b4",
+          pointBorderWidth: 20,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 15,
+          pointRadius: 4,
+          data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
+          type: "line",
+        },
       ],
     };
   },
-  options: chart_1_options,
+  options: annualChartOptions,
 };
 
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-let chartExample2 = {
+let entriesDoughnut = {
   data: (canvas) => {
     let ctx = canvas.getContext("2d");
 
@@ -306,7 +325,7 @@ let chartExample2 = {
       ],
     };
   },
-  options: chart_2_options,
+  options: doughnutOptions,
 };
 
 // #########################################
@@ -391,7 +410,7 @@ let chartExample3 = {
 // #########################################
 // // // used inside src/views/Dashboard.js
 // #########################################
-const chartExample4 = {
+const weeklyChart = {
   data: (canvas) => {
     let ctx = canvas.getContext("2d");
 
@@ -401,8 +420,17 @@ const chartExample4 = {
     gradientStroke.addColorStop(0.4, "rgba(66,134,121,0.0)"); //green colors
     gradientStroke.addColorStop(0, "rgba(66,134,121,0)"); //green colors
 
+    let date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    let labels = [];
+
+    for(let i = 0; i < 7; i++) {
+      
+      labels.push(`${date.getDate()}/${date.getMonth()}`);
+      date = new Date(date.getTime() + 24 * 60 * 60 * 1000)
+    }
+
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
+      labels: labels,
       datasets: [
         {
           label: "My First dataset",
@@ -419,7 +447,7 @@ const chartExample4 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [90, 27, 60, 12, 80],
+          data: [90, 27, 60, 12, 80, 34, 69, 56],
         },
       ],
     };
@@ -478,8 +506,8 @@ const chartExample4 = {
 };
 
 module.exports = {
-  chartExample1, // in src/views/Dashboard.js
-  chartExample2, // in src/views/Dashboard.js
+  annualChart, // in src/views/Dashboard.js
+  entriesDoughnut, // in src/views/Dashboard.js
   chartExample3, // in src/views/Dashboard.js
-  chartExample4, // in src/views/Dashboard.js
+  weeklyChart, // in src/views/Dashboard.js
 };

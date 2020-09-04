@@ -44,10 +44,10 @@ import {
 
 // core components
 import {
-  chartExample1,
-  chartExample2,
+  annualChart,
+  entriesDoughnut,
   chartExample3,
-  chartExample4,
+  weeklyChart,
 } from "variables/charts.js";
 
 class Dashboard extends React.Component {
@@ -96,7 +96,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Accounts
+                            Happy
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-single-02" />
@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Purchases
+                            Neutral
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-gift-2" />
@@ -140,7 +140,7 @@ class Dashboard extends React.Component {
                             type="radio"
                           />
                           <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                            Sessions
+                            Sad
                           </span>
                           <span className="d-block d-sm-none">
                             <i className="tim-icons icon-tap-02" />
@@ -153,8 +153,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartExample1[this.state.bigChartData]}
-                      options={chartExample1.options}
+                      data={annualChart[this.state.bigChartData]}
+                      options={annualChart.options}
                     />
                   </div>
                 </CardBody>
@@ -170,8 +170,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Doughnut
-                      data={chartExample2.data}
-                      options={chartExample2.options}
+                      data={entriesDoughnut.data}
+                      options={entriesDoughnut.options}
                     />
                   </div>
                 </CardBody>
@@ -200,8 +200,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartExample4.data}
-                      options={chartExample4.options}
+                      data={weeklyChart.data}
+                      options={weeklyChart.options}
                     />
                   </div>
                 </CardBody>
