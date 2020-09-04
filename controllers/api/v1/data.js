@@ -182,7 +182,10 @@ module.exports.getAnnualData = async function (req, res) {
 
   data.Test = await User.aggregate(
     [
+      //Match the user id
       { $match: { _id: ObjectId(req.body.user) } },
+
+      //Populates the entries from the entries database
       {
         $lookup: {
           from: "entries",
@@ -191,6 +194,8 @@ module.exports.getAnnualData = async function (req, res) {
           as: "entries",
         },
       },
+
+      //projects only the entries field after filtering
       {
         $project: {
           _id: false,
