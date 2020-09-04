@@ -44,10 +44,10 @@ import {
 
 // core components
 import {
-  chartExample1,
-  chartExample2,
+  annualChart,
+  entriesDoughnut,
   chartExample3,
-  chartExample4,
+  weeklyChart,
 } from "variables/charts.js";
 
 class Dashboard extends React.Component {
@@ -153,8 +153,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartExample1[this.state.bigChartData]}
-                      options={chartExample1.options}
+                      data={annualChart[this.state.bigChartData]}
+                      options={annualChart.options}
                     />
                   </div>
                 </CardBody>
@@ -170,8 +170,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Doughnut
-                      data={chartExample2.data}
-                      options={chartExample2.options}
+                      data={entriesDoughnut.data}
+                      options={entriesDoughnut.options}
                     />
                   </div>
                 </CardBody>
@@ -200,8 +200,8 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={chartExample4.data}
-                      options={chartExample4.options}
+                      data={weeklyChart.data}
+                      options={weeklyChart.options}
                     />
                   </div>
                 </CardBody>
