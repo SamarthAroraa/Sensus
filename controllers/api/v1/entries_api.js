@@ -58,7 +58,7 @@ module.exports.createUpdate = async function (req, res) {
       console.log()
       category = "H";
     }
-    if (!entry_for_date) {
+    if (!entry_for_date ) {
       new_entry = await Entry.create({
         title: title,
         user: user,
