@@ -16,7 +16,7 @@ const partials = require("express-partials");
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
 const flashMiddleware = require("./config/flash_middleware");
-const port = 5000;
+// const port = 5000;
 const path = require("path");
 
 app.use(
@@ -84,6 +84,6 @@ app.use("/", require("./routes"));
 
 app.use(express.static(path.join(__dirname, "client/build")))
 
-app.listen(port, () => {
-    console.log(`Server is active on port:${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Server is active on port:${port}`);
+// });
