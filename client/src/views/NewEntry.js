@@ -72,22 +72,14 @@ const NewEntry = (props) => {
   //
 
   useEffect(() => {
-<<<<<<< HEAD
     fetch("http://127.0.0.1:5000/app-utils/daily-prompts")
-=======
-    fetch("http://localhost:5000/app-utils/daily-prompts")
->>>>>>> 073ed3dce2f233d1003c15ef55f871602cbf677f
       .then((response) => response.json())
       .then((response) => {
         setPrompt(response.prompt);
       });
 
     let url =
-<<<<<<< HEAD
       "http://127.0.0.1:5000/api/v1/entries/find?" +
-=======
-      "http://localhost:5000/api/v1/entries/find?" +
->>>>>>> 073ed3dce2f233d1003c15ef55f871602cbf677f
       "user_id=" +
       props.auth.user.id +
       "&date=" +
