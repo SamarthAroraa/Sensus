@@ -425,7 +425,7 @@ const weeklyChart = {
 
     for(let i = 0; i < 7; i++) {
       
-      labels.push(`${date.getDate()}/${date.getMonth()}`);
+      labels.push(`${date.getDate()}/${date.getMonth() + 1}`);
       date = new Date(date.getTime() + 24 * 60 * 60 * 1000)
     }
 
@@ -447,7 +447,7 @@ const weeklyChart = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [90, 27, 60, 12, 80, 34, 69, 56],
+          data: [1, 1, 1, 1, 1, 0, 1, -1],
         },
       ],
     };
@@ -469,6 +469,9 @@ const weeklyChart = {
       position: "nearest",
     },
     responsive: true,
+    scaleLabel: {
+      display: true,
+    },
     scales: {
       yAxes: [
         {
@@ -479,8 +482,14 @@ const weeklyChart = {
             zeroLineColor: "transparent",
           },
           ticks: {
-            suggestedMin: 50,
-            suggestedMax: 125,
+            suggestedMin: -1,
+            suggestedMax: 1,
+            stepSize: 1,
+            callback: function(value, index, values) {
+              if(value == -1) return "Negative";
+              if(value == 0) return "Neutral";
+              if(value == 1) return "Positive";
+            },
             padding: 20,
             fontColor: "#9e9e9e",
           },
