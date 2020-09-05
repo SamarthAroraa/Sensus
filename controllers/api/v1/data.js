@@ -35,7 +35,7 @@ module.exports.getAnnualData = async function (req, res) {
 
             _id: { year: "$_id.year" },
             monthlyentries: {
-              $push: { month: "$_id.month", average: "$dailyentries" },
+              $push: { month: "$_id.month", dailyentries: "$dailyentries" },
             },
           },
         },
