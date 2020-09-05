@@ -64,3 +64,23 @@ Our policy  is to keep Sensus as unopinionated as possible. We provide the user 
 Navigate to
 `<backend-domain-name>/testing` <br/>
 (For development, `<backend-domain-name>` is localhost:5000)
+
+server {
+    listen 80;
+    server_name 52.206.208.78;
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_redirect off;
+     }
+}
+
+sudo npm install --unsafe-perm=true --allow-root
+http://172.31.67.188/
+
+/home/ubuntu/Sensus
+export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/Sensus/config/Sensus-0f50e66c71ef.json"
