@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 // react component used to create a calendar with events on it
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
@@ -6,14 +6,26 @@ import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 // react component used to create alerts
 import { Table, Button } from "reactstrap";
-
-
+import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const EntryList = (props) => {
-  const[entryList,setEntryList] = useState([]);
-  useEffect(()=>{
-    fetch('/api/v1/user-entries/',)
-  })
+  const [entryList, setEntryList] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/v1/entries/", {
+      method: "post",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+      body: `user=${props.auth.user._id}`,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  });
 
   return (
     <div className="content">
@@ -98,4 +110,11 @@ const EntryList = (props) => {
   );
 };
 
-export default EntryList;
+EntryList.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(withRouter(EntryList));
