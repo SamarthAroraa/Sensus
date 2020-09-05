@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
 
   componentWillMount() {
 
-    fetch("http://52.206.208.78:5000/api/v1/annual")
+    fetch("http://127.0.0.1:5000/api/v1/annual")
   }
 
   render() {
