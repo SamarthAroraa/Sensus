@@ -169,11 +169,7 @@ class Dashboard extends React.Component {
       });
 
     //Fetch Weekly data
-<<<<<<< HEAD
     fetch("http://127.0.0.1:5000/api/v1/data/weekly", {
-=======
-    fetch("/api/v1/data/weekly", {
->>>>>>> 073ed3dce2f233d1003c15ef55f871602cbf677f
       method: "post",
 
       headers: {
