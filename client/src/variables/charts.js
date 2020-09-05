@@ -433,7 +433,7 @@ const weeklyChart = {
       labels: labels,
       datasets: [
         {
-          label: "My First dataset",
+          label: "Mood",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#00d6b4",
