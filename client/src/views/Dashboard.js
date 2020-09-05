@@ -63,6 +63,17 @@ class Dashboard extends React.Component {
       annualChartData: "data1",
       overallMoodData: [33, 33, 33],
       weeklyData: [0, 0, 0, 0, 0, 0, 0],
+      annualUserData: {
+        data1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      annualGlobalData: {
+        data1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        data3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      },
+      emojiMood: 1,
     };
     this.emojis = [positiveEmoji, neutralEmoji, negativeEmoji];
     this.captions = [
@@ -79,6 +90,64 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
+    //Fetch Annual Data
+    fetch("/api/v1/data/annual", {
+      method: "post",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        Accept: "application/json",
+      },
+      body: `user=${this.props.auth.user.id}`,
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        let date = new Date(Date.now());
+
+        let annualUserData = {
+          data1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          data2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          data3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        };
+
+        let emojiMood = 0;
+
+        let user = response.user;
+        let global = response.global;
+
+        user.S.forEach((element) => {
+          if (element._id.year == date.getFullYear()) {
+            element.monthlyentries.forEach((ele) => {
+              if (ele.month - 1 == date.getMonth()) emojiMood--;
+              annualUserData.data3[ele.month - 1] = ele.dailyentries.length;
+            });
+          }
+        });
+
+        user.N.forEach((element) => {
+          if (element._id.year == date.getFullYear()) {
+            element.monthlyentries.forEach((ele) => {
+              annualUserData.data2[ele.month - 1] = ele.dailyentries.length;
+            });
+          }
+        });
+
+        user.H.forEach((element) => {
+          if (element._id.year == date.getFullYear()) {
+            element.monthlyentries.forEach((ele) => {
+              if (ele.month - 1 == date.getMonth()) emojiMood++;
+              annualUserData.data1[ele.month - 1] = ele.dailyentries.length;
+            });
+          }
+        });
+
+        // console.log(annualUserData);
+
+        this.setState({
+          annualUserData: annualUserData,
+          emojiMood: emojiMood > 0 ? 0 : emojiMood < 0 ? 2 : 1,
+        });
+      });
+
     //Fetch total data
     fetch("http://127.0.0.1:5000/api/v1/data/total", {
       method: "post",
@@ -100,7 +169,11 @@ class Dashboard extends React.Component {
       });
 
     //Fetch Weekly data
+<<<<<<< HEAD
     fetch("http://127.0.0.1:5000/api/v1/data/weekly", {
+=======
+    fetch("/api/v1/data/weekly", {
+>>>>>>> 073ed3dce2f233d1003c15ef55f871602cbf677f
       method: "post",
 
       headers: {
@@ -115,8 +188,8 @@ class Dashboard extends React.Component {
         const dates = {};
 
         for (let i = 0; i < 7; i++) {
-          dates[`${date.getDate()}/${date.getMonth() + 1}`] = i;
           date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
+          dates[`${date.getDate()}/${date.getMonth() + 1}`] = i;
         }
 
         //Created an enum type dates to get index
@@ -129,8 +202,8 @@ class Dashboard extends React.Component {
             ? element.val == "H"
               ? 1
               : element.val == "N"
-                ? 0
-                : -1
+              ? 0
+              : -1
             : 0;
         });
 
@@ -138,8 +211,11 @@ class Dashboard extends React.Component {
           weeklyData: data,
         });
       });
+<<<<<<< HEAD
 
     fetch("http://127.0.0.1:5000/api/v1/annual")
+=======
+>>>>>>> 073ed3dce2f233d1003c15ef55f871602cbf677f
   }
 
   render() {
@@ -233,7 +309,27 @@ class Dashboard extends React.Component {
                 <CardBody>
                   <div className="chart-area">
                     <Line
-                      data={annualChart[this.state.annualChartData]}
+                      data={(canvas) => {
+                        let data = annualChart[this.state.annualChartData](
+                          canvas
+                        );
+
+                        data = {
+                          ...data,
+                          datasets: data.datasets.map((a, index) => {
+                            if (index == 0)
+                              return {
+                                ...a,
+                                data: this.state.annualUserData[
+                                  this.state.annualChartData
+                                ],
+                              };
+                            else return a;
+                          }),
+                        };
+
+                        return data;
+                      }}
                       options={annualChart.options}
                     />
                   </div>
@@ -285,10 +381,10 @@ class Dashboard extends React.Component {
                   >
                     <img
                       alt="your-mood"
-                      src={this.emojis[0]}
+                      src={this.emojis[this.state.emojiMood]}
                       style={{ margin: "auto", alignSelf: "center" }}
                     ></img>
-                    <h4 style={{ margin: "auto" }}>{this.captions[0]}</h4>
+                    <h4 style={{ margin: "auto" }}>{this.captions[this.state.emojiMood]}</h4>
                   </div>
                 </CardBody>
               </Card>
