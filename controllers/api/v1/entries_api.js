@@ -3,6 +3,18 @@ const User = require("../../../models/user");
 const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
+sort_entry_array_datestring = (entries) => {
+  for (var i=0; i<entries.length; i++){
+    var dateParts = entries[i]["createDate"].split("/");
+    var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+    entries[i]["createDate"] = dateObject
+  }
+  entries.sort(function(a,b){
+    return new Date(b.createDate) - new Date(a.createDate);
+  });
+  return entries;
+}
+
 module.exports.index = async function (req, res) {
   try {
     //user will a string eg.5f4ba5769fdc69d27fd2725b this will be the id of the user
@@ -13,14 +25,15 @@ module.exports.index = async function (req, res) {
     await Entry.find({
       user: user,
     })
-      .sort("-createdAt")
+      // .sort("-createdAt")
       .exec(function (err, docs) {
         if (err) {
           console.log(err);
           return err;
         }
-        user_entries = docs;
-        return res.status(200).json(docs);
+        user_entries = sort_entry_array_datestring(docs);
+        console.log(user_entries)
+        return res.status(200).json(user_entries);
       });
   } catch (err) {
     return res.status(500).json(err);
