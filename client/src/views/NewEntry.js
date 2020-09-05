@@ -50,7 +50,7 @@ const NewEntry = (props) => {
   var newEntry = {};
 
   //function that saves/updates the entry
-  const save = () => {
+  const save = async () => {
     newEntry = {
       user_id: props.auth.user.id,
       title: entryTitle,
@@ -58,12 +58,14 @@ const NewEntry = (props) => {
       date: today,
     };
     console.log(newEntry);
-    axios
+    await axios
       .post("http://localhost:5000/api/v1/entries/create-update", qs.stringify(newEntry))
       // .then((res) => res.json())
       .then((res) => {
         console.log(res);
-      });
+      })
+      
+    window.location.reload(true);
   };
 
   //
