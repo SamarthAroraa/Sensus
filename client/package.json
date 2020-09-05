@@ -31,7 +31,7 @@
         "redux-thunk": "^2.3.0"
     },
     "scripts": {
-        "proxy": "http://localhost:5000",
+        "proxy": "http://127.0.0.1:5000",
         "start": "react-scripts start",
         "build": "react-scripts build && gulp licenses",
         "test": "react-scripts test --env=jsdom",
