@@ -77,9 +77,9 @@ class Dashboard extends React.Component {
     };
     this.emojis = [positiveEmoji, neutralEmoji, negativeEmoji];
     this.captions = [
-      "You're Doing Great!",
-      "Hustling Hard!",
-      "But We Know That You'll Be Doing Better Soon!",
+      "You're doing great!",
+      "Hustling hard!",
+      "But we know that you'll be doing better soon!",
     ];
   }
 
@@ -358,7 +358,9 @@ class Dashboard extends React.Component {
             <Col lg="4">
               <Card className="card-chart">
                 <CardHeader>
-                  <CardTitle tag="h2">Your Mood This Month</CardTitle>
+                  <CardTitle tag="h2" className="text-center">
+                    Your Mood This Month
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <div
@@ -375,7 +377,9 @@ class Dashboard extends React.Component {
                       src={this.emojis[this.state.emojiMood]}
                       style={{ margin: "auto", alignSelf: "center" }}
                     ></img>
-                    <h4 style={{ margin: "auto", "textAlign": "center" }}>{this.captions[this.state.emojiMood]}</h4>
+                    <h4 style={{ margin: "auto", textAlign: "center" }}>
+                      {this.captions[this.state.emojiMood]}
+                    </h4>
                   </div>
                 </CardBody>
               </Card>
