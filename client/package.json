@@ -3,7 +3,7 @@
     "version": "1.1.0",
     "private": true,
     "homepage": "/",
-    "proxy": "http://localhost:5000/",
+    "proxy": "http://127.0.0.1:5000/",
     "dependencies": {
         "@types/react": "16.9.23",
         "axios": "^0.20.0",
