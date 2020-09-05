@@ -125,13 +125,13 @@ let annualChart = {
           label: "My Data",
           fill: true,
 
-          borderColor: "#1f8ef1",
+          borderColor: "#f2ea46",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#1f8ef1",
+          pointBackgroundColor: "#f2ea46",
           pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#1f8ef1",
+          pointHoverBackgroundColor: "#f2ea46",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
@@ -145,13 +145,13 @@ let annualChart = {
           label: "Average Data",
           fill: true,
 
-          borderColor: "#00d6b4",
+          borderColor: "rgba(0,214,180, 0.3)",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#00d6b4",
+          pointBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#00d6b4",
+          pointHoverBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
@@ -191,13 +191,13 @@ let annualChart = {
           label: "My Data",
           fill: true,
           // backgroundColor: gradientStroke,
-          borderColor: "#1f8ef1",
+          borderColor: "#f5f5f5",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#1f8ef1",
+          pointBackgroundColor: "#f5f5f5",
           pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#1f8ef1",
+          pointHoverBackgroundColor: "#f5f5f5",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
@@ -209,13 +209,13 @@ let annualChart = {
           label: "Average Data",
           fill: true,
           // backgroundColor: gradientStroke,
-          borderColor: "#00d6b4",
+          borderColor: "rgba(0,214,180, 0.3)",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#00d6b4",
+          pointBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#00d6b4",
+          pointHoverBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
@@ -274,13 +274,13 @@ let annualChart = {
           label: "Average Data",
           fill: true,
 
-          borderColor: "#00d6b4",
+          borderColor: "rgba(0,214,180, 0.3)",
           borderWidth: 2,
           borderDash: [],
           borderDashOffset: 0.0,
-          pointBackgroundColor: "#00d6b4",
+          pointBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderColor: "rgba(255,255,255,0)",
-          pointHoverBackgroundColor: "#00d6b4",
+          pointHoverBackgroundColor: "rgba(0,214,180, 0.3)",
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
@@ -307,7 +307,7 @@ let entriesDoughnut = {
         {
           label: "Entry Count",
           fill: true,
-          backgroundColor: ["#f5f5f5", "#1f8ef1", "#00d6b4"],
+          backgroundColor: ["#f5f5f5","#1f8ef1", "#f2ea46"],
           borderColor: "#1f8ef1",
           borderWidth: 2,
           borderDash: [],
@@ -424,9 +424,9 @@ const weeklyChart = {
     let labels = [];
 
     for(let i = 0; i < 7; i++) {
-      
+      date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
       labels.push(`${date.getDate()}/${date.getMonth() + 1}`);
-      date = new Date(date.getTime() + 24 * 60 * 60 * 1000)
+      
     }
 
     return {
