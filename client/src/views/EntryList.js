@@ -23,7 +23,7 @@ const EntryList = (props) => {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:5000/api/v1/entries/",
+        "http://127.0.0.1:5000/api/v1/entries/",
         qs.stringify({ user: props.auth.user.id })
       )
       // .then((res) => res.json())
@@ -37,7 +37,7 @@ const EntryList = (props) => {
     setEntryList(newEntryList);
     axios
       .post(
-        "http://localhost:5000/api/v1/entries/delete",
+        "http://127.0.0.1:5000/api/v1/entries/delete",
         qs.stringify({ userId: props.auth.user.id, entryId: entry_id })
       )
       // .then((res) => res.json())
