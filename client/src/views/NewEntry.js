@@ -60,7 +60,7 @@ const NewEntry = (props) => {
     console.log(newEntry);
     axios
       .post(
-        "http://localhost:5000/api/v1/entries/create-update",
+        "http://52.206.208.78:5000/api/v1/entries/create-update",
         qs.stringify(newEntry)
       )
       // .then((res) => res.json())
@@ -72,14 +72,14 @@ const NewEntry = (props) => {
   //
 
   useEffect(() => {
-    fetch("http://localhost:5000/app-utils/daily-prompts")
+    fetch("http://52.206.208.78:5000/app-utils/daily-prompts")
       .then((response) => response.json())
       .then((response) => {
         setPrompt(response.prompt);
       });
 
     let url =
-      "http://localhost:5000/api/v1/entries/find?" +
+      "http://52.206.208.78:5000/api/v1/entries/find?" +
       "user_id=" +
       props.auth.user.id +
       "&date=" +
