@@ -4,11 +4,27 @@ const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
 module.exports.index = async function (req, res) {
-  let entries = await Entry.find({}).sort("-createdAt").populate("user");
-  return res.status(200).json({
-    message: "List of entries",
-    entries: entries,
-  });
+  try {
+    //user will a string eg.5f4ba5769fdc69d27fd2725b this will be the id of the user
+    //so we need to convert it into mongoId format for comparison
+    let user = ObjectId(req.body.user);
+
+    //this gets us all the instances where the passed condition holds true
+    await Entry.find({
+      user: user,
+    })
+      .sort("-createdAt")
+      .exec(function (err, docs) {
+        if (err) {
+          console.log(err);
+          return err;
+        }
+        user_entries = docs;
+        return res.status(200).json(docs);
+      });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
 };
 
 module.exports.createUpdate = async function (req, res) {
@@ -21,7 +37,10 @@ module.exports.createUpdate = async function (req, res) {
     let uid = req.body.user_id;
     console.log(req.body);
     let user = await User.findById(uid);
-    let entry_for_date = await Entry.findOne({ createDate: date, user: user._id });
+    let entry_for_date = await Entry.findOne({
+      createDate: date,
+      user: user._id,
+    });
 
     // console.log(user, "userr");
     if (!user) {
@@ -29,6 +48,14 @@ module.exports.createUpdate = async function (req, res) {
         message: "User not found",
       });
     }
+
+    //invalid input if entry empty
+    if (text.length == 0) {
+      return res.status(400).json({
+        message: "empty text field",
+      });
+    }
+
     // let color;
     //to be returned in response
     let new_entry;
@@ -49,15 +76,15 @@ module.exports.createUpdate = async function (req, res) {
       score = 0;
       magnitude = 0;
     }
-    console.log(typeof score,typeof 0.25, magnitude, color);
+    console.log(typeof score, typeof 0.25, magnitude, color);
 
     let category = "S";
-    if ( score <= 0.25 && score >= -0.25) {
+    if (score <= 0.25 && score >= -0.25) {
       category = "N";
     } else if (score > 0.25) {
       category = "H";
     }
-    if (!entry_for_date   ) {
+    if (!entry_for_date) {
       new_entry = await Entry.create({
         title: title,
         user: user,
