@@ -63,7 +63,7 @@ Our policy  is to keep Sensus as unopinionated as possible. We provide the user 
 
 Navigate to
 `<backend-domain-name>/testing` <br/>
-(For development, `<backend-domain-name>` is localhost:5000)
+(For development, `<backend-domain-name>` is 127.0.0.1:5000)
 
 server {
     listen 80;
