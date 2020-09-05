@@ -32,6 +32,19 @@ const EntryList = (props) => {
         setEntryList(res.data);
       });
   }, []);
+  const deleteItem = (entry_id) => {
+    const newEntryList = entryList.filter((item) => item._id != entry_id);
+    setEntryList(newEntryList);
+    axios
+      .post(
+        "http://localhost:5000/api/v1/entries/delete",
+        qs.stringify({ userId: props.auth.user.id, entryId: entry_id })
+      )
+      // .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <div className="content">
@@ -74,7 +87,12 @@ const EntryList = (props) => {
                     <i className="fa fa-edit"></i>
                   </Button>
                   {` `}
-                  <Button className="btn-icon" color="danger" size="sm">
+                  <Button
+                    className="btn-icon"
+                    color="danger"
+                    size="sm"
+                    onClick={() => deleteItem(entry._id)}
+                  >
                     <i className="fa fa-times" />
                   </Button>
                 </td>
