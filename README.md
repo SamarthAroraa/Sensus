@@ -83,4 +83,4 @@ sudo npm install --unsafe-perm=true --allow-root
 http://172.31.67.188/
 
 /home/ubuntu/Sensus
-export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/Sensus/config/Sensus-0f50e66c71ef.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/ishant/ishant_linux/Sensus/config/Sensus-0f50e66c71ef.json"

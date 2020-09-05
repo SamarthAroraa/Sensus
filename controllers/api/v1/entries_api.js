@@ -10,8 +10,11 @@ sort_entry_array_datestring = (entries) => {
     entries[i]["createDate"] = dateObject
   }
   entries.sort(function(a,b){
-    return new Date(b.createDate) - new Date(a.createDate);
+    return (new Date(b.createDate) - new Date(a.createDate));
   });
+  for (var i=0; i<entries.length; i++){
+    entries[i]["createDate"] = new Date(entries[i]["createDate"]).toLocaleDateString();
+  }
   return entries;
 }
 
