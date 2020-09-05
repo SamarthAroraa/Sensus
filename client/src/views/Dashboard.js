@@ -138,6 +138,7 @@ class Dashboard extends React.Component {
           weeklyData: data,
         });
       });
+
   }
 
   render() {
