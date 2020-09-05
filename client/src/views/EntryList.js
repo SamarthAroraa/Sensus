@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 // react component used to create a calendar with events on it
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 // dependency plugin for react-big-calendar
@@ -9,23 +9,29 @@ import { Table, Button } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+const qs = require("querystring");
 
 const EntryList = (props) => {
   const [entryList, setEntryList] = useState([]);
+  let color_text = {
+    H: {
+      color: "black",
+    },
+    S: {},
+    N: {},
+  };
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/entries/", {
-      method: "post",
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded",
-        Accept: "application/json",
-      },
-      body: `user=${props.auth.user._id}`,
-    })
-      .then((res) => res.json())
+    axios
+      .post(
+        "http://localhost:5000/api/v1/entries/",
+        qs.stringify({ user: props.auth.user.id })
+      )
+      // .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        setEntryList(res.data);
       });
-  });
+  }, []);
 
   return (
     <div className="content">
@@ -42,68 +48,39 @@ const EntryList = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="text-center">1</td>
-            <td>Andrew Mike</td>
-            <td>Develop</td>
-            <td className="text-center">2013</td>
-            <td className="text-right">€ 99,225</td>
-            <td className="text-right">
-              <Button className="btn-icon" color="info" size="sm">
-                <i className="fa fa-user"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon" color="success" size="sm">
-                <i className="fa fa-edit"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon" color="danger" size="sm">
-                <i className="fa fa-times" />
-              </Button>
-            </td>
-          </tr>
-          <tr>
-            <td className="text-center">2</td>
-            <td>Manuel Rico</td>
-            <td>Manager</td>
-            <td className="text-center">2012</td>
-            <td className="text-right">€ 99,201</td>
-            <td className="text-right">
-              <Button className="btn-icon btn-round" color="info" size="sm">
-                <i className="fa fa-user"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon btn-round" color="success" size="sm">
-                <i className="fa fa-edit"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon btn-round" color="danger" size="sm">
-                <i className="fa fa-times" />
-              </Button>
-              {` `}
-            </td>
-          </tr>
-          <tr>
-            <td className="text-center">3</td>
-            <td>Alex Mike</td>
-            <td>Designer</td>
-            <td className="text-center">2012</td>
-            <td className="text-right">€ 99,201</td>
-            <td className="text-right">
-              <Button className="btn-icon btn-simple" color="info" size="sm">
-                <i className="fa fa-user"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon btn-simple" color="success" size="sm">
-                <i className="fa fa-edit"></i>
-              </Button>
-              {` `}
-              <Button className="btn-icon btn-simple" color="danger" size="sm">
-                <i className="fa fa-times" />
-              </Button>
-              {` `}
-            </td>
-          </tr>
+          {entryList.map((entry, index) => {
+            let font_col = color_text[entry.category];
+            return (
+              <tr
+                key={index}
+                style={{ backgroundColor: entry.mood, fontWeight: "bold" }}
+              >
+                <td className="text-center">
+                  <span style={font_col}>{index + 1}</span>
+                </td>
+
+                <td>
+                  <span style={font_col}>{entry.title ? entry.title : ""}</span>
+                </td>
+
+                <td></td>
+                <td className="text-center">
+                  <span style={font_col}>{entry.createDate}</span>
+                </td>
+                <td className="text-right"></td>
+                <td className="text-right">
+                  {` `}
+                  <Button className="btn-icon" color="success" size="sm">
+                    <i className="fa fa-edit"></i>
+                  </Button>
+                  {` `}
+                  <Button className="btn-icon" color="danger" size="sm">
+                    <i className="fa fa-times" />
+                  </Button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
