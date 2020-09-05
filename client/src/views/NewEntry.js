@@ -59,14 +59,10 @@ const NewEntry = (props) => {
     };
     console.log(newEntry);
     axios
-<<<<<<< HEAD
       .post(
         "http://127.0.0.1:5000/api/v1/entries/create-update",
         qs.stringify(newEntry)
       )
-=======
-      .post("/api/v1/entries/create-update", qs.stringify(newEntry))
->>>>>>> ca77d14b2a8e295718b2aba404b8a44123050722
       // .then((res) => res.json())
       .then((res) => {
         console.log(res);
@@ -76,22 +72,14 @@ const NewEntry = (props) => {
   //
 
   useEffect(() => {
-<<<<<<< HEAD
     fetch("http://127.0.0.1:5000/app-utils/daily-prompts")
-=======
-    fetch("/app-utils/daily-prompts")
->>>>>>> ca77d14b2a8e295718b2aba404b8a44123050722
       .then((response) => response.json())
       .then((response) => {
         setPrompt(response.prompt);
       });
 
     let url =
-<<<<<<< HEAD
       "http://127.0.0.1:5000/api/v1/entries/find?" +
-=======
-      "/api/v1/entries/find?" +
->>>>>>> ca77d14b2a8e295718b2aba404b8a44123050722
       "user_id=" +
       props.auth.user.id +
       "&date=" +

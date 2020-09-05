@@ -7,11 +7,7 @@ const qs = require('querystring')
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-<<<<<<< HEAD
     .post("http://127.0.0.1:5000/users/sign-up", qs.stringify(userData))
-=======
-    .post("/users/sign-up", qs.stringify(userData))
->>>>>>> ca77d14b2a8e295718b2aba404b8a44123050722
     .then((res) => history.push("/login")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
@@ -23,11 +19,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
-<<<<<<< HEAD
     .post("http://127.0.0.1:5000/users/login", qs.stringify(userData))
-=======
-    .post("/users/login", qs.stringify(userData))
->>>>>>> ca77d14b2a8e295718b2aba404b8a44123050722
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage
