@@ -19,7 +19,7 @@ const development = {
             pass: "pack6:ICU",
         },
     },
-    GOOGLE_APPLICATION_CREDENTIALS: path.join(__dirname, "../config/qwiklabs-gcp-02-3a67ec5cb5bc-75e388f83074.json")
+    GOOGLE_APPLICATION_CREDENTIALS: path.join(__dirname, "../config/Sensus-0f50e66c71ef.json")
 };
 const production = {
     name: "production",
@@ -41,7 +41,7 @@ const production = {
             pass: "pack6:ICU",
         },
     },
-    GOOGLE_APPLICATION_CREDENTIALS: path.join(__dirname, "../config/qwiklabs-gcp-02-3a67ec5cb5bc-75e388f83074.json")
+    GOOGLE_APPLICATION_CREDENTIALS: path.join(__dirname, "../config/Sensus-0f50e66c71ef.json")
 };
 
 module.exports = production;
