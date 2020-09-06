@@ -18,6 +18,40 @@ sort_entry_array_datestring = (entries) => {
   return entries;
 }
 
+change_createdAt_using_createDate = (entry) => {
+
+  let newDate = new Date(entry.createDate);
+  entry.createdAt = newDate;
+
+  entry.save();
+
+  return entry;
+}
+
+module.exports.updateDate = async function (req, res) {
+
+  try {
+
+    let entries = await Entry.find({}, (err) => {
+      if(err) {
+        console.log(err)
+      }
+    });
+
+    entries.forEach(element => {
+
+      element.createdAt = new Date(element.createDate);
+
+      element.save();
+    })
+
+    return res.status(200).json({message: "Done", updatedEntries: entries});
+  }
+  catch(err) {
+    return res.status(500).json({messgae: err});
+  }
+};
+
 module.exports.index = async function (req, res) {
   try {
     //user will a string eg.5f4ba5769fdc69d27fd2725b this will be the id of the user
@@ -34,6 +68,9 @@ module.exports.index = async function (req, res) {
           return err;
         }
         user_entries = sort_entry_array_datestring(docs);
+        user_entries.forEach((element, index) => {
+          user_entries[index] = change_createdAt_using_createDate(element);
+        });
         console.log(user_entries)
         return res.status(200).json(user_entries);
       });
