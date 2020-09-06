@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 // react component used to create a calendar with events on it
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 // dependency plugin for react-big-calendar
 import moment from "moment";
 // react component used to create alerts
-import { Table, Button } from "reactstrap";
+import {
+  Table,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,6 +20,13 @@ const qs = require("querystring");
 
 const EntryList = (props) => {
   const [entryList, setEntryList] = useState([]);
+  const [modal, setModal] = useState(false);
+
+  const toggle = (entry) => {
+    swal(entry.title, entry.text);
+    setModal(!modal);
+    console.log(modal);
+  };
   let color_text = {
     H: {
       color: "black",
@@ -83,8 +97,13 @@ const EntryList = (props) => {
                 <td className="text-right"></td>
                 <td className="text-right">
                   {` `}
-                  <Button className="btn-icon" color="success" size="sm">
-                    <i className="fa fa-edit"></i>
+                  <Button
+                    className="btn-icon"
+                    color="success"
+                    size="sm"
+                    onClick={() => toggle(entry)}
+                  >
+                    <i className="fa fa-eye"></i>
                   </Button>
                   {` `}
                   <Button

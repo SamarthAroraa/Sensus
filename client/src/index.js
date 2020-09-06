@@ -16,7 +16,6 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import "assets/scss/black-dashboard-react.scss";
 // import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '../node_modules/react-big-calendar/lib/sass/styles.scss';
-
 import "assets/demo/demo.css";
 import "assets/css/nucleo-icons.css";
 

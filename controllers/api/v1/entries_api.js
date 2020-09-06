@@ -79,7 +79,7 @@ module.exports.createUpdate = async function (req, res) {
       score = 0,
       magnitude = 0;
     let mode; //Update or create (U or C respectively)
-    if (text.length >= 8) {
+    if (text.length >= 4) {
       console.log("analyzing");
 
       let get_sentiment = await SentimentApi.analyze(text);
