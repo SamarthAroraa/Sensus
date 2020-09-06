@@ -3,30 +3,30 @@ const User = require("../../../models/user");
 const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
-sort_entry_array_datestring = (entries) => {
-  for (var i=0; i<entries.length; i++){
-    var dateParts = entries[i]["createDate"].split("/");
-    var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
-    entries[i]["createDate"] = dateObject
-  }
-  entries.sort(function(a,b){
-    return (new Date(b.createDate) - new Date(a.createDate));
-  });
-  for (var i=0; i<entries.length; i++){
-    entries[i]["createDate"] = new Date(entries[i]["createDate"]).toLocaleDateString();
-  }
-  return entries;
-}
+// sort_entry_array_datestring = (entries) => {
+//   for (var i=0; i<entries.length; i++){
+//     var dateParts = entries[i]["createDate"].split("/");
+//     var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+//     entries[i]["createDate"] = dateObject
+//   }
+//   entries.sort(function(a,b){
+//     return (new Date(b.createDate) - new Date(a.createDate));
+//   });
+//   for (var i=0; i<entries.length; i++){
+//     entries[i]["createDate"] = new Date(entries[i]["createDate"]).toLocaleDateString();
+//   }
+//   return entries;
+// }
 
-change_createdAt_using_createDate = (entry) => {
+// change_createdAt_using_createDate = (entry) => {
 
-  let newDate = new Date(entry.createDate);
-  entry.createdAt = newDate;
+//   let newDate = new Date(entry.createDate);
+//   entry.createdAt = newDate;
 
-  entry.save();
+//   entry.save();
 
-  return entry;
-}
+//   return entry;
+// }
 
 module.exports.updateDate = async function (req, res) {
 
@@ -61,16 +61,16 @@ module.exports.index = async function (req, res) {
     await Entry.find({
       user: user,
     })
-      // .sort("-createdAt")
+      .sort("-createdAt")
       .exec(function (err, docs) {
         if (err) {
           console.log(err);
           return err;
         }
-        user_entries = sort_entry_array_datestring(docs);
-        user_entries.forEach((element, index) => {
-          user_entries[index] = change_createdAt_using_createDate(element);
-        });
+        // user_entries = sort_entry_array_datestring(docs);
+        // user_entries.forEach((element, index) => {
+        //   user_entries[index] = change_createdAt_using_createDate(element);
+        // });
         console.log(user_entries)
         return res.status(200).json(user_entries);
       });
