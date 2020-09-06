@@ -9,7 +9,7 @@ mongoose.connect(
   }
 );
 
-//  mongoose.connect('mongodb://52.206.208.78/sensus_database');
+//  mongoose.connect('mongodb://54.237.77.123/sensus_database');
 const db = mongoose.connection;
 
 //unsuccessful connection
