@@ -200,7 +200,7 @@ const UserProfile = (props) => {
                 </FormGroup>
               </Col>{" "}
             </Row>
-            <Row>
+            {/* <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
                   <label> Country </label>{" "}
@@ -233,11 +233,11 @@ const UserProfile = (props) => {
                   />
                 </FormGroup>{" "}
               </Col>{" "}
-            </Row>{" "}
+            </Row>{" "} */}
           </CardBody>{" "}
-          <CardHeader>
-            <h5 className="title"> Social Media Links </h5>
-          </CardHeader>
+          {/* <CardHeader> */}
+          {/* <h5 className="title"> Social Media Links </h5> */}
+          {/* </CardHeader> */}
           {/* <CardBody>
             <Row>
               <Col className="pr-md-1" md="4">
@@ -305,14 +305,14 @@ const UserProfile = (props) => {
             </Row>{" "}
           </CardBody> */}
           <CardFooter>
-            <Button
+            {/* <Button
               className="btn-fill"
               color="primary"
               type="submit"
               onClick={handleSave}
             >
               Save{" "}
-            </Button>{" "}
+            </Button>{" "} */}
           </CardFooter>{" "}
         </Form>{" "}
       </Card>{" "}

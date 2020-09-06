@@ -6,7 +6,7 @@ const ObjectId = require("mongodb").ObjectID;
 // sort_entry_array_datestring = (entries) => {
 //   for (var i=0; i<entries.length; i++){
 //     var dateParts = entries[i]["createDate"].split("/");
-//     var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+//     var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
 //     entries[i]["createDate"] = dateObject
 //   }
 //   entries.sort(function(a,b){
@@ -29,26 +29,22 @@ const ObjectId = require("mongodb").ObjectID;
 // }
 
 module.exports.updateDate = async function (req, res) {
-
   try {
-
     let entries = await Entry.find({}, (err) => {
-      if(err) {
-        console.log(err)
+      if (err) {
+        console.log(err);
       }
     });
 
-    entries.forEach(element => {
-
+    entries.forEach((element) => {
       element.createdAt = new Date(element.createDate);
 
       element.save();
-    })
+    });
 
-    return res.status(200).json({message: "Done", updatedEntries: entries});
-  }
-  catch(err) {
-    return res.status(500).json({messgae: err});
+    return res.status(200).json({ message: "Done", updatedEntries: entries });
+  } catch (err) {
+    return res.status(500).json({ messgae: err });
   }
 };
 
@@ -71,8 +67,8 @@ module.exports.index = async function (req, res) {
         // user_entries.forEach((element, index) => {
         //   user_entries[index] = change_createdAt_using_createDate(element);
         // });
-        console.log(user_entries)
-        return res.status(200).json(user_entries);
+        console.log(docs);
+        return res.status(200).json(docs);
       });
   } catch (err) {
     // console.log(req.body);
