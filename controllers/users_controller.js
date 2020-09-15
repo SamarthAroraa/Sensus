@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
-const env = require('../config/environment')
+const env = require("../config/environment");
 
 const User = require("../models/user");
 const mailer = require("../config/nodemailer");
@@ -81,16 +81,16 @@ module.exports.login = function (req, res) {
           id: user._id,
           fname: user.firstName,
           lname: user.lastName,
-          defaultName : user.defaultName,
+          defaultName: user.defaultName,
           usePenNameDefault: user.usePenNameDefault,
-          about:user.about,
+          about: user.about,
           penName: user.penName,
           country: user.country,
           instagramURL: user.instagramURL,
-          linkedinURL:user.linkedinURL,
+          linkedinURL: user.linkedinURL,
           twitterURL: user.twitterURL,
           facebookURL: user.facebookURL,
-          entries: user.entries
+          entries: user.entries,
         };
         // Sign token
         jwt.sign(
@@ -170,9 +170,11 @@ module.exports.destroySession = function (req, res) {
 
 //Profile Page Modifications.
 
-module.exports.updateProfile = (req, res) => {
-  User.updateOne(
-    { username: req.body.username },
+module.exports.updateProfile = async (req, res) => {
+  let uid = req.body.id;
+  console.log(req.body);
+  let updated = await User.findByIdAndUpdate(
+    { _id: uid },
     {
       firstName: req.body.fname,
       lastName: req.body.lname,
@@ -185,4 +187,8 @@ module.exports.updateProfile = (req, res) => {
       linkedinURL: req.body.liurl,
     }
   );
+  return res.status(200).json({
+    message: "user profile updated!",
+    updatedUser: updated,
+  });
 };

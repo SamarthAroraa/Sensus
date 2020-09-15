@@ -36,6 +36,7 @@ const UserProfile = (props) => {
   let liurl = "";
 
   useEffect(() => {
+    
     if (props.auth.user) {
       setFirstName(props.auth.user.fname);
       setLastName(props.auth.user.lname);
@@ -45,6 +46,7 @@ const UserProfile = (props) => {
       setAbout(props.auth.user.about);
       setFacebookURL(props.auth.user.facebookURL);
       setInstagramURL(props.auth.user.instagramURL);
+      setLinkedinURL(props.auth.user.linkedinURL);
     }
   }, []);
 
@@ -60,16 +62,19 @@ const UserProfile = (props) => {
   const [linkedinURL, setLinkedinURL] = useState("");
 
   const handleSave = () => {
-    setFirstName(fname);
-    setLastName(lname);
-    setPenName(pname);
-    setPenNameDefault(pnamedef);
-    setCountry(co);
-    setAbout(abt);
-    setFacebookURL(fburl);
-    setTwitterURL(turl);
-    setInstagramURL(iurl);
-    setLinkedinURL(liurl);
+    let updatedObject = {
+      id: props.auth.user.id,
+      fname: firstName,
+      lname: lastName,
+      pname: penName,
+      pnamedef: penNameDefault,
+      abt: about,
+      fburl: facebookURL,
+      turl: twitterURL,
+      iurl: instagramURL,
+      liurl: linkedinURL,
+    };
+    console.log(updatedObject);
   };
 
   return (
@@ -95,7 +100,7 @@ const UserProfile = (props) => {
           </div>{" "}
           <div className="card-description">{about}</div>{" "}
         </CardBody>{" "}
-        {/* <CardFooter>
+        <CardFooter>
           <div className="button-container">
             {facebookURL == "" ? null : (
               <Button className="btn-icon btn-round" color="facebook">
@@ -126,7 +131,7 @@ const UserProfile = (props) => {
               </Button>
             )}
           </div>{" "}
-        </CardFooter>{" "} */}
+        </CardFooter>{" "}
       </Card>{" "}
       <Card>
         <CardHeader>
@@ -174,7 +179,7 @@ const UserProfile = (props) => {
                     name="pname"
                     value={penName}
                     onChange={(event) => {
-                      pname = event.target.value;
+                      setPenName(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -189,7 +194,7 @@ const UserProfile = (props) => {
                       defaultChecked={penNameDefault}
                       // value={pnamedef}
                       onClick={(event) => {
-                        pnamedef = !pnamedef;
+                        setPenNameDefault(!penNameDefault);
                       }}
                     />{" "}
                     Use pen name as default
@@ -200,7 +205,7 @@ const UserProfile = (props) => {
                 </FormGroup>
               </Col>{" "}
             </Row>
-            {/* <Row>
+            <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
                   <label> Country </label>{" "}
@@ -208,9 +213,9 @@ const UserProfile = (props) => {
                     placeholder="Country"
                     type="text"
                     name="country"
-                    // value={co}
+                    value={country}
                     onChange={(event) => {
-                      co = event.target.value;
+                      setCountry(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -226,19 +231,19 @@ const UserProfile = (props) => {
                     rows="4"
                     type="textarea"
                     name="about"
-                    // value={abt}
+                    value={about}
                     onChange={(event) => {
-                      abt = event.target.value;
+                      setAbout(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
               </Col>{" "}
-            </Row>{" "} */}
+            </Row>{" "}
           </CardBody>{" "}
-          {/* <CardHeader> */}
-          {/* <h5 className="title"> Social Media Links </h5> */}
-          {/* </CardHeader> */}
-          {/* <CardBody>
+          <CardHeader>
+            <h5 className="title"> Social Media Links </h5>
+          </CardHeader>
+          <CardBody>
             <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
@@ -247,9 +252,9 @@ const UserProfile = (props) => {
                     placeholder="FB ID URL"
                     type="url"
                     name="fburl"
-                    // value={fburl}
+                    value={facebookURL}
                     onChange={(event) => {
-                      fburl = event.target.value;
+                      setFacebookURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -263,9 +268,9 @@ const UserProfile = (props) => {
                     placeholder="Twitter URL"
                     type="url"
                     name="turl"
-                    // value={turl}
+                    value={twitterURL}
                     onChange={(event) => {
-                      turl = event.target.value;
+                      setTwitterURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -279,9 +284,9 @@ const UserProfile = (props) => {
                     placeholder="Instagram URL"
                     type="url"
                     name="iurl"
-                    // value={iurl}
+                    value={instagramURL}
                     onChange={(event) => {
-                      iurl = event.target.value;
+                      setInstagramURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -295,24 +300,24 @@ const UserProfile = (props) => {
                     placeholder="LinkedIn URL"
                     type="url"
                     name="liurl"
-                    // value={liurl}
+                    value={linkedinURL}
                     onChange={(event) => {
-                      liurl = event.target.value;
+                      setLinkedinURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
               </Col>{" "}
             </Row>{" "}
-          </CardBody> */}
+          </CardBody>
           <CardFooter>
-            {/* <Button
+            <Button
               className="btn-fill"
               color="primary"
-              type="submit"
+              // type="submit"
               onClick={handleSave}
             >
               Save{" "}
-            </Button>{" "} */}
+            </Button>{" "}
           </CardFooter>{" "}
         </Form>{" "}
       </Card>{" "}
@@ -326,7 +331,6 @@ UserProfile.propTypes = {
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  user: state.user,
 });
 
 export default connect(mapStateToProps, { registerUser })(
