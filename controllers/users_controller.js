@@ -171,16 +171,23 @@ module.exports.destroySession = function (req, res) {
 //Profile Page Modifications.
 
 module.exports.updateProfile = async (req, res) => {
+  let pnamedef = req.body.pnamedef
   let uid = req.body.id;
-  console.log(req.body);
+  if (req.body.pnamedef == "false") {
+    pnamedef = false;
+  } else {
+    pnamedef = true;
+  }
+  console.log(pnamedef, typeof pnamedef);
   let updated = await User.findByIdAndUpdate(
     { _id: uid },
     {
       firstName: req.body.fname,
       lastName: req.body.lname,
       penName: req.body.pname,
-      usePenNameDefault: req.body.pnamedef,
+      usePenNameDefault: pnamedef,
       about: req.body.abt,
+      defaultName: req.body.dname,
       facebookURL: req.body.fburl,
       twitterURL: req.body.turl,
       instgramURL: req.body.iurl,
