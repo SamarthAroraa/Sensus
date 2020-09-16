@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
+import { logoutUser } from "../actions/authActions";
 // reactstrap components
 import {
   Button,
@@ -10,6 +11,7 @@ import {
   CardText,
   FormGroup,
   Form,
+  CardSubtitle,
   Input,
   Label,
   Row,
@@ -19,34 +21,10 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../actions/authActions";
+const qs = require("querystring");
 
 const UserProfile = (props) => {
   const username = "@mike_andrew123"; //This will be taken from props.
-
-  let fname = "Mike";
-  let lname = "Andrew";
-  let pname = "";
-  let pnamedef = false;
-  let co = "";
-  let abt =
-    "Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...";
-  let fburl = "";
-  let turl = "";
-  let iurl = "";
-  let liurl = "";
-
-  useEffect(() => {
-    if (props.auth.user) {
-      setFirstName(props.auth.user.fname);
-      setLastName(props.auth.user.lname);
-      setPenName(props.auth.user.penName);
-      setPenNameDefault(props.auth.user.penNameDefault);
-      setCountry(props.auth.user.country);
-      setAbout(props.auth.user.about);
-      setFacebookURL(props.auth.user.facebookURL);
-      setInstagramURL(props.auth.user.instagramURL);
-    }
-  }, []);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -58,18 +36,52 @@ const UserProfile = (props) => {
   const [twitterURL, setTwitterURL] = useState("");
   const [instagramURL, setInstagramURL] = useState("");
   const [linkedinURL, setLinkedinURL] = useState("");
+  
+  useEffect(() => {
+    if (props.auth.user) {
+      
+      setFirstName(props.auth.user.fname);
+      setLastName(props.auth.user.lname);
+      setPenName(props.auth.user.penName);
+      setPenNameDefault(props.auth.user.usePenNameDefault);
+      setCountry(props.auth.user.country);
+      setAbout(props.auth.user.about);
+      setFacebookURL(props.auth.user.facebookURL);
+      setInstagramURL(props.auth.user.instagramURL);
+      setLinkedinURL(props.auth.user.linkedinURL);
+      console.log(typeof props.auth.user.usePenNameDefault,props.auth.user.usePenNameDefault ,penNameDefault);
+    }
+  }, []);
 
   const handleSave = () => {
-    setFirstName(fname);
-    setLastName(lname);
-    setPenName(pname);
-    setPenNameDefault(pnamedef);
-    setCountry(co);
-    setAbout(abt);
-    setFacebookURL(fburl);
-    setTwitterURL(turl);
-    setInstagramURL(iurl);
-    setLinkedinURL(liurl);
+    let defName = (penNameDefault ? penName: firstName);
+    let updatedObject = {
+      id: props.auth.user.id,
+      fname: firstName,
+      lname: lastName,
+      dname: defName,
+      pname: penName,
+      pnamedef: penNameDefault,
+      abt: about,
+      fburl: facebookURL,
+      turl: twitterURL,
+      iurl: instagramURL,
+      liurl: linkedinURL,
+    
+    };
+    
+    axios
+      .patch(
+        "http://localhost:5000/users/update-profile",
+        qs.stringify(updatedObject)
+      )
+      .then((res) => {
+        const { updatedUser } = res.data;
+        console.log(updatedUser);
+      });
+    console.log(updatedObject);
+    props.logoutUser();
+
   };
 
   return (
@@ -95,11 +107,11 @@ const UserProfile = (props) => {
           </div>{" "}
           <div className="card-description">{about}</div>{" "}
         </CardBody>{" "}
-        {/* <CardFooter>
+        <CardFooter>
           <div className="button-container">
             {facebookURL == "" ? null : (
               <Button className="btn-icon btn-round" color="facebook">
-                <a href={facebookURL}>
+                <a href={"//"+facebookURL}>
                   <i className="fab fa-facebook" />
                 </a>
               </Button>
@@ -126,7 +138,7 @@ const UserProfile = (props) => {
               </Button>
             )}
           </div>{" "}
-        </CardFooter>{" "} */}
+        </CardFooter>{" "}
       </Card>{" "}
       <Card>
         <CardHeader>
@@ -174,7 +186,7 @@ const UserProfile = (props) => {
                     name="pname"
                     value={penName}
                     onChange={(event) => {
-                      pname = event.target.value;
+                      setPenName(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -186,10 +198,11 @@ const UserProfile = (props) => {
                     <Input
                       type="checkbox"
                       name="pnamedef"
-                      defaultChecked={penNameDefault}
-                      // value={pnamedef}
+                      checked={penNameDefault}
+                      value={penNameDefault}
                       onClick={(event) => {
-                        pnamedef = !pnamedef;
+                        setPenNameDefault(!penNameDefault);
+                        console.log( event.target.checked,penNameDefault);
                       }}
                     />{" "}
                     Use pen name as default
@@ -200,7 +213,7 @@ const UserProfile = (props) => {
                 </FormGroup>
               </Col>{" "}
             </Row>
-            {/* <Row>
+            <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
                   <label> Country </label>{" "}
@@ -208,9 +221,9 @@ const UserProfile = (props) => {
                     placeholder="Country"
                     type="text"
                     name="country"
-                    // value={co}
+                    value={country}
                     onChange={(event) => {
-                      co = event.target.value;
+                      setCountry(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -226,30 +239,30 @@ const UserProfile = (props) => {
                     rows="4"
                     type="textarea"
                     name="about"
-                    // value={abt}
+                    value={about}
                     onChange={(event) => {
-                      abt = event.target.value;
+                      setAbout(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
               </Col>{" "}
-            </Row>{" "} */}
+            </Row>{" "}
           </CardBody>{" "}
-          {/* <CardHeader> */}
-          {/* <h5 className="title"> Social Media Links </h5> */}
-          {/* </CardHeader> */}
-          {/* <CardBody>
+          <CardHeader>
+            <h5 className="title"> Social Media Links </h5>
+          </CardHeader>
+          <CardBody>
             <Row>
               <Col className="pr-md-1" md="4">
                 <FormGroup>
                   <label> Facebook </label>{" "}
                   <Input
-                    placeholder="FB ID URL"
+                    placeholder="www.facebook.com/"
                     type="url"
                     name="fburl"
-                    // value={fburl}
+                    value={facebookURL}
                     onChange={(event) => {
-                      fburl = event.target.value;
+                      setFacebookURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -260,12 +273,12 @@ const UserProfile = (props) => {
                 <FormGroup>
                   <label> Twitter </label>{" "}
                   <Input
-                    placeholder="Twitter URL"
+                    placeholder="www.twitter.com/"
                     type="url"
                     name="turl"
-                    // value={turl}
+                    value={twitterURL}
                     onChange={(event) => {
-                      turl = event.target.value;
+                      setTwitterURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -276,12 +289,12 @@ const UserProfile = (props) => {
                 <FormGroup>
                   <label> Instagram </label>{" "}
                   <Input
-                    placeholder="Instagram URL"
+                    placeholder="www.instagram.com/"
                     type="url"
                     name="iurl"
-                    // value={iurl}
+                    value={instagramURL}
                     onChange={(event) => {
-                      iurl = event.target.value;
+                      setInstagramURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
@@ -292,27 +305,30 @@ const UserProfile = (props) => {
                 <FormGroup>
                   <label> LinkedIn </label>{" "}
                   <Input
-                    placeholder="LinkedIn URL"
+                    placeholder="www.linkedin.com/"
                     type="url"
                     name="liurl"
-                    // value={liurl}
+                    value={linkedinURL}
                     onChange={(event) => {
-                      liurl = event.target.value;
+                      setLinkedinURL(event.target.value);
                     }}
                   />
                 </FormGroup>{" "}
               </Col>{" "}
             </Row>{" "}
-          </CardBody> */}
+            <CardSubtitle className="mb-2 " style={{ color: "red" }}>
+              Note: You will be logged out upon saving changes.
+            </CardSubtitle>
+          </CardBody>
           <CardFooter>
-            {/* <Button
+            <Button
               className="btn-fill"
               color="primary"
-              type="submit"
+              // type="submit"
               onClick={handleSave}
             >
               Save{" "}
-            </Button>{" "} */}
+            </Button>{" "}
           </CardFooter>{" "}
         </Form>{" "}
       </Card>{" "}
@@ -322,13 +338,13 @@ const UserProfile = (props) => {
 
 UserProfile.propTypes = {
   auth: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  user: state.user,
 });
 
-export default connect(mapStateToProps, { registerUser })(
+export default connect(mapStateToProps, { registerUser, logoutUser })(
   withRouter(UserProfile)
 );
