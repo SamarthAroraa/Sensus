@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -46,6 +46,7 @@ const NewEntry = (props) => {
 		"Hi, " + props.auth.user.defaultName + ". Give your entry a title!"
 	);
 	const [prompt, setPrompt] = useState("");
+	const [disableSaveBtn, setDisableSaveBtn] = useState(false);
 
 	var newEntry = {};
 
@@ -58,6 +59,9 @@ const NewEntry = (props) => {
 			date: today,
 		};
 		console.log(newEntry);
+
+		setDisableSaveBtn(true);
+
 		await axios
 			.post(
 				"http://localhost:5000/api/v1/entries/create-update",
@@ -174,6 +178,7 @@ const NewEntry = (props) => {
 									{/* <Col sm="12"> */}
 									<div className="text-right">
 										<Button
+											disabled={disableSaveBtn}
 											onClick={() => save()}
 											size="md"
 											color="primary"
