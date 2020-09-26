@@ -93,6 +93,10 @@ const UserProfile = (props) => {
 		props.logoutUser();
 	};
 
+	const handleChangePassword = () => {
+		//TODO: Call api to update password
+	};
+
 	return (
 		<div className="content">
 			<Card className="card-user">
@@ -398,7 +402,7 @@ const UserProfile = (props) => {
 							className="btn-fill"
 							color="primary"
 							// type="submit"
-							onClick={handleSave}
+							onClick={handleChangePassword}
 						>
 							Change{" "}
 						</Button>{" "}
