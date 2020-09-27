@@ -7,7 +7,8 @@
     "client": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "prod": "NODE_ENV=production concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Samarth Arora",
   "license": "ISC",

@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     //Fetch Annual Data
-    fetch("/api/v1/data/annual", {
+    fetch(process.env.REACT_APP_API_URI+ "api/v1/data/annual", {
       method: "post",
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
@@ -149,7 +149,7 @@ class Dashboard extends React.Component {
       });
 
     //Fetch total data
-    fetch("http://54.237.77.123/api/v1/data/total", {
+    fetch(process.env.REACT_APP_API_URI+"api/v1/data/total", {
       method: "post",
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
@@ -169,7 +169,7 @@ class Dashboard extends React.Component {
       });
 
     //Fetch Weekly data
-    fetch("http://54.237.77.123/api/v1/data/weekly", {
+    fetch(process.env.REACT_APP_API_URI+"api/v1/data/weekly", {
       method: "post",
 
       headers: {
@@ -208,7 +208,7 @@ class Dashboard extends React.Component {
         });
       });
 
-    fetch("http://54.237.77.123/api/v1/annual")
+    fetch(process.env.REACT_APP_API_URI+"api/v1/annual")
   }
 
   render() {

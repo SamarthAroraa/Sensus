@@ -42,25 +42,31 @@ const userSchema = new mongoose.Schema(
 
     about: {
       type: String,
+      default: "",
     },
 
     facebookURL: {
       type: String,
+      default: "",
     },
 
     twitterURL: {
       type: String,
+      default: "",
     },
 
     instagramURL: {
       type: String,
+      default: "",
     },
 
     linkedinURL: {
       type: String,
+      default: "",
     },
     country: {
       type: String,
+      default: "",
     },
 
     //array of the entries made by the user
