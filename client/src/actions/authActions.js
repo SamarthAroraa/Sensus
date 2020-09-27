@@ -7,7 +7,7 @@ const qs = require('querystring')
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("http://localhost:5000/users/sign-up", qs.stringify(userData))
+    .post(process.env.REACT_APP_API_URI + "users/sign-up", qs.stringify(userData))
     .then((res) => history.push("/login")) // re-direct to login on successful register
     .catch((err) =>
       dispatch({
@@ -19,7 +19,7 @@ export const registerUser = (userData, history) => (dispatch) => {
 // Login - get user token
 export const loginUser = (userData) => (dispatch) => {
   axios
-    .post("http://localhost:5000/users/login", qs.stringify(userData))
+    .post(process.env.REACT_APP_API_URI+"users/login", qs.stringify(userData))
     .then((res) => {
       // Save to localStorage
       // Set token to localStorage

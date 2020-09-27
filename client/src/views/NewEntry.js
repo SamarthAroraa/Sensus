@@ -64,7 +64,7 @@ const NewEntry = (props) => {
 
 		await axios
 			.post(
-				"http://localhost:5000/api/v1/entries/create-update",
+				process.env.REACT_APP_API_URI+"api/v1/entries/create-update",
 				qs.stringify(newEntry)
 			)
 			// .then((res) => res.json())
@@ -78,14 +78,14 @@ const NewEntry = (props) => {
 	//
 
 	useEffect(() => {
-		fetch("http://localhost:5000/app-utils/daily-prompts")
+		fetch(process.env.REACT_APP_API_URI+"app-utils/daily-prompts")
 			.then((response) => response.json())
 			.then((response) => {
 				setPrompt(response.prompt);
 			});
 
 		let url =
-			"http://localhost:5000/api/v1/entries/find?" +
+		process.env.REACT_APP_API_URI+"api/v1/entries/find?" +
 			"user_id=" +
 			props.auth.user.id +
 			"&date=" +

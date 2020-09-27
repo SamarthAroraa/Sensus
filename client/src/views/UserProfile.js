@@ -72,7 +72,7 @@ const UserProfile = (props) => {
     
     axios
       .patch(
-        "http://localhost:5000/users/update-profile",
+        process.env.REACT_APP_API_URI+"users/update-profile",
         qs.stringify(updatedObject)
       )
       .then((res) => {
