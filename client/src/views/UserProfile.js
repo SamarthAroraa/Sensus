@@ -39,11 +39,44 @@ const UserProfile = (props) => {
 	const [instagramURL, setInstagramURL] = useState("");
 	const [linkedinURL, setLinkedinURL] = useState("");
 
+	const handleSave = () => {
+		let defName = penNameDefault ? penName : firstName;
+		let updatedObject = {
+			id: props.auth.user.id,
+			fname: firstName,
+			lname: lastName,
+			dname: defName,
+			pname: penName,
+			pnamedef: penNameDefault,
+			abt: about,
+			fburl: facebookURL,
+			turl: twitterURL,
+			iurl: instagramURL,
+			liurl: linkedinURL,
+		};
+
+		axios
+			.patch(
+				process.env.REACT_APP_API_URI + "users/update-profile",
+				qs.stringify(updatedObject)
+			)
+			.then((res) => {
+				const { updatedUser } = res.data;
+				console.log(updatedUser);
+			});
+		console.log(updatedObject);
+		props.logoutUser();
+	};
+
 	//Change password controls
 
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+	const handleChangePassword = () => {
+		//TODO: Call api to update password
+	};
 
 	useEffect(() => {
 		if (props.auth.user) {
@@ -63,39 +96,6 @@ const UserProfile = (props) => {
 			);
 		}
 	}, []);
-
-	const handleSave = () => {
-		let defName = penNameDefault ? penName : firstName;
-		let updatedObject = {
-			id: props.auth.user.id,
-			fname: firstName,
-			lname: lastName,
-			dname: defName,
-			pname: penName,
-			pnamedef: penNameDefault,
-			abt: about,
-			fburl: facebookURL,
-			turl: twitterURL,
-			iurl: instagramURL,
-			liurl: linkedinURL,
-		};
-
-		axios
-			.patch(
-				"http://localhost:5000/users/update-profile",
-				qs.stringify(updatedObject)
-			)
-			.then((res) => {
-				const { updatedUser } = res.data;
-				console.log(updatedUser);
-			});
-		console.log(updatedObject);
-		props.logoutUser();
-	};
-
-	const handleChangePassword = () => {
-		//TODO: Call api to update password
-	};
 
 	return (
 		<div className="content">

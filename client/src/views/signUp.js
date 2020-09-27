@@ -177,7 +177,7 @@ const SignUp = (props) => {
             <Label check>
               <Input
                 type="checkbox"
-                defaultChecked={defaultPname}
+                checked={defaultPname}
                 onChange={() => setDefaultPname(!defaultPname)}
                 name="defaultPname"
               />
