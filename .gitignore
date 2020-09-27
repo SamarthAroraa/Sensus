@@ -4,3 +4,4 @@ env
 .vscode
 scripts/aclImdb_v1.tar.gz
 scripts/aclImdb_v1
+Sensus-aws.pem
