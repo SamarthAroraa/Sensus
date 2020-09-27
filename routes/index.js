@@ -5,7 +5,7 @@ const homeController= require('../controllers/home_controller');
 
 
 // router.use('/testing', require('./testing'));
-router.get('/', homeController.home);
+// router.get('/', homeController.home);
 router.use('/users', require('./users'));
 router.use('/app-utils', require('./utils'))
 

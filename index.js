@@ -42,9 +42,9 @@ app.use(expressLayouts);
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
 
-// app.use(express.static(path.join(__dirname, env.asset_path)));
+app.use(express.static(path.join(__dirname, env.asset_path)));
 
-// app.use(partials());
+app.use(partials());
 
 
 
@@ -78,14 +78,16 @@ app.use(flashMiddleware.setFlash);
 app.use(passport.initialize());
 // Passport config
 require("./config/passport-jwt")(passport);
-
-app.use("/", require("./routes"));
-
 app.use(express.static(path.join(__dirname, "client/build")))
 
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+
+app.use('/users', require('./routes/users'));
+app.use('/app-utils', require('./routes/utils'))
+app.use('/api', require('./routes/api'));
+
+// app.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
