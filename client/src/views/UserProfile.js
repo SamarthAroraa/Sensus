@@ -16,6 +16,7 @@ import {
 	Label,
 	Row,
 	Col,
+	FormText,
 } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -73,9 +74,27 @@ const UserProfile = (props) => {
 	const [oldPassword, setOldPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmNewPassword, setConfirmNewPassword] = useState("");
+	const [errors, setErrors] = useState({});
 
-	const handleChangePassword = () => {
-		//TODO: Call api to update password
+	const handleChangePassword = async () => {
+		let updatedObject = {
+			id: props.auth.user.id,
+			oldPassword: oldPassword,
+			newPassword: newPassword,
+			confirmNewPassword: confirmNewPassword,
+		};
+
+		await axios
+			.patch(
+				process.env.REACT_APP_API_URI + "users/change-password",
+				qs.stringify(updatedObject)
+			)
+			.then((res) => {
+				console.log(res);
+				setErrors(res.data);
+			});
+
+		props.logoutUser();
 	};
 
 	useEffect(() => {
@@ -363,6 +382,10 @@ const UserProfile = (props) => {
 											setOldPassword(event.target.value);
 										}}
 									/>
+									<FormText color="danger">
+										{errors.oldPassword}
+										{errors.passwordMismatch}
+									</FormText>
 								</FormGroup>{" "}
 							</Col>{" "}
 						</Row>{" "}
@@ -378,6 +401,7 @@ const UserProfile = (props) => {
 											setNewPassword(event.target.value);
 										}}
 									/>
+									<FormText color="danger">{errors.newPassword}</FormText>
 								</FormGroup>{" "}
 							</Col>{" "}
 						</Row>{" "}
@@ -393,6 +417,9 @@ const UserProfile = (props) => {
 											setConfirmNewPassword(event.target.value);
 										}}
 									/>
+									<FormText color="danger">
+										{errors.confirmNewPassword}
+									</FormText>
 								</FormGroup>{" "}
 							</Col>{" "}
 						</Row>{" "}

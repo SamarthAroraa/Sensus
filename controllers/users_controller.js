@@ -7,6 +7,7 @@ const env = require("../config/environment");
 
 const User = require("../models/user");
 const mailer = require("../config/nodemailer");
+const { use } = require("passport");
 
 const addUser = (req, res) => {
 	const user = new User({});
@@ -204,12 +205,37 @@ module.exports.updateProfile = async (req, res) => {
 //Password Manager
 
 module.exports.changePassword = async (req, res) => {
-	let uid = req.body.id;
-	const oldPassword = req.body.oldPass;
+	const { errors, isValid } = validateChangePasswordInput(req.body);
+
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	const uid = req.body.id;
+	const oldPassword = req.body.oldPassword;
+	const newPassword = req.body.newPassword;
 
 	User.findById(uid, (err, user) => {
 		if (err) {
-			res.status(400).json({ message: err });
+			res.status(400).json({ err: err });
 		}
+
+		bcrypt.compare(oldPassword, user.password).then((isMatch) => {
+			if (!isMatch) {
+				res.status(400).json({ passwordMismatch: "Password is incorrect" });
+			} else {
+				// Hash password before saving in database
+				bcrypt.genSalt(10, (err, salt) => {
+					bcrypt.hash(newPassword, salt, (err, hash) => {
+						if (err) throw err;
+						user.password = hash;
+						user
+							.save()
+							.then(res.status(200).json({ message: "Password Updated!" }))
+							.catch((err) => console.log(err));
+					});
+				});
+			}
+		});
 	});
 };
