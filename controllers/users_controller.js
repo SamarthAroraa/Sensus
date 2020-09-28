@@ -211,17 +211,17 @@ module.exports.changePassword = async (req, res) => {
 
 	User.findById(uid, (err, user) => {
 		if (err) {
-			res.status(500).json({ err: err });
+			res.status(401).json({ err: err });
 		}
 
 		bcrypt.compare(oldPassword, user.password).then((isMatch) => {
 			if (!isMatch) {
-				res.status(500).json({ passwordMismatch: "Password is incorrect" });
+				res.status(401).json({ passwordMismatch: "Password is incorrect" });
 			} else {
 				const { errors, isValid } = validateChangePasswordInput(req.body);
 
 				if (!isValid) {
-					return res.status(500).json(errors);
+					return res.status(400).json(errors);
 				}
 
 				// Hash password before saving in database
