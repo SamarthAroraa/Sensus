@@ -205,25 +205,25 @@ module.exports.updateProfile = async (req, res) => {
 //Password Manager
 
 module.exports.changePassword = async (req, res) => {
-	const { errors, isValid } = validateChangePasswordInput(req.body);
-
-	if (!isValid) {
-		return res.status(400).json(errors);
-	}
-
 	const uid = req.body.id;
 	const oldPassword = req.body.oldPassword;
 	const newPassword = req.body.newPassword;
 
 	User.findById(uid, (err, user) => {
 		if (err) {
-			res.status(400).json({ err: err });
+			res.status(500).json({ err: err });
 		}
 
 		bcrypt.compare(oldPassword, user.password).then((isMatch) => {
 			if (!isMatch) {
-				res.status(400).json({ passwordMismatch: "Password is incorrect" });
+				res.status(500).json({ passwordMismatch: "Password is incorrect" });
 			} else {
+				const { errors, isValid } = validateChangePasswordInput(req.body);
+
+				if (!isValid) {
+					return res.status(500).json(errors);
+				}
+
 				// Hash password before saving in database
 				bcrypt.genSalt(10, (err, salt) => {
 					bcrypt.hash(newPassword, salt, (err, hash) => {

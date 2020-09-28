@@ -84,17 +84,17 @@ const UserProfile = (props) => {
 			confirmNewPassword: confirmNewPassword,
 		};
 
-		await axios
-			.patch(
+		try {
+			let res = await axios.patch(
 				process.env.REACT_APP_API_URI + "users/change-password",
 				qs.stringify(updatedObject)
-			)
-			.then((res) => {
-				console.log(res);
-				setErrors(res.data);
-			});
+			);
+		} catch (err) {
+			console.log(err.response.data);
+			setErrors(err.response.data);
+		}
 
-		props.logoutUser();
+		// props.logoutUser();
 	};
 
 	useEffect(() => {
