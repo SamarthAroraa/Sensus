@@ -5,11 +5,14 @@ const language = require("@google-cloud/language");
 const getColorMapping = require("../config/get-color-mapping").getColorMapping;
 
 // Creates a client
-const client = new language.LanguageServiceClient();
+let client;
 
 // Detects the sentiment of the document
 module.exports.analyze = async function (text) {
   try {
+    if(!client){
+      client = new language.LanguageServiceClient();
+    }
     text = String(text);
     text = text.toLowerCase();
     const document = {
