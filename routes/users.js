@@ -18,10 +18,14 @@ router.post("/login", usersController.login);
 // @route PATCH users/update-profile
 // @desc Update profile details of an existing user
 // @access Public
-router.patch('/update-profile', usersController.updateProfile)
+router.patch("/update-profile", usersController.updateProfile);
 
+// @route PATCH users/change-password
+// @desc Change Password of current user
+// @access public
+
+router.patch("/change-password", usersController.changePassword);
 
 router.get("/sign-out", usersController.destroySession);
-
 
 module.exports = router;
