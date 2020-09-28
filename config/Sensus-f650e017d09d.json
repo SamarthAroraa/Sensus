@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sensus-286919",
+  "private_key_id": "f650e017d09dc012096d8fca7135712492401fae",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCY7P1uzPvmKeDj\nSx3iVkPK3W68vRn0IzkRVQ/5UzGIk7y36pDueqNhCo5BAYU7upqjJgm6NE2zJxB0\np2ZqlAxaoVvJE8n8tM3ZJzd+GyJKtwzHXRkMr0qh2iv+ICYx1sa6daGPkZkL3EZ5\nd4XCCbhPjslQlkuZrsrrDnUQ/UsZI9Dd+sJFUyYzT89uE6Xf/gR4Tz/10sn0ezT6\nE9ih4/iLXUGUXdD60JDh+xUbPkLA3jbmoD1WKQRhEzK8VTR9Ryh6iuNEdkfXl1ZQ\nFzc0o71MfXnH5y0GuovYneKLHA6Eo4LWWqosFyRzdJO930CqK3+tkaCMQC2VYcDQ\naEqBR7hRAgMBAAECggEAMlWW2RhpNQnFtqprzKq+J5CYuVC4sS3Cw9yupE7ot96A\nuDxhtczx56f0yJq6gr1Z1qdXfk1m4bfS58KNqDjQlCgWMOntitrsAjSxRDWkJNl5\nQEl5TD6KHxnTbxKf37mksYy0P7AZoti+7Y4UnZhbbPw/cOH3Qj9RFOsuRwhH5p7r\n6LKNnM+B2T6sN2SU/psth17/VvOGC3IUny0DiV2WQgNBI1xtE3N12TZ3noqYCucj\ny5rkbbB2tYv+Ey4P2c94r2/KUL5bQQILI4MHCSb5wfhN0ttfulDIYmL55VYjE/Na\n61eXHsy1fXC1ktNXcjIUXW3BqcXSm+a2gSLF1V8JnQKBgQDO0Hv2f5FrpjXIeDmq\nc2lHpi2QRr2a8TaptBGIYzHGLlih6djgR40etwFoaqbtHyoDegdQJF6aBg1mucZT\neb4MhpXMI+vogH4owpftrsPgXYwwrZJPIqQvhX5dkAHlZgZked4w7vst7X/upb2D\nZaD+NI4xiLaBZ/8khZSQj2bygwKBgQC9S5gMBTZejhel7bZr8L0WIZqZRCrgxNFm\n6FQ9fUL25gye7EiroZYBsFqEh3Ryub7x3p1pg7cdG6b3RyPzKUJrNQXWttydv6Nd\nXIdc13EN+MGmlV/WZ/TEOaOCdhBdYl+oKWa25ir46CvLWYMut6b+YAfAn07+Y4Km\nErmI1ZAhmwKBgQCmQ4eVGOOA5qOQYc8CUDxQRLGWrrhZqxgmAESkIBLw32uT55ra\nW8uA6OEx36QJN6egGedtL3/6VWlKr4lYrKP0D/K3ph1O0pYaEK7xfzGr26kLrU7V\nXeUe6zQ25cIQeSAkgLD3J/k46BmUcxxTWU2/b+LswZrvl/rPkrBoM1ExHwKBgQCZ\ndZE8HXWoTjVptT7wXuhL6s40doj0U1sXvD2e48/H7VRJ+nAnhAXiNKANVOrYnzDn\nUHv4sGlg1awUR74jQU2xL/kdyn0r/dJou7yZTac/lm0XqX1aikhqU/f0qdY2fqvh\n3j6BBDPOOhpW7qhk1UoyapOeWwhlPzMJg6CaB9ijBQKBgASTBAaAXfkpvu9Fd+AQ\nArcghXmB17a/tDmGQKcjFyvSwMveP/SFNJSf6gHYXVe10KN6rGSY62YNhn6p474i\nQJDNoKnlyRkGL4mHcihmUYumCPHmKWSpX5N8Q9lJ6FBiLH/9f9GzWqlKr1iW+Pxq\nS3u63U15L4FKJyWaGowhNH6q\n-----END PRIVATE KEY-----\n",
+  "client_email": "sensus@sensus-286919.iam.gserviceaccount.com",
+  "client_id": "110530640457344983724",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sensus%40sensus-286919.iam.gserviceaccount.com"
+}
