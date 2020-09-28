@@ -89,12 +89,12 @@ const UserProfile = (props) => {
 				process.env.REACT_APP_API_URI + "users/change-password",
 				qs.stringify(updatedObject)
 			);
+
+			props.logoutUser();
 		} catch (err) {
 			console.log(err.response.data);
 			setErrors(err.response.data);
 		}
-
-		// props.logoutUser();
 	};
 
 	useEffect(() => {
