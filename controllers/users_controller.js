@@ -180,7 +180,7 @@ module.exports.updateProfile = async (req, res) => {
 	} else {
 		pnamedef = true;
 	}
-	console.log(pnamedef, typeof pnamedef);
+	// console.log(pnamedef, typeof pnamedef);
 	let updated = await User.findByIdAndUpdate(
 		{ _id: uid },
 		{
