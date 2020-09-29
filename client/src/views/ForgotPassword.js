@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	FormGroup,
 	Label,
 	Input,
+	InputGroup,
+	InputGroupAddon,
+	InputGroupText,
 	FormText,
 	Button,
 	Card,
@@ -10,6 +13,7 @@ import {
 	CardBody,
 	CardTitle,
 	CardSubtitle,
+	CardFooter,
 } from "reactstrap";
 
 const ForgotPassword = (props) => {
@@ -17,35 +21,52 @@ const ForgotPassword = (props) => {
 		event.preventDefault();
 	};
 
+	const [focused, setFocused] = useState("");
+
+	const onFocus = () => {
+		setFocused("input-group-focus");
+	};
+
+	const onBlur = () => {
+		setFocused("");
+	};
 	return (
 		<form className="login-form" noValidate onSubmit={onSubmit}>
 			<Card className="form-component">
-				<CardBody>
-					<CardTitle style={{ textAlign: "center" }}>
-						<i
-							style={{ display: "block", color: "#e9b000" }}
-							className="fas fa-lock fa-6x"
-						></i>
+				<CardBody style={{ textAlign: "center" }}>
+					<CardTitle>
+						<i style={{ display: "block" }} className="fas fa-lock fa-6x"></i>
 						<br></br>
-						<h2>Trouble Logging In?</h2>
+						<h2 style={{ color: "#d725bb" }}>Trouble Logging In?</h2>
 						<h5>
-							Enter your email and we'll send you a link to get back into your
-							account.
+							Enter your email and we'll send you your new login credential to
+							get back into your account.
 						</h5>
 					</CardTitle>
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fas fa-envelope"></i>
-							</div>
-						</div>
-						<input
+					<InputGroup className={focused}>
+						<InputGroupAddon addonType="prepend">
+							<InputGroupText>
+								<i className="fas fa-envelope"></i>
+							</InputGroupText>
+						</InputGroupAddon>
+						<Input
 							type="text"
-							class="form-control"
 							placeholder="Email Address"
+							onFocus={onFocus}
+							onBlur={onBlur}
 						/>
-					</div>
+					</InputGroup>
 				</CardBody>
+
+				<CardFooter>
+					<Button
+						color="primary"
+						className="animation-on-hover btn-block"
+						type="submit"
+					>
+						Send Password
+					</Button>
+				</CardFooter>
 			</Card>
 		</form>
 	);
