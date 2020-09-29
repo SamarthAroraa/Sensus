@@ -1,3 +1,5 @@
+import axios from "axios";
+import qs from "querystring";
 import React, { useState } from "react";
 import {
 	FormGroup,
@@ -17,11 +19,11 @@ import {
 } from "reactstrap";
 
 const ForgotPassword = (props) => {
-	const onSubmit = (event) => {
-		event.preventDefault();
-	};
-
 	const [focused, setFocused] = useState("");
+	const [email, setEmail] = useState("");
+	const [disableButton, setDisableButton] = useState(false);
+	const [displayMessage, setDisplayMessage] = useState("");
+	const [messageClass, setMessageClass] = useState("");
 
 	const onFocus = () => {
 		setFocused("input-group-focus");
@@ -30,6 +32,28 @@ const ForgotPassword = (props) => {
 	const onBlur = () => {
 		setFocused("");
 	};
+
+	const onSubmit = async (event) => {
+		event.preventDefault();
+
+		setDisableButton(true);
+
+		try {
+			let res = await axios.patch(
+				process.env.REACT_APP_API_URI + "forgot-password",
+				qs.stringify({ email: email })
+			);
+			console.log(res);
+			setDisplayMessage(res.data.displayMessage);
+			setMessageClass("success");
+		} catch (err) {
+			console.log(err.response.data);
+			setDisplayMessage(err.response.data.displayMessage);
+			setMessageClass("danger");
+			setDisableButton(false);
+		}
+	};
+
 	return (
 		<form className="login-form" noValidate onSubmit={onSubmit}>
 			<Card className="form-component">
@@ -54,8 +78,13 @@ const ForgotPassword = (props) => {
 							placeholder="Email Address"
 							onFocus={onFocus}
 							onBlur={onBlur}
+							value={email}
+							onChange={(event) => {
+								setEmail(event.target.value);
+							}}
 						/>
 					</InputGroup>
+					<FormText color={messageClass}>{displayMessage}</FormText>
 				</CardBody>
 
 				<CardFooter>
@@ -63,6 +92,7 @@ const ForgotPassword = (props) => {
 						color="primary"
 						className="animation-on-hover btn-block"
 						type="submit"
+						disabled={disableButton}
 					>
 						Send Password
 					</Button>
