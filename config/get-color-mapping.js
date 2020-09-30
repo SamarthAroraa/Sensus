@@ -34,7 +34,7 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
     score_color_index = Math.floor(score * 10);
     color_group = happy_colors;
   } else {
-    score_color_index = Math.floor(Math.abs(score) * 10.1);
+    score_color_index = Math.floor(Math.abs(score) * 10);
     color_group = sad_colors;
   }
 
