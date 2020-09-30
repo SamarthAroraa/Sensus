@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const usersController = require("../controllers/users_controller");
 const testingController = require("../controllers/testing-controller");
-const sentimentAnalyisApi = require("../controllers/sentimentAPI");
 
 // @route POST api/users/register
 // @desc Register user

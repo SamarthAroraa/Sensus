@@ -18,32 +18,11 @@ Our policy  is to keep Sensus as unopinionated as possible. We provide the user 
       `cd client` <br/>
       `npm install`
 
-- [ ] Modify your environment variables
-
-  - [ ] For Windows:
-
-    - [ ] Open Control Panel
-    - [ ] Go to System Settings
-    - [ ] Advanced System Settings
-    - [ ] Environment Variables...
-    - [ ] Add a new variable, with name GOOGLE_APPLICATION_CREDENTIALS
-    - [ ] Set file path to \<path-to-the-project-directory\>/Sensus/config/Sensus-0f50e66c71ef.json
-    - [ ] Restart your PC
-
-  - [ ] For MAC:
-
-    - [ ] Add the following at the end of your ~/.bash_profile<br/> `export GOOGLE_APPLICATION_CREDENTIALS="<path-to-the-project-directory>/Sensus/config/Sensus-0f50e66c71ef.json"`
-
-    - [ ] Run `source ~/.bash_profile` in the terminal.
-
-  - [ ] For Ubuntu:
-
-    - [ ] Add the following at the end of your ~/.bashrc<br/> `export GOOGLE_APPLICATION_CREDENTIALS="<path-to-the-project-directory>/Sensus/config/Sensus-0f50e66c71ef.json"`
-
-    - [ ] Run `source ~/.bashrc` in the terminal.
-    
-    
-## Install the following browser extensions:-
+## Install the Amazon Web Services CLI:- 
+- [ ] Follow the instruction on https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html 
+- [ ] Once the CLI is installed, run the command `aws configure` 
+- [ ] Ask for the Access key and Secret ID from Samarth. And enter the Access key and Secret ID when prompted 
+## Install the following browser extensions (Recommended):-
 - [ ] Redux DevTools
 - [ ] React Developer Tools
 
