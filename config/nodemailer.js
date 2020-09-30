@@ -1,31 +1,29 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: "sensus.service@gmail.com",
-        pass: "pack6:ICU"
-    }
+	service: "gmail",
+	auth: {
+		user: "sensus.service@gmail.com",
+		pass: "pack6:ICU",
+	},
 });
 
 const generateWelcomeEmail = (messageOptions) => {
+	//TODO: Create a email template
+};
 
-    //TODO: Create a email template
-}
+module.exports.sendMail = async (messageOptions, callback) => {
+	transporter.sendMail(messageOptions, (err, info) => {
+		if (err) {
+			callback(err);
+		} else {
+			console.log("Email Sent" + info.response);
+			callback(null);
+		}
+	});
+};
 
-module.exports.sendMail = async (messageOptions) => {
-
-    transporter.sendMail(messageOptions, (err, info) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            console.log('Email Sent' + info.response);
-        }
-    })
-}
-
-// To use the function: 
+// To use the function:
 
 /* sendMail({
     from: "foo",

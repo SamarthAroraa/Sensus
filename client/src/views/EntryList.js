@@ -29,7 +29,7 @@ const EntryList = (props) => {
   };
   let color_text = {
     H: {
-      color: "black",
+      // color: "",
     },
     S: {},
     N: {},
@@ -80,7 +80,19 @@ const EntryList = (props) => {
             return (
               <tr
                 key={index}
-                style={{ backgroundColor: entry.mood, fontWeight: "bold" }}
+                style={{
+                  // backgroundColor: entry.mood,
+                  fontWeight: "bold",
+                  // borderWidth: "10px 10px",
+                  // borderColor: entry.mood,
+                  color: entry.mood,
+                  borderLeft: "15px solid " + entry.mood,
+                  // borderRight: "15px solid "+ entry.mood,
+
+                  // border: "10px solid #1e1e2f",
+                  // borderRadius:"50px",
+                  // marginTop: "20px",
+                }}
               >
                 <td className="text-center">
                   <span style={font_col}>{index + 1}</span>
