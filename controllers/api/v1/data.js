@@ -1,6 +1,5 @@
 const Entry = require("../../../models/entry");
 const User = require("../../../models/user");
-const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
 module.exports.getAnnualData = async function (req, res) {
