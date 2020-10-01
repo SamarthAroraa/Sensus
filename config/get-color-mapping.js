@@ -34,7 +34,7 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
     score_color_index = Math.floor(score * 10);
     color_group = happy_colors;
   } else {
-    score_color_index = Math.floor(Math.abs(score) * 10.1);
+    score_color_index = Math.floor(Math.abs(score) * 10);
     color_group = sad_colors;
   }
 
@@ -43,6 +43,7 @@ module.exports.getColorMapping = ({ score, magnitude }) => {
   const alpha_val = Math.tanh(Math.abs(1.5 * magnitude)).toFixed(2);
 
   const color_group_array = color_group[score_color_index];
+
   const rgba = `rgba(${color_group_array[0]},${color_group_array[1]},${color_group_array[2]},${alpha_val})`;
   return rgba;
 };
