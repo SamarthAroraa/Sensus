@@ -8,6 +8,16 @@ Our policy  is to keep Sensus as unopinionated as possible. We provide the user 
 
 Project hosted at http://18.222.255.147/
 
+## Contribution Guidelines:- 
+ Note: All contributions are to be made to the hackathon branch. The hackathon branch is in practice our master branch.
+ - [ ] Fork this repository
+ - [ ] Clone the forked repository to your sytem
+ - [ ] `git branch -a` 
+ - [ ] `git checkout origin/hackathon` 
+ - [ ] `git checkout hackathon`
+ - [ ] `git checkout -b <feature-branch-name> hackathon`
+ - [ ] After committing changes to your feature branch, create a pull request. The base branch should be `SamarthAroraa/Sensus: hackathon`
+
 ## Setup and installation
 
 - [ ] Clone the repository on your system by running the command <br/>
@@ -66,5 +76,3 @@ http://18.222.255.147/
 /home/ubuntu/Sensus
 export GOOGLE_APPLICATION_CREDENTIALS="/home/ubuntu/Sensus/config/Sensus-0f50e66c71ef.json"
 
-## Contribution Guidelines:- 
- Note: All contributions are to be made to the hackathon branch. The hackathon branch is in practice our master branch.
