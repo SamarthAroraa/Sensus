@@ -52,28 +52,22 @@ module.exports.index = async function (req, res) {
           console.log(err);
           return err;
         }
-        // user_entries = sort_entry_array_datestring(docs);
-        // user_entries.forEach((element, index) => {
-        //   user_entries[index] = change_createdAt_using_createDate(element);
-        // });
+        
         console.log(docs);
         return res.status(200).json(docs);
       });
   } catch (err) {
-    // console.log(req.body);
     return res.status(500).json(err);
   }
 };
 
 module.exports.createUpdate = async function (req, res) {
   try {
-    //   req=await req.json();
-    // var body_parsed = JSON.parse(req.body.)
+   
     let text = req.body.text;
     let title = req.body.title;
     let date = req.body.date;
     let uid = req.body.user_id;
-    console.log(req.body);
     let user = await User.findById(uid);
     let entry_for_date = await Entry.findOne({
       createDate: date,
@@ -97,9 +91,6 @@ module.exports.createUpdate = async function (req, res) {
     // let color;
     //to be returned in response
     let new_entry;
-    let color = "transparent",
-      score = 0,
-      magnitude = 0;
     let mode; //Update or create (U or C respectively)
     console.log("analyzing");
     //Sentiment Analysis Part
@@ -116,8 +107,6 @@ module.exports.createUpdate = async function (req, res) {
       LanguageCode: "en",
     };
     comprehend.detectSentiment(params, async function (err, data) {
-      // an error occurred
-      // console.log(data)
       const result = data;
       let sentiment = result.Sentiment.toLowerCase();
       sentiment = sentiment[0].toUpperCase() + sentiment.slice(1);
@@ -134,11 +123,7 @@ module.exports.createUpdate = async function (req, res) {
       score = score.toFixed(3);
       console.log(score);
       const color = await getColorMapping({ score: score, magnitude: score });
-      // let brief = {
-      //   color: color,
-      //   score: score,
-      //   magnitude: score,
-      // };
+      
       let category = "S";
       if (score <= 0.3 && score >= -0.4) {
         category = "N";
@@ -169,7 +154,6 @@ module.exports.createUpdate = async function (req, res) {
       }
       res.status(200).json({ message: "Entry saved!" });
     });
-    // let get_sentiment = await SentimentApi.analyze(text);
   } catch (err) {
     console.log(err);
     return res.status(500).json({
