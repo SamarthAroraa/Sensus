@@ -5,7 +5,7 @@ Our policy  is to keep Sensus as unopinionated as possible. We provide the user 
 
 **We at Sensus aim to build a better, happier, more introspective future!**
 
-Project hosted at http://18.222.255.147/
+Project hosted at http://sensusjournal.com
 
 ## Contribution Guidelines:- 
  **Note** : All contributions are to be made to the hackathon branch. The hackathon branch is in practice our master branch.
