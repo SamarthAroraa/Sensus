@@ -19,15 +19,15 @@ const flashMiddleware = require("./config/flash_middleware");
 const port = 5000;
 const path = require("path");
 
-app.use(
-    sassMiddleware({
-        src: path.join(__dirname, env.asset_path, "scss"),
-        dest: path.join(__dirname, env.asset_path, "css"),
-        debug: true,
-        outputStyle: "extended",
-        prefix: "/css",
-    })
-);
+// app.use(
+//     sassMiddleware({
+//         src: path.join(__dirname, env.asset_path, "scss"),
+//         dest: path.join(__dirname, env.asset_path, "css"),
+//         debug: true,
+//         outputStyle: "extended",
+//         prefix: "/css",
+//     })
+// );
 
 app.use(
     express.urlencoded({
@@ -44,10 +44,9 @@ app.set("layout extractScripts", true);
 
 app.use(express.static(path.join(__dirname, env.asset_path)));
 
-// app.use(partials());
+app.use(partials());
 
-app.set("view engine", "ejs");
-app.set("views", "./views");
+
 
 app.use(cors());
 app.use(
@@ -79,16 +78,18 @@ app.use(flashMiddleware.setFlash);
 app.use(passport.initialize());
 // Passport config
 require("./config/passport-jwt")(passport);
-
-app.use("/", require("./routes"));
-
 app.use(express.static(path.join(__dirname, "client/build")))
 
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
 
-app.get("/*", function(req, res) {
+app.use('/users', require('./routes/users'));
+app.use('/app-utils', require('./routes/utils'))
+app.use('/api', require('./routes/api'));
+
+// app.get("/", function(req, res) {
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
+
+app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
