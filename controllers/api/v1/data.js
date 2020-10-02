@@ -1,6 +1,5 @@
 const Entry = require("../../../models/entry");
 const User = require("../../../models/user");
-const SentimentApi = require("../../sentimentAPI");
 const ObjectId = require("mongodb").ObjectID;
 
 module.exports.getAnnualData = async function (req, res) {
@@ -35,7 +34,7 @@ module.exports.getAnnualData = async function (req, res) {
 
             _id: { year: "$_id.year" },
             monthlyentries: {
-              $push: { month: "$_id.month", average: "$dailyentries" },
+              $push: { month: "$_id.month", dailyentries: "$dailyentries" },
             },
           },
         },

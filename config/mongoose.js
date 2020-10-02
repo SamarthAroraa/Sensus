@@ -9,7 +9,7 @@ mongoose.connect(
   }
 );
 
-//  mongoose.connect('mongodb://localhost/sensus_database');
+//  mongoose.connect('mongodb://localhost:27017/sensus_database');
 const db = mongoose.connection;
 
 //unsuccessful connection
@@ -22,5 +22,6 @@ db.on(
 db.once("open", function () {
   console.log("Connected to the Database::MongoDB");
 });
+
 
 module.exports = db;

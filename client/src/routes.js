@@ -7,8 +7,9 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
-import NewEntry from "views/NewEntry";
-import EntryCalendar from 'views/Calendar';
+import NewEntry from "views/NewEntry"
+// import EntryCalendar from 'views/Calendar'
+import EntryList from "views/EntryList";
 var routes = [
   {
     path: "/dashboard",
@@ -45,7 +46,7 @@ var routes = [
     path: "/entry-calender",
     name: "Entries list",
     icon: "tim-icons icon-calendar-60",
-    component: EntryCalendar,
+    component: EntryList,
     layout: "/admin",
   },
   // {

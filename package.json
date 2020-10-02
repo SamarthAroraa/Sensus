@@ -7,15 +7,18 @@
     "client": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "prod": "NODE_ENV=production concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Samarth Arora",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/language": "^4.1.0",
+    "@sweetalert2/theme-dark": "^3.2.0",
     "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.2",
     "colormap": "^2.3.1",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^3.2.0",
@@ -43,11 +46,13 @@
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "react-big-calendar": "^0.27.0",
+    "react-bootstrap": "^1.3.0",
     "react-bootstrap-sweetalert": "^5.2.0",
     "react-bootstrap-switch": "^15.5.3",
     "react-google-login": "^5.1.21",
     "react-social-login-buttons": "^3.1.0",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^9.17.2",
     "validator": "^13.1.1"
   },
   "devDependencies": {
