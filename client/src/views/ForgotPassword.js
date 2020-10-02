@@ -43,7 +43,7 @@ const ForgotPassword = (props) => {
 				process.env.REACT_APP_API_URI + "forgot-password",
 				qs.stringify({ email: email })
 			);
-			console.log(res);
+			console.log(res.data);
 			setDisplayMessage(res.data.displayMessage);
 			setMessageClass("success");
 		} catch (err) {
