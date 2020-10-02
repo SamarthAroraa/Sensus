@@ -7,8 +7,8 @@ import Rtl from "views/Rtl.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
-import NewEntry from "views/NewEntry"
-import EntryCalendar from 'views/Calendar'
+import NewEntry from "views/NewEntry";
+import EntryCalendar from 'views/Calendar';
 var routes = [
   {
     path: "/dashboard",

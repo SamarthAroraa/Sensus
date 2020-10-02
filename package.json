@@ -45,6 +45,7 @@
     "react-big-calendar": "^0.27.0",
     "react-bootstrap-sweetalert": "^5.2.0",
     "react-bootstrap-switch": "^15.5.3",
+    "react-google-login": "^5.1.21",
     "react-social-login-buttons": "^3.1.0",
     "sweetalert": "^2.1.2",
     "validator": "^13.1.1"

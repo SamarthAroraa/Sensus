@@ -1,7 +1,7 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, GOOGLE_OAUTH2 } from "./types";
 const qs = require('querystring')
 
 // Register User
@@ -60,4 +60,15 @@ export const logoutUser = () => (dispatch) => {
   setAuthToken(false);
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
+};
+
+//google oAuth
+export const googleOAuth2 = (googleResponse) => {
+  return async (dispatch) => {
+      if (typeof googleResponse === 'undefined') {
+          googleResponse = [];
+      }
+
+      dispatch({ type: GOOGLE_OAUTH2, googleResponse });
+  };
 };
