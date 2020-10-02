@@ -1,3 +1,4 @@
+//NOTE: ROUTES SHIFTED TO ~/index.js THIS FILE IS OBSOLETE
 const express = require("express");
 const router = express.Router();
 

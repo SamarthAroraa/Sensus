@@ -84,6 +84,7 @@ app.use(express.static(path.join(__dirname, "client/build")))
 app.use('/users', require('./routes/users'));
 app.use('/app-utils', require('./routes/utils'))
 app.use('/api', require('./routes/api'));
+app.use("/forgot-password", require("./routes/forgot_password"));
 
 // app.get("/", function(req, res) {
 //     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
