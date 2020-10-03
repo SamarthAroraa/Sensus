@@ -228,21 +228,15 @@ const SignUp = (props) => {
             </Col>
           </Row>
           <FormGroup></FormGroup>
-          <Button color="primary" className="animation-on-hover" type="submit">
+          <Button
+            style={{ margin: "0px auto 10px", display: "block" }}
+            color="primary"
+            className="animation-on-hover"
+            type="submit"
+          >
             Sign up
           </Button>
 
-          {/* <div className="text-center pt-3">
-            Or sign up with your social accounts
-          </div>
-          <FormGroup className="justify-content-center d-flex pt-2">
-            <Button className="btn-icon btn-round mr-3" color="danger">
-              <i className="fab fa-google" />
-            </Button>
-            <Button className="btn-icon btn-round ml-3" color="info">
-              <i className="fab fa-facebook-f" />
-            </Button>
-          </FormGroup> */}
           <div className="text-center pt-1 ">
             <Link to="/login">Already a member? Login</Link>
           </div>
