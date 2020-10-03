@@ -120,16 +120,18 @@ const Login = (props) => {
             </FormText>
           </FormGroup>
 
-          <Button
-            style={{ margin: "0px auto 10px", display:"block" }}
-            color="primary"
-            className="animation-on-hover"
-            type="submit"
-          >
-            Login
-          </Button>
-          <div className="text-center pt-3">
-            Or log in with your Google account
+
+					<Button
+						color="primary"
+						style={{ display: "block", margin: "0 auto 10px" }}
+						className="animation-on-hover"
+						type="submit"
+					>
+
+						Login
+					</Button>
+					<div className="text-center pt-3">
+            Or log in with your social accounts
           </div>
           <FormGroup className="justify-content-center d-flex pt-2">
             {/* <Button className="btn-icon btn-round mr-3" color="danger">
