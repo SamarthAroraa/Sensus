@@ -118,7 +118,7 @@ const Login = (props) => {
 						</FormText>
 					</FormGroup>
 
-					<Button color="primary" className="animation-on-hover" type="submit">
+					<Button color="primary" className="animation-on-hover" type="submit" style={{ marginLeft: "32.8%" }}>
 						Login
 					</Button>
 					{/* <div className="text-center pt-3">
