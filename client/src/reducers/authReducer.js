@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, USER_LOADING } from "../actions/types";
+import { SET_CURRENT_USER, USER_LOADING, GOOGLE_OAUTH2 } from "../actions/types";
 const isEmpty = require("is-empty");
 
 const initialState = {
@@ -20,7 +20,12 @@ export default function(state = initialState, action) {
           ...state,
           loading: true
         };
+      case GOOGLE_OAUTH2: {
+        return {...state, googleResponse : action.googleResponse}
+      }
       default:
         return state;
     }
   }
+
+  
