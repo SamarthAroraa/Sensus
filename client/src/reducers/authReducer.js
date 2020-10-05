@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
           loading: true
         };
       case GOOGLE_OAUTH2: {
-        return action.googleResponse;
+        return {...state, googleResponse : action.googleResponse}
       }
       default:
         return state;

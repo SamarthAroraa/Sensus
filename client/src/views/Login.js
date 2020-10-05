@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../actions/authActions";
+import { bindActionCreators } from "redux";
+import { loginUser, googleOAuth2 } from "../actions/authActions";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import classnames from "classnames";
 
@@ -48,8 +49,22 @@ const Login = (props) => {
 
     props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
-  const LoggedIn = props;
+  const LoggedIn = (props) => (
+    <GoogleLogout
+      clientId="YOUR_CLIENT_ID"
+      buttonText="Logout"
+      onLogoutSuccess={props.googleOAuth2}
+    />
+  );
 
+  const LoggedOut = (props) => <Login />;
+
+  const HandleAuth = (props) => {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      props.history.push("/admin/new-entry");
+    }
+  };
   useEffect(() => {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (props.auth.isAuthenticated) {
@@ -67,6 +82,7 @@ const Login = (props) => {
   }, [props]);
 
   return (
+    // <HandleAuth isLoggedIn={typeof props.googleReducer !== 'undefined'}>
     <form className="login-form" noValidate onSubmit={onSubmit}>
       <Card className="form-component">
         <CardBody className="p-4">
@@ -120,23 +136,19 @@ const Login = (props) => {
             </FormText>
           </FormGroup>
 
-
-					<Button
-						color="primary"
-						style={{ display: "block", margin: "0 auto 10px" }}
-						className="animation-on-hover"
-						type="submit"
-					>
-
-						Login
-					</Button>
-					<div className="text-center pt-3">
+          <Button
+            color="primary"
+            style={{ display: "block", margin: "0 auto 10px" }}
+            className="animation-on-hover"
+            type="submit"
+          >
+            Login
+          </Button>
+          {/* <div className="text-center pt-3">
             Or log in with your social accounts
           </div>
           <FormGroup className="justify-content-center d-flex pt-2">
-            {/* <Button className="btn-icon btn-round mr-3" color="danger">
-              <i className="fab fa-google" />
-            </Button> */}
+           
             <GoogleLogin
               clientId="309790979574-35mv41mmp1eqm5tdrnils1eqk6lau2j0.apps.googleusercontent.com"
               buttonText="Sign in with Google"
@@ -145,13 +157,14 @@ const Login = (props) => {
               cookiePolicy={"single_host_origin"}
               isSignedIn={true}
             />
-          </FormGroup>
+          </FormGroup> */}
           <div className="text-center">
             <Link to="/sign-up">New to Sensus? Sign Up</Link>
           </div>
         </CardBody>
       </Card>
     </form>
+    // </HandleAuth>
   );
 };
 
@@ -162,6 +175,10 @@ Login.propTypes = {
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  googleReducer: state.googleReducer,
   errors: state.errors,
 });
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ googleOAuth2, loginUser }, dispatch);
+};
 export default connect(mapStateToProps, { loginUser })(Login);
