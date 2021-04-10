@@ -7,7 +7,7 @@ const getColorMapping = require("../../../config/get-color-mapping")
   .getColorMapping;
 
 var myCredentials = new AWS.CognitoIdentityCredentials({
-  IdentityPoolId: "us-east-1:2946de93-ba02-4baf-ab24-5dcf9c13027f",
+  IdentityPoolId: "us-east-1:e3e4e7aa-023e-4217-9b2f-631c0b17c6f7",
 });
 var myConfig = new AWS.Config({
   credentials: myCredentials,
