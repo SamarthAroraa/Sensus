@@ -132,7 +132,7 @@ const NewEntry = (props) => {
           <Col md="1"></Col>
           <Col md="10">
             <Card
-              style={{ height: 91 + "vh", border: "7px solid " + borderColor }}
+              style={{ height: 91 + "vh", border: `7px solid ${borderColor}` }}
             >
               <CardHeader>
                 <FormGroup>

@@ -19,15 +19,7 @@ const flashMiddleware = require("./config/flash_middleware");
 const port = 5000;
 const path = require("path");
 
-// app.use(
-//     sassMiddleware({
-//         src: path.join(__dirname, env.asset_path, "scss"),
-//         dest: path.join(__dirname, env.asset_path, "css"),
-//         debug: true,
-//         outputStyle: "extended",
-//         prefix: "/css",
-//     })
-// );
+
 
 app.use(
 	express.urlencoded({

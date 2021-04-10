@@ -69,6 +69,6 @@ export const googleOAuth2 = (googleResponse) => {
           googleResponse = [];
       }
 
-      dispatch({ type: GOOGLE_OAUTH2, googleResponse });
+      dispatch({ type: GOOGLE_OAUTH2, payload:googleResponse });
   };
 };

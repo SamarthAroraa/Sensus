@@ -52,7 +52,7 @@ module.exports.index = async function (req, res) {
           console.log(err);
           return err;
         }
-        
+
         console.log(docs);
         return res.status(200).json(docs);
       });
@@ -63,10 +63,23 @@ module.exports.index = async function (req, res) {
 
 module.exports.createUpdate = async function (req, res) {
   try {
-   
     let text = req.body.text;
     let title = req.body.title;
-    let date = req.body.date;
+    var today = new Date();
+    var dd = today.getDate();
+    // 0 indexed months so added 1
+
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    today = dd + "/" + mm + "/" + yyyy;
+    let date = today;
     let uid = req.body.user_id;
     let user = await User.findById(uid);
     let entry_for_date = await Entry.findOne({
@@ -123,7 +136,7 @@ module.exports.createUpdate = async function (req, res) {
       score = score.toFixed(3);
       console.log(score);
       const color = await getColorMapping({ score: score, magnitude: score });
-      
+
       let category = "S";
       if (score <= 0.3 && score >= -0.4) {
         category = "N";
