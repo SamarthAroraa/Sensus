@@ -31,7 +31,7 @@ module.exports.updateDate = async function (req, res) {
       element.save();
     });
 
-    return res.status(200).json({ message: "Done", updatedEntries: entries });
+    return res.status(200).json({ message: "done", updatedEntries: entries });
   } catch (err) {
     return res.status(500).json({ messgae: err });
   }
