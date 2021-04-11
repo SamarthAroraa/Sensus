@@ -9,11 +9,16 @@ const getColorMapping = require("../../../config/get-color-mapping")
 var myCredentials = new AWS.CognitoIdentityCredentials({
   IdentityPoolId: "us-east-1:e3e4e7aa-023e-4217-9b2f-631c0b17c6f7",
 });
+AWS.config.update({
+  accessKeyId: "AKIASZGNZJMQCZDXR3EE",
+  secretAccessKey: "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",
+  "region": "us-east-1"
+});
 var myConfig = new AWS.Config({
   credentials: myCredentials,
   region: "us-east-1",
 });
-AWS.config = myConfig;
+// AWS.config = myConfig;
 // Creates a comprehend instance
 var comprehend = new AWS.Comprehend();
 
@@ -110,6 +115,9 @@ module.exports.createUpdate = async function (req, res) {
     if (!AWS.config.region) {
       await AWS.config.update({
         region: "us-east-1",
+        accessKeyId: 'AKIASZGNZJMQLJI4F45Y',
+        secretAccessKey: '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'
+
       });
     }
     text = String(text);
@@ -119,7 +127,14 @@ module.exports.createUpdate = async function (req, res) {
       Text: text,
       LanguageCode: "en",
     };
+    // AWS.config.credentials.refresh();
     comprehend.detectSentiment(params, async function (err, data) {
+      if (err) {
+        console.log(err);
+        console.log(AWS.config.credentials.accessKeyId)
+        console.log(AWS.config.credentials.secretAccessKey)
+        console.log(AWS.config.credentials.sessionToken)
+      }
       const result = data;
       let sentiment = result.Sentiment.toLowerCase();
       sentiment = sentiment[0].toUpperCase() + sentiment.slice(1);
