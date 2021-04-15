@@ -10,8 +10,8 @@ var myCredentials = new AWS.CognitoIdentityCredentials({
   IdentityPoolId: "us-east-1:e3e4e7aa-023e-4217-9b2f-631c0b17c6f7",
 });
 AWS.config.update({
-  accessKeyId: "AKIASZGNZJMQCZDXR3EE",
-  secretAccessKey: "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",
+  accessKeyId: ACCESS_KEY_ID,
+  secretAccessKey: SECRET_ACCESS_KEY,
   "region": "us-east-1"
 });
 var myConfig = new AWS.Config({
